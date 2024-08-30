@@ -12,7 +12,12 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $catalogue=Apartment::all();
+        $data=
+        [
+            'catalogue'=>$catalogue,
+        ];
+        return view('admin.apartment.index',$data);
     }
 
     /**
@@ -20,7 +25,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('apartment.create');
+
     }
 
     /**
@@ -28,7 +34,28 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validating data inserted
+        $data=$request->validate([
+            "user_id"=>"required|unique",
+            "title"=>"string|required",
+            "rooms"=>"required|numeric",
+            "beds"=>"required|numeric",
+            "bathrooms"=>"required|numeric",
+            "dimension_mq"=>"required|numeric",
+            "image"=>"required",
+            "latitude"=>"required|numeric",
+            "longitude"=>"required|numeric",
+            "address_full"=>"required|string",
+            "is_visible"=>"required|boolean",
+
+        ]);
+        //creating new istance of Apartment
+        $newApartment= new Apartment();
+        $newApartment->fill($data);
+        dd($data);
+        $newApartment->save();
+        return redirect()->route('apartment.show',['apartment'=>$newApartment]); 
+
     }
 
     /**
