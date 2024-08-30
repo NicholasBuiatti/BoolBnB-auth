@@ -54,9 +54,9 @@
                                         class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
                                         value="{{ old('birth_date') }}" autocomplete="birth_date" autofocus>
 
-                                    @error('name')
+                                    @error('birth_date')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>Devi essere maggiorenne per iscriverti al sito</strong>
                                         </span>
                                     @enderror
                                 </div>
