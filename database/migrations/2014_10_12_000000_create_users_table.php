@@ -23,11 +23,11 @@ return new class extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 255)->unique();
+            $table->string('name');
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password', 16);
-            $table->string('name', 255)->nullable();
-            $table->string('surname', 255)->nullable();
+            $table->string('password');
+            $table->string('surname')->nullable();
             $table->date('birth_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
