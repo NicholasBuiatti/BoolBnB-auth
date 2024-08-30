@@ -12,7 +12,7 @@ class ApartmentSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(Faker $faker): void
+    public function run(): void
     {
         //
     }
