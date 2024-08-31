@@ -7,6 +7,6 @@
 		<p>{{ $apartment->beds }}</p>
 		<p>{{ $apartment->bathrooms }}</p>
 		<img src="" alt="">
-		{{-- <a href="{{ route('admin.project.show', $apartment) }}">{{ $progetti->name }}</a> --}}
+		<a href="{{ route('apartments.edit', $apartment->id) }}">{{ $apartment->title }}</a>
 	@endforeach
 @endsection

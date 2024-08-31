@@ -27,7 +27,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('apartment.create');
+        return view('admin.apartment.create');
 
     }
 
@@ -37,26 +37,30 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         //validating data inserted
-        $data=$request->validate([
-            "user_id"=>"required|unique",
-            "title"=>"string|required",
-            "rooms"=>"required|numeric",
-            "beds"=>"required|numeric",
-            "bathrooms"=>"required|numeric",
-            "dimension_mq"=>"required|numeric",
-            "image"=>"required",
-            "latitude"=>"required|numeric",
-            "longitude"=>"required|numeric",
-            "address_full"=>"required|string",
-            "is_visible"=>"required|boolean",
+         $data=$request->validate([
+             "title"=>"string|required",
+             "rooms"=>"required|numeric",
+             "beds"=>"required|numeric",
+             "bathrooms"=>"required|numeric",
+             "dimension_mq"=>"required|numeric",
+             "latitude"=>"required|numeric",
+             "longitude"=>"required|numeric",
+             "address_full"=>"required|string",
 
-        ]);
+         ]);
+
+        //requesting data from form
+        // $data=$request->all();
         //creating new istance of Apartment
         $newApartment= new Apartment();
+        $newApartment->image='aaaaaaaaa';
+        $newApartment->is_visible=true;
+        $newApartment->user_id=Auth::id();
+
         $newApartment->fill($data);
-        dd($data);
+        //dd($data);
         $newApartment->save();
-        return redirect()->route('apartment.show',['apartment'=>$newApartment]); 
+        return redirect()->route('apartments.index'); 
 
     }
 
@@ -69,7 +73,7 @@ class ApartmentController extends Controller
             'apartment'=>$apartment,
         ];
         
-        return view('apartment.show', $data);
+        return view('admin.apartment.show', $data);
     }
 
     /**
@@ -81,7 +85,7 @@ class ApartmentController extends Controller
             'apartment'=>$apartment,
         ];
 
-        return view('apartment.edit', $data);
+        return view('admin.apartment.edit', $data);
 
     }
 
@@ -90,22 +94,33 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        $data=$request->all();
+
+        $data=$request->validate([
+            "title"=>"string|required",
+            "rooms"=>"required|numeric",
+            "beds"=>"required|numeric",
+            "bathrooms"=>"required|numeric",
+            "dimension_mq"=>"required|numeric",
+            "latitude"=>"required|numeric",
+            "longitude"=>"required|numeric",
+            "address_full"=>"required|string",
+
+        ]);
 
         $apartment->title=$data['title'];
         $apartment->rooms=$data['rooms'];
         $apartment->beds=$data['beds'];
         $apartment->bathrooms=$data['bathrooms'];
         $apartment->dimension_mq=$data['dimension_mq'];
-        $apartment->image=$data['image'];
+        // $apartment->image=$data['image'];
         $apartment->latitude=$data['latitude'];
         $apartment->longitude=$data['longitude'];
         $apartment->address_full=$data['address_full'];
-        $apartment->is_visible=$data['is_visible'];
+        // $apartment->is_visible=$data['is_visible'];
 
         $apartment->update();
 
-        return redirect()->route('apartment.show',['apartment'=>$apartment]);
+        return redirect()->route('apartments.index');
     }
 
     /**
