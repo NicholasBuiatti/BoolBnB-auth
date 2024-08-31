@@ -87,7 +87,14 @@
             @enderror
         </div> --}}
 
+        
 
         <button type="submit" class="btn btn-primary">Inserisci Appartamento </button>
     </form>
+    {{-- delete button --}}
+   <form action="{{route('apartments.destroy',$apartment)}}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-danger" type="submit">elimina l'appartamento dalla tua lista </button>
+   </form>
 @endsection
