@@ -58,9 +58,9 @@ class ApartmentController extends Controller
         $newApartment->image = 'aaaaaaaaa';
         $newApartment->is_visible = true;
         $newApartment->user_id = Auth::id();
-        if($request->has('image')){
-            $img_path=Storage::put('uploads',$request->image);
-            $data['image']=$img_path;
+        if ($request->has('image')) {
+            $img_path = Storage::put('uploads', $request->image);
+            $data['image'] = $img_path;
         };
         $newApartment->fill($data);
 
@@ -107,7 +107,7 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric",
             "latitude" => "required|numeric",
             "longitude" => "required|numeric",
-            "address_full" => "required|string",    
+            "address_full" => "required|string",
 
         ]);
         //$data=$request->all();
@@ -116,11 +116,11 @@ class ApartmentController extends Controller
         $apartment->beds = $data['beds'];
         $apartment->bathrooms = $data['bathrooms'];
         $apartment->dimension_mq = $data['dimension_mq'];
-        $apartment->image=$data['image'];
-        if($request->has('image')){
-            $img_path=Storage::put('uploads',$request->image);
-            $data['image']=$img_path;
-            if($apartment->image && !Str::startsWith($apartment->image,'http')){
+        $apartment->image = $data['image'];
+        if ($request->has('image')) {
+            $img_path = Storage::put('uploads', $request->image);
+            $data['image'] = $img_path;
+            if ($apartment->image && !Str::startsWith($apartment->image, 'http')) {
                 Storage::delete($apartment->image);
             };
         };
