@@ -22,7 +22,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 2;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 50;
-        $newApartment->image = "https://discord.com/channels/1214170188271063060/1229384659755073597/1279099524782227581  ";
+        $newApartment->image = "http://www.case-in-legno-progettolegno.it/wp-content/uploads/2015/12/Casa-in-legno-a-Fano-0003.jpg";
         $newApartment->latitude = 45.4642;
         $newApartment->longitude = 45.4642;
         $newApartment->address_full = "via dei matti,0,11111,Milano";
@@ -36,7 +36,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 3;
         $newApartment->bathrooms = 2;
         $newApartment->dimension_mq = 75;
-        $newApartment->image = "https://example.com/image2.jpg";
+        $newApartment->image = "https://www.arredamento.it/le-case-bellissime_NG2.jpg";
         $newApartment->latitude = 45.4652;
         $newApartment->longitude = 45.4652;
         $newApartment->address_full = "via dei fiori,10,22222,Milano";
@@ -50,7 +50,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 1;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 45;
-        $newApartment->image = "https://example.com/image3.jpg";
+        $newApartment->image = "https://images.tuscany-villas.it/vacation_rentals/79657/xwide/villa-le-palme-esterni-15.jpg";
         $newApartment->latitude = 45.4662;
         $newApartment->longitude = 45.4662;
         $newApartment->address_full = "via delle rose,15,33333,Milano";
@@ -64,7 +64,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 2;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 55;
-        $newApartment->image = "https://example.com/image4.jpg";
+        $newApartment->image = "https://www.costantinilegno.it/wp-content/uploads/2015/11/LACOST-Case-in-legno-umbria2.jpg";
         $newApartment->latitude = 45.4672;
         $newApartment->longitude = 45.4672;
         $newApartment->address_full = "via degli ulivi,20,44444,Milano";
@@ -78,7 +78,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 4;
         $newApartment->bathrooms = 3;
         $newApartment->dimension_mq = 100;
-        $newApartment->image = "https://example.com/image5.jpg";
+        $newApartment->image = "https://itacanotizie.it/wp-content/uploads/2020/04/1560857854_villa_under_construction_barban_istra1.jpg";
         $newApartment->latitude = 45.4682;
         $newApartment->longitude = 45.4682;
         $newApartment->address_full = "via dei tigli,25,55555,Milano";
@@ -92,7 +92,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 1;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 35;
-        $newApartment->image = "https://example.com/image6.jpg";
+        $newApartment->image = "https://i.pinimg.com/originals/34/5b/e1/345be18e88f164caad46e3f849b43626.jpg";
         $newApartment->latitude = 45.4692;
         $newApartment->longitude = 45.4692;
         $newApartment->address_full = "via delle magnolie,30,66666,Milano";
@@ -106,7 +106,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 2;
         $newApartment->bathrooms = 2;
         $newApartment->dimension_mq = 65;
-        $newApartment->image = "https://example.com/image7.jpg";
+        $newApartment->image = "https://www.lignius.it/images/_processed_/d/0/csm_lignius-rubner-haus_02_5a3164153c.jpg";
         $newApartment->latitude = 45.4702;
         $newApartment->longitude = 45.4702;
         $newApartment->address_full = "via degli aranci,35,77777,Milano";
@@ -120,7 +120,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 1;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 40;
-        $newApartment->image = "https://example.com/image8.jpg";
+        $newApartment->image = "https://4.bp.blogspot.com/-nNbDz0n4Uu4/VY1hZy6bMII/AAAAAAAADVY/rKMhPngoCb0/s1600/corfu-villa-edoardo-luxury-fa%25C3%25A7ade";
         $newApartment->latitude = 45.4712;
         $newApartment->longitude = 45.4712;
         $newApartment->address_full = "via dei pini,40,88888,Milano";
@@ -134,7 +134,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 3;
         $newApartment->bathrooms = 2;
         $newApartment->dimension_mq = 85;
-        $newApartment->image = "https://example.com/image9.jpg";
+        $newApartment->image = "https://images.homify.com/images/a_0,c_fit,f_auto,q_auto,w_1108/v1448264950/p/photo/image/1136307/037_Montecarlo_MG_0581-2_ab/foto-di-in-stile-di.jpg";
         $newApartment->latitude = 45.4722;
         $newApartment->longitude = 45.4722;
         $newApartment->address_full = "via dei cipressi,45,99999,Milano";
@@ -148,7 +148,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 2;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 60;
-        $newApartment->image = "https://example.com/image10.jpg";
+        $newApartment->image = "https://www.salvafamiglie.it/wp-content/uploads/2017/04/case-di-legno-prefabbricate.jpg ";
         $newApartment->latitude = 45.4732;
         $newApartment->longitude = 45.4732;
         $newApartment->address_full = "via dei castagni,50,101010,Milano";
