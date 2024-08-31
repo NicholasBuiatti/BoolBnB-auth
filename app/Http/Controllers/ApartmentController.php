@@ -65,7 +65,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        $data=[
+            'apartment'=>$apartment,
+        ];
+        
+        return view('apartment.show', $data);
     }
 
     /**
@@ -73,7 +77,12 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        $data=[
+            'apartment'=>$apartment,
+        ];
+
+        return view('apartment.edit', $data);
+
     }
 
     /**
@@ -81,7 +90,22 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        //
+        $data=$request->all();
+
+        $apartment->title=$data['title'];
+        $apartment->rooms=$data['rooms'];
+        $apartment->beds=$data['beds'];
+        $apartment->bathrooms=$data['bathrooms'];
+        $apartment->dimension_mq=$data['dimension_mq'];
+        $apartment->image=$data['image'];
+        $apartment->latitude=$data['latitude'];
+        $apartment->longitude=$data['longitude'];
+        $apartment->address_full=$data['address_full'];
+        $apartment->is_visible=$data['is_visible'];
+
+        $apartment->update();
+
+        return redirect()->route('apartment.show',['apartment'=>$apartment]);
     }
 
     /**
@@ -89,6 +113,8 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+
+        return to_route('apartments.index')->with('message','Appartamento eliminato.'); 
     }
 }
