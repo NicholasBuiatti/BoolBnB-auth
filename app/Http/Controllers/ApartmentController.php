@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class ApartmentController extends Controller
 {
     /**
@@ -12,14 +13,14 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        
-        $user_id=Auth::id();
-        $catalogue=Apartment::where('user_id', $user_id)->get();
-        $data=
-        [
-            'catalogue'=>$catalogue,
-        ];
-        return view('admin.apartment.index',$data);
+
+        $user_id = Auth::id();
+        $catalogue = Apartment::where('user_id', $user_id)->get();
+        $data =
+            [
+                'catalogue' => $catalogue,
+            ];
+        return view('admin.apartment.index', $data);
     }
 
     /**
@@ -28,7 +29,6 @@ class ApartmentController extends Controller
     public function create()
     {
         return view('admin.apartment.create');
-
     }
 
     /**
@@ -37,31 +37,30 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         //validating data inserted
-         $data=$request->validate([
-             "title"=>"string|required",
-             "rooms"=>"required|numeric",
-             "beds"=>"required|numeric",
-             "bathrooms"=>"required|numeric",
-             "dimension_mq"=>"required|numeric",
-             "latitude"=>"required|numeric",
-             "longitude"=>"required|numeric",
-             "address_full"=>"required|string",
+        $data = $request->validate([
+            "title" => "string|required",
+            "rooms" => "required|numeric",
+            "beds" => "required|numeric",
+            "bathrooms" => "required|numeric",
+            "dimension_mq" => "required|numeric",
+            "latitude" => "required|numeric",
+            "longitude" => "required|numeric",
+            "address_full" => "required|string",
 
-         ]);
+        ]);
 
         //requesting data from form
         // $data=$request->all();
         //creating new istance of Apartment
-        $newApartment= new Apartment();
-        $newApartment->image='aaaaaaaaa';
-        $newApartment->is_visible=true;
-        $newApartment->user_id=Auth::id();
+        $newApartment = new Apartment();
+        $newApartment->image = 'aaaaaaaaa';
+        $newApartment->is_visible = true;
+        $newApartment->user_id = Auth::id();
 
         $newApartment->fill($data);
         //dd($data);
         $newApartment->save();
-        return redirect()->route('apartments.index'); 
-
+        return redirect()->route('apartments.index');
     }
 
     /**
@@ -69,10 +68,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $data=[
-            'apartment'=>$apartment,
+        $data = [
+            'apartment' => $apartment,
         ];
-        
+
         return view('admin.apartment.show', $data);
     }
 
@@ -81,12 +80,11 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $data=[
-            'apartment'=>$apartment,
+        $data = [
+            'apartment' => $apartment,
         ];
 
         return view('admin.apartment.edit', $data);
-
     }
 
     /**
@@ -95,27 +93,27 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
 
-        $data=$request->validate([
-            "title"=>"string|required",
-            "rooms"=>"required|numeric",
-            "beds"=>"required|numeric",
-            "bathrooms"=>"required|numeric",
-            "dimension_mq"=>"required|numeric",
-            "latitude"=>"required|numeric",
-            "longitude"=>"required|numeric",
-            "address_full"=>"required|string",
+        $data = $request->validate([
+            "title" => "string|required",
+            "rooms" => "required|numeric",
+            "beds" => "required|numeric",
+            "bathrooms" => "required|numeric",
+            "dimension_mq" => "required|numeric",
+            "latitude" => "required|numeric",
+            "longitude" => "required|numeric",
+            "address_full" => "required|string",
 
         ]);
 
-        $apartment->title=$data['title'];
-        $apartment->rooms=$data['rooms'];
-        $apartment->beds=$data['beds'];
-        $apartment->bathrooms=$data['bathrooms'];
-        $apartment->dimension_mq=$data['dimension_mq'];
+        $apartment->title = $data['title'];
+        $apartment->rooms = $data['rooms'];
+        $apartment->beds = $data['beds'];
+        $apartment->bathrooms = $data['bathrooms'];
+        $apartment->dimension_mq = $data['dimension_mq'];
         // $apartment->image=$data['image'];
-        $apartment->latitude=$data['latitude'];
-        $apartment->longitude=$data['longitude'];
-        $apartment->address_full=$data['address_full'];
+        $apartment->latitude = $data['latitude'];
+        $apartment->longitude = $data['longitude'];
+        $apartment->address_full = $data['address_full'];
         // $apartment->is_visible=$data['is_visible'];
 
         $apartment->update();
@@ -130,6 +128,6 @@ class ApartmentController extends Controller
     {
         $apartment->delete();
 
-        return to_route('apartments.index')->with('message','Appartamento eliminato.'); 
+        return to_route('apartments.index')->with('message', 'Appartamento eliminato.');
     }
 }
