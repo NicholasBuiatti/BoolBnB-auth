@@ -1,26 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="fs-4 text-secondary my-4">
-        {{ __('Dashboard') }}
-    </h2>
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
+    <div class="d-flex gap-5">
+        <div id="right-dashboard" class="col-2">
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+            <h1>Dashboard</h1>
+            <ul>
+                <li><a href="{{ route('apartments.index') }}">Elenco Appartamenti</a></li>
+                <li><a href="{{ route('apartments.create') }}">Inserisci nuovo appartamento</a></li>
+                <li><a href="">Messaggi ricevuti</a></li>
+                <li><a href="">Storico acquisti</a></li>
+            </ul>
+        </div>
+        <div class="col-7">
+            <h2 class="fs-4 text-secondary my-4">
+                {{ __('Dashboard') }}
+            </h2>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">{{ __('User Dashboard') }}</div>
+
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                            {{ __('You are logged in!') }}
+                        </div>
                     </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
