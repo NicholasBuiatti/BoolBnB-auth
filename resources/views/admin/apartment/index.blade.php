@@ -21,8 +21,11 @@
 						<p><i class="fa-solid fa-bath"></i> Bagni: {{ $apartment->bathrooms }}</p>
 						<p><i class="fa-solid fa-house"></i> Superficie: {{ $apartment->dimension_mq }}mq</p>
 						</p>
-						<a class="btn btn-primary" href="{{ route('apartments.edit', $apartment->id) }}">Modifica
-							appartamento</a>
+						<div class="text-center">
+							<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}">Dettagli</a>
+							<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">Modifica</a>
+						</div>
+						
 					</div>
 				</div>
 			@endforeach

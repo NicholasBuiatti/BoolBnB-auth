@@ -5,28 +5,28 @@
 		<form method="POST" action="{{ route('apartments.store') }}" class="w-100 p-5" enctype="multipart/form-data">
 			@csrf
 			<div class="mb-3">
-				<label class="form-label">descrizione appartamento </label>
+				<label class="form-label">Descrizione appartamento </label>
 				<input type="text" class="form-control" name="title">
 				@error('title')
 					<div>{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
-				<label class="form-label">camere</label>
+				<label class="form-label">Camere</label>
 				<input type="number" class="form-control" name="rooms">
 				@error('rooms')
 					<div>{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
-				<label class="form-label">letti</label>
+				<label class="form-label">Letti</label>
 				<input type="number" class="form-control" name="beds">
 				@error('beds')
 					<div>{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
-				<label class="form-label">bagni </label>
+				<label class="form-label">Bagni </label>
 				<input type="number" class="form-control" name="bathrooms">
 				@error('bathrooms')
 					<div>{{ $message }}</div>
@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="mb-3">
-				<label class="form-label">metratura</label>
+				<label class="form-label">Dimensioni</label>
 				<input type="number" class="form-control" name="dimension_mq" placeholder="">
 				@error('dimension_mq')
 					<div>{{ $message }}</div>

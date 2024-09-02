@@ -12,7 +12,7 @@
 							@csrf
 
 							<div class="mb-4 row">
-								<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+								<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo mail') }}</label>
 
 								<div class="col-md-6">
 									<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
@@ -48,7 +48,7 @@
 											{{ old('remember') ? 'checked' : '' }}>
 
 										<label class="form-check-label" for="remember">
-											{{ __('Remember Me') }}
+											{{ __('Resta collegato') }}
 										</label>
 									</div>
 								</div>
@@ -62,7 +62,7 @@
 
 									@if (Route::has('password.request'))
 										<a class="btn btn-link" href="{{ route('password.request') }}">
-											{{ __('Forgot Your Password?') }}
+											{{ __('Password dimenticata?') }}
 										</a>
 									@endif
 								</div>

@@ -9,28 +9,28 @@
 				@csrf
 				@method('PUT')
 				<div class="mb-3">
-					<label class="form-label">descrizione appartamento </label>
+					<label class="form-label">Descrizione appartamento </label>
 					<input type="text" class="form-control" name="title" value={{ old('title') ?? $apartment->title }}>
 					@error('title')
 						<div>{{ $message }}</div>
 					@enderror
 				</div>
 				<div class="mb-3">
-					<label class="form-label">camere</label>
+					<label class="form-label">Camere</label>
 					<input type="text" class="form-control" name="rooms" value={{ old('rooms') ?? $apartment->rooms }}>
 					@error('rooms')
 						<div>{{ $message }}</div>
 					@enderror
 				</div>
 				<div class="mb-3">
-					<label class="form-label">letti</label>
+					<label class="form-label">Letti</label>
 					<input type="number" class="form-control" name="beds" value={{ old('beds') ?? $apartment->beds }}>
 					@error('beds')
 						<div>{{ $message }}</div>
 					@enderror
 				</div>
 				<div class="mb-3">
-					<label class="form-label">bagni </label>
+					<label class="form-label">Bagni </label>
 					<input type="number" class="form-control" name="bathrooms" value={{ old('bathrooms') ?? $apartment->bathrooms }}>
 					@error('bathrooms')
 						<div>{{ $message }}</div>
@@ -38,7 +38,7 @@
 				</div>
 
 				<div class="mb-3">
-					<label class="form-label">metratura</label>
+					<label class="form-label">Dimensioni</label>
 					<input type="number" class="form-control" name="dimension_mq"
 						value={{ old('dimension_mq') ?? $apartment->dimension_mq }}>
 					@error('dimension_mq')
@@ -81,7 +81,7 @@
 			<form class="px-5 pb-5" action="{{ route('apartments.destroy', $apartment) }}" method="POST">
 				@csrf
 				@method('DELETE')
-				<button class="btn btn-danger" type="submit">elimina l'appartamento dalla tua lista </button>
+				<button class="btn btn-danger" type="submit">Elimina l'appartamento dalla tua lista </button>
 			</form>
 		</div>
 	</div>

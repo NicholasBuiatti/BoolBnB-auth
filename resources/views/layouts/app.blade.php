@@ -35,7 +35,7 @@
                 </div>
             </a>
 
-            <div class="d-flex gap-3" id="navbarSupportedContent">
+            {{-- <div class="d-flex gap-3" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -78,7 +78,7 @@
                         </li>
                     @endguest
                 </ul>
-            </div>
+            </div> --}}
         </nav>
 
         <main class="">
