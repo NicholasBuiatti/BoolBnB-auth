@@ -7,9 +7,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
+
+    // creo la funzione per trasformare l'indirizzo in coordinate tramite chiamata api
+    public function getCoordinatesFromAddress($address)
+    {
+        $apiKey = "hQniyYGsdO6E3G6qs7tOGNX2wpgxFccZ";
+
+        $urlAddress = urlencode($address);
+
+        $url = "https://api.tomtom.com/search/2/geocode/{$urlAddress}.json?key={$apiKey}";
+
+        // effettuo la chiamata api
+        $response = Http::get($url);
+        // controllo che ci sia una risposta e la salvo nelle variabili latitude e longitude FUNZIONA!!!!
+        if ($response->successful()) {
+            $data = $response->json();
+
+            if (!empty($data['results'])) {
+                $latitude = $data['results'][0]['position']['lat'];
+                $longitude = $data['results'][0]['position']['lon'];
+
+                return [
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                ];
+            }
+        }
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,6 +66,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+
         //validating data inserted
         $data = $request->validate([
             "title" => "string|required",
@@ -45,14 +74,13 @@ class ApartmentController extends Controller
             "beds" => "required|numeric",
             "bathrooms" => "required|numeric",
             "dimension_mq" => "required|numeric",
-            "latitude" => "required|numeric",
-            "longitude" => "required|numeric",
             "address_full" => "required|string",
 
         ]);
 
+        // mando i dati dell'indirizzo alla mia funzione per le coordinate
+        $responseAddress = $this->getCoordinatesFromAddress($data['address_full']);
         //requesting data from form
-        // $data=$request->all();
         //creating new istance of Apartment
         $newApartment = new Apartment();
         $newApartment->image = 'aaaaaaaaa';
@@ -62,6 +90,10 @@ class ApartmentController extends Controller
             $img_path = Storage::put('uploads', $request->image);
             $data['image'] = $img_path;
         };
+
+        // salvo i dati delle coordinate nel database FUNZIONAAAAAAAA!
+        $newApartment->longitude = $responseAddress['longitude'];
+        $newApartment->latitude = $responseAddress['latitude'];
         $newApartment->fill($data);
 
         //dd($data);

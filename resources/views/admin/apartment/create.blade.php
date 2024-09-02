@@ -58,7 +58,7 @@
                     <div>{{ $message }}</div>
                 @enderror
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="form-label">Latitudine</label>
                 <input type="text" class="form-control" name="latitude" placeholder="inserisci numero per tipo progetto">
                 @error('latitude')
@@ -72,7 +72,7 @@
                 @error('longitude')
                     <div>{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <label class="form-label">Indirizzo </label>
                 <input type="text" class="form-control" name="address_full"
