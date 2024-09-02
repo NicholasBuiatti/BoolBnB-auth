@@ -15,7 +15,7 @@ class ApartmentController extends Controller
     // creo la funzione per trasformare l'indirizzo in coordinate tramite chiamata api
     public function getCoordinatesFromAddress($address)
     {
-        $apiKey = "hQniyYGsdO6E3G6qs7tOGNX2wpgxFccZ";
+        $apiKey = "RUfkTtEK0CYbHBG3YE2RSEslSRGAWZcu";
 
         $urlAddress = urlencode($address);
 
