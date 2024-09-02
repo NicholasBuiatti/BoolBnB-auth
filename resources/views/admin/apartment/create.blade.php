@@ -8,28 +8,28 @@
 				<label class="form-label">Descrizione appartamento </label>
 				<input type="text" class="form-control" name="title">
 				@error('title')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Camere</label>
 				<input type="number" class="form-control" name="rooms">
 				@error('rooms')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Letti</label>
 				<input type="number" class="form-control" name="beds">
 				@error('beds')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Bagni </label>
 				<input type="number" class="form-control" name="bathrooms">
 				@error('bathrooms')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 
@@ -37,7 +37,7 @@
 				<label class="form-label">Dimensioni</label>
 				<input type="number" class="form-control" name="dimension_mq" placeholder="">
 				@error('dimension_mq')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 
@@ -45,7 +45,7 @@
 				<label class="form-label">Inserisci Immagine</label>
 				<input type="file" class="form-control" name="image" placeholder="">
 				@error('image')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			{{-- <div class="mb-3">
@@ -67,7 +67,7 @@
 				<label class="form-label">Indirizzo </label>
 				<input type="text" class="form-control" name="address_full" placeholder="inserisci numero per tipo progetto">
 				@error('address_full')
-					<div>{{ $message }}</div>
+					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<button type="submit" class="btn btn-primary">Inserisci Appartamento </button>

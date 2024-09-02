@@ -69,12 +69,12 @@ class ApartmentController extends Controller
 
         //validating data inserted
         $data = $request->validate([
-            "title" => "string|required",
-            "rooms" => "required|numeric",
-            "beds" => "required|numeric",
-            "bathrooms" => "required|numeric",
-            "dimension_mq" => "required|numeric",
-            "address_full" => "required|string",
+            "title" => "string|required|min:6",
+            "rooms" => "required|numeric|min:1",
+            "beds" => "required|numeric|min:1",
+            "bathrooms" => "required|numeric|min:1",
+            "dimension_mq" => "required|numeric|min:15",
+            "address_full" => "required|string|min:8",
 
         ]);
 
@@ -132,23 +132,21 @@ class ApartmentController extends Controller
     {
 
         $data = $request->validate([
-            "title" => "string|required",
-            "rooms" => "required|numeric",
-            "beds" => "required|numeric",
-            "bathrooms" => "required|numeric",
-            "dimension_mq" => "required|numeric",
-            "latitude" => "required|numeric",
-            "longitude" => "required|numeric",
-            "address_full" => "required|string",
+            "title" => "string|required|min:6",
+            "rooms" => "required|numeric|min:1",
+            "beds" => "required|numeric|min:1",
+            "bathrooms" => "required|numeric|min:1",
+            "dimension_mq" => "required|numeric|min:15",
+            "address_full" => "required|string|min:8",
 
         ]);
         //$data=$request->all();
-        $apartment->title = $data['title'];
-        $apartment->rooms = $data['rooms'];
-        $apartment->beds = $data['beds'];
-        $apartment->bathrooms = $data['bathrooms'];
-        $apartment->dimension_mq = $data['dimension_mq'];
-        $apartment->image = $data['image'];
+        // $apartment->title = $data['title'];
+        // $apartment->rooms = $data['rooms'];
+        // $apartment->beds = $data['beds'];
+        // $apartment->bathrooms = $data['bathrooms'];
+        // $apartment->dimension_mq = $data['dimension_mq'];
+        // $apartment->image = $data['image'];
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $request->image);
             $data['image'] = $img_path;
@@ -156,13 +154,16 @@ class ApartmentController extends Controller
                 Storage::delete($apartment->image);
             };
         };
-        $apartment->latitude = $data['latitude'];
-        $apartment->longitude = $data['longitude'];
-        $apartment->address_full = $data['address_full'];
+
+        $responseAddress = $this->getCoordinatesFromAddress($data['address_full']);
+        $data['longitude'] = $responseAddress['longitude'];
+        $data['latitude'] = $responseAddress['latitude'];
+        // $apartment->latitude = $data['latitude'];
+        // $apartment->longitude = $data['longitude'];
+        // $apartment->address_full = $data['address_full'];
         // $apartment->is_visible=$data['is_visible'];
-
-        $apartment->update();
-
+        
+        $apartment->update($data);
         return redirect()->route('apartments.index');
     }
 
