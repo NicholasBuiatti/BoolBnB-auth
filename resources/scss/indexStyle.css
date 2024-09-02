@@ -1,4 +1,4 @@
-#right-dashboard {
+/* #right-dashboard {
     background-color: rgb(78, 78, 78);
     color: white;
     padding-left: 1rem;
@@ -28,7 +28,7 @@
     color: red;
     font-weight: bold;
     transition: 0.1s;
-}
+} */
 
 #card-container {
     border: 2px solid rgb(174, 174, 174);
@@ -52,7 +52,7 @@
 }
 
 .index-view {
-    max-height: calc(100vh - 70px);
+    max-height: 100vh;
     overflow: auto;
 }
 

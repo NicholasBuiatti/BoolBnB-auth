@@ -3,17 +3,8 @@
 
 @section('content')
 	<div class="d-flex align-items-start">
-		<div id="right-dashboard" class="col-2">
 
-			<h1>Dashboard</h1>
-			<ul>
-				<li><a href="{{ route('apartments.index') }}">Elenco Appartamenti</a></li>
-				<li><a href="{{ route('apartments.create') }}">Inserisci nuovo appartamento</a></li>
-				<li><a href="">Messaggi ricevuti</a></li>
-				<li><a href="">Storico acquisti</a></li>
-			</ul>
-		</div>
-		<div class="form-edit">
+		<div class="h-100 w-100 overflow-auto">
 			<form method="POST" action="{{ route('apartments.update', $apartment) }}" class="p-5" enctype="multipart/form-data">
 				@csrf
 				@method('PUT')

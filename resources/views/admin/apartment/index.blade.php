@@ -1,9 +1,9 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<div class="d-flex align-items-start">
+	<div class="d-flex align-items-start w-100">
 
-		<div class="index-view d-flex flex-wrap">
+		<div class="d-flex flex-wrap">
 			@foreach ($catalogue as $apartment)
 				<div id="card-container" class="card col-3">
 					<div class="img-container">

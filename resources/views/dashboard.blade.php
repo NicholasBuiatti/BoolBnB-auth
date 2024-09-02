@@ -12,7 +12,7 @@
 				<li><a href="">Storico acquisti</a></li>
 			</ul>
 		</div> --}}
-		<div class="col-7">
+		<div class="col">
 			<h2 class="fs-4 text-secondary my-4">
 				{{ __('Dashboard') }}
 			</h2>

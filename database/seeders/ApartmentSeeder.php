@@ -148,7 +148,7 @@ class ApartmentSeeder extends Seeder
         $newApartment->beds = 2;
         $newApartment->bathrooms = 1;
         $newApartment->dimension_mq = 60;
-        $newApartment->image = "https://www.salvafamiglie.it/wp-content/uploads/2017/04/case-di-legno-prefabbricate.jpg ";
+        $newApartment->image = "http://www.case-in-legno-progettolegno.it/wp-content/uploads/2015/12/Casa-in-legno-a-Fano-0003.jpg";
         $newApartment->latitude = 45.4732;
         $newApartment->longitude = 45.4732;
         $newApartment->address_full = "via dei castagni,50,101010,Milano";

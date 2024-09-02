@@ -1,8 +1,8 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<div class="d-flex align-items-start">
-		<form method="POST" action="{{ route('apartments.store') }}" class="form-create p-5" enctype="multipart/form-data">
+	<div class="d-flex align-items-start w-100">
+		<form method="POST" action="{{ route('apartments.store') }}" class="w-100 p-5" enctype="multipart/form-data">
 			@csrf
 			<div class="mb-3">
 				<label class="form-label">descrizione appartamento </label>
