@@ -58,8 +58,11 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Indirizzo </label>
-                <input type="text" class="form-control" name="address_full"
-                    placeholder="inserisci numero per tipo progetto" required value="{{ old('address_full') }}">
+                <input id="input_indirizzo" type="text" class="form-control" name="address_full"
+                    placeholder="inserisci numero per tipo progetto" required value="{{ old('address_full') }}"
+                    list="opzioni">
+                    <datalist id="opzioni">
+                    </datalist>
                 @error('address_full')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -67,6 +70,7 @@
             <button type="submit" class="btn btn-primary" id='btnSend'>Inserisci Appartamento </button>
         </form>
     </div>
+
     <script>
         document.getElementById('image').addEventListener('change', function() {
             let file = this.files[0];
@@ -85,5 +89,29 @@
             }
 
         });
+        let apiAnswer = [];
+        const apiKey = "RUfkTtEK0CYbHBG3YE2RSEslSRGAWZcu";
+        const limit = 5;
+        let indirizzo = document.getElementById('input_indirizzo');
+        indirizzo.addEventListener('input', function() {
+            if (indirizzo.value.length > 5) {
+                let addressInput = indirizzo.value;
+                const url_tomtom =
+                    `https://api.tomtom.com/search/2/search/${encodeURIComponent(addressInput)}.json?key=${apiKey}&typeahead=true&limit=${limit}&countrySet={IT}`;
+                axios.get(url_tomtom)
+                    .then(function(response) {
+                        apiAnswer = response.data;
+                        console.log(apiAnswer);
+                    });
+
+                let lista = document.getElementById('opzioni');
+                for (let index = 0; index < apiAnswer.results.length; index++) {
+                    let indirizzoCompleto = apiAnswer.results[0].address.freeformAddress;
+                    let newOption = document.createElement("option");
+                    newOption.innerHTML = indirizzoCompleto;
+                    lista.append(newOption);
+                }
+            }
+        })
     </script>
 @endsection
