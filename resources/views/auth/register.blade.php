@@ -46,7 +46,8 @@
 
 								<div class="col-md-6">
 									<input id="birth_date" type="date" required class="form-control @error('birth_date') is-invalid @enderror"
-										name="birth_date" value="{{ old('birth_date') }}" autocomplete="birth_date" autofocus>
+										name="birth_date" max={{ now()->subYears(18) }} value="{{ old('birth_date') }}" autocomplete="birth_date"
+										autofocus>
 
 									@error('birth_date')
 										<span class="invalid-feedback" role="alert">
@@ -99,7 +100,7 @@
 							<div class="mb-4 row mb-0">
 								<div class="col-md-6 offset-md-4">
 									<a class="btn btn-secondary" href="{{ route('login') }}">Indietro</a>
-									<button type="submit" class="btn btn-primary">
+									<button type="submit" class="btn btn-primary" id='btnSend'>
 										{{ __('Registrati') }}
 									</button>
 								</div>
