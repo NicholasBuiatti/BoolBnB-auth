@@ -8,7 +8,7 @@
 					<div class="card-header">{{ __('Registrati') }}</div>
 
 					<div class="card-body">
-						<form method="POST" action="{{ route('register') }}">
+						<form method="POST" action="{{ route('register') }}" id="registrationForm">
 							@csrf
 
 							<div class="mb-4 row">
@@ -96,6 +96,8 @@
 										autocomplete="new-password">
 								</div>
 							</div>
+
+							<p id="message" class="error"></p>
 
 							<div class="mb-4 row mb-0">
 								<div class="col-md-6 offset-md-4">
