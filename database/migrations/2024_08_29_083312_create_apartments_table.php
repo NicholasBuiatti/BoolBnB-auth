@@ -21,8 +21,8 @@ return new class extends Migration
             $table->smallInteger('bathrooms');
             $table->smallInteger('dimension_mq');
             $table->string('image', 255);
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 10, 8);
             $table->string('address_full');
             $table->boolean('is_visible');
             $table->timestamps();
