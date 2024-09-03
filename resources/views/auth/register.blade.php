@@ -51,7 +51,7 @@
 
 									@error('birth_date')
 										<span class="invalid-feedback" role="alert">
-											<strong>Devi essere maggiorenne per iscriverti al sito</strong>
+											<strong>{{$message}}</strong>
 										</span>
 									@enderror
 								</div>
