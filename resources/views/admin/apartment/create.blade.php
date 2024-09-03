@@ -61,11 +61,12 @@
                 <input id="input_indirizzo" type="text" class="form-control" name="address_full"
                     placeholder="inserisci numero per tipo progetto" required value="{{ old('address_full') }}"
                     list="opzioni">
-                    <datalist id="opzioni">
-                    </datalist>
+                <ul id="opzioni">
+                </ul>
                 @error('address_full')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
+                <p id="addressError" style="color:red; display:none;">L'indirizzo non è valido</p>
             </div>
             <button type="submit" class="btn btn-primary" id='btnSend'>Inserisci Appartamento </button>
         </form>
@@ -89,10 +90,13 @@
             }
 
         });
+
+
         let apiAnswer = [];
         const apiKey = "RUfkTtEK0CYbHBG3YE2RSEslSRGAWZcu";
         const limit = 5;
         let indirizzo = document.getElementById('input_indirizzo');
+        let selectedAddress = '';
         indirizzo.addEventListener('input', function() {
             if (indirizzo.value.length > 5) {
                 let addressInput = indirizzo.value;
@@ -100,18 +104,71 @@
                     `https://api.tomtom.com/search/2/search/${encodeURIComponent(addressInput)}.json?key=${apiKey}&typeahead=true&limit=${limit}&countrySet={IT}`;
                 axios.get(url_tomtom)
                     .then(function(response) {
-                        apiAnswer = response.data;
-                        console.log(apiAnswer);
-                    });
 
-                let lista = document.getElementById('opzioni');
-                for (let index = 0; index < apiAnswer.results.length; index++) {
-                    let indirizzoCompleto = apiAnswer.results[0].address.freeformAddress;
-                    let newOption = document.createElement("option");
-                    newOption.innerHTML = indirizzoCompleto;
-                    lista.append(newOption);
-                }
+                        apiAnswer = response.data;
+
+                        console.log(apiAnswer);
+
+                        let lista = document.getElementById('opzioni');
+                        lista.innerHTML = '';
+
+                        for (let i = 0; i < apiAnswer.results.length; i++) {
+                            let indirizzoCompleto = apiAnswer.results[i].address.freeformAddress;
+                            let newOption = document.createElement("li");
+                            newOption.innerHTML = indirizzoCompleto;
+
+                            newOption.addEventListener('click', function() {
+                                indirizzo.value = indirizzoCompleto;
+                                selectedAddress = indirizzoCompleto;
+                                apiAnswer = [];
+                                lista.innerHTML = '';
+
+                                console.log("Indirizzo selezionato:", selectedAddress);
+                            });
+
+                            lista.append(newOption);
+                        }
+                    });
             }
         })
+
+
+        document.getElementById('btnSend').addEventListener('click', function() {
+            if (selectedAddress == indirizzo.value) {
+                console.log("l'indirizzo è uguale")
+                document.getElementById('addressError').style.display = 'none';
+                document.getElementById('apartmentForm').onsubmit = function(event) {
+                    return true;
+                };
+            } else {
+                console.log("l'indirizzo NON è uguale")
+                document.getElementById('apartmentForm').onsubmit = function(event) {
+                    event.preventDefault();
+                }
+                document.getElementById('addressError').style.display = 'block';
+            }
+        });
     </script>
+    <style>
+        #opzioni {
+            width: 100%;
+            background-color: rgb(216, 216, 216);
+            border-radius: 10px;
+            max-height: 4.5rem;
+            overflow: auto;
+            padding-left: 0;
+        }
+
+        #opzioni li {
+            list-style: none;
+            cursor: pointer;
+            width: 100%;
+            padding-left: 1rem;
+        }
+
+        #opzioni li:hover {
+            background-color: rgba(0, 145, 255, 0.278);
+            transition: .5s;
+        }
+    </style>
 @endsection
