@@ -106,6 +106,16 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        // Ottieni l'utente autenticato
+        $user = auth()->user();
+
+        // Verifica se l'utente autenticato è lo stesso dell'appartamento
+        if ($apartment->user_id != $user->id) {
+            // Se l'utente non è autorizzato, mostra la pagina 404
+            abort(404);
+        }
+
+        // Se l'utente è autorizzato, passa i dati alla vista
         $data = [
             'apartment' => $apartment,
         ];
@@ -162,7 +172,7 @@ class ApartmentController extends Controller
         // $apartment->longitude = $data['longitude'];
         // $apartment->address_full = $data['address_full'];
         // $apartment->is_visible=$data['is_visible'];
-        
+
         $apartment->update($data);
         return redirect()->route('apartments.index');
     }
