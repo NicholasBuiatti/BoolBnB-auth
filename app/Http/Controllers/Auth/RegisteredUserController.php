@@ -33,7 +33,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             // 'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                'unique:' . User::class,
+                function ($attribute, $value, $fail) {
+                    // Definisci la regex per .com o .it
+                    if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|it)$/', $value)) {
+                        $fail('Il campo email deve terminare con .com o .it.');
+                    }
+                },
+            ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'birth_date' => ['required', 'date', 'before:' . now()->subYears(18)->toDateString()]
         ]);
