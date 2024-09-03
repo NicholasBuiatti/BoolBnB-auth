@@ -6,28 +6,28 @@
 			@csrf
 			<div class="mb-3">
 				<label class="form-label">Descrizione appartamento </label>
-				<input type="text" class="form-control" name="title" required>
+				<input type="text" class="form-control" name="title" required value="{{ old('title')   }}">
 				@error('title')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Camere</label>
-				<input type="number" min="1" class="form-control" name="rooms" required>
+				<input type="number" min="1" class="form-control" name="rooms" required value="{{ old('rooms')   }}">
 				@error('rooms')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Letti</label>
-				<input type="number" min="1" class="form-control" name="beds" required>
+				<input type="number" min="1" class="form-control" name="beds" required value="{{ old('beds') }}">
 				@error('beds')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Bagni </label>
-				<input type="number" min="1" class="form-control" name="bathrooms" required>
+				<input type="number" min="1" class="form-control" name="bathrooms" required value="{{ old('bathrooms')   }}">
 				@error('bathrooms')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
@@ -35,15 +35,15 @@
 
 			<div class="mb-3">
 				<label class="form-label">Dimensioni</label>
-				<input type="number" min="1" class="form-control" name="dimension_mq" placeholder="in metri quadri" required>
+				<input type="number" min="1" class="form-control" name="dimension_mq" placeholder="in metri quadri" required value="{{ old('dimension_mq')   }}">
 				@error('dimension_mq')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
-
+image
 			<div class="mb-3">
 				<label class="form-label">Inserisci Immagine</label>
-				<input type="file" class="form-control" name="image" placeholder="" required>
+					<input type="file" class="form-control" name="image" placeholder="" required value="{{ old('image')  }}">
 				@error('image')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
@@ -66,7 +66,7 @@
 			<div class="mb-3">
 				<label class="form-label">Indirizzo </label>
 				<input type="text" class="form-control" name="address_full" placeholder="inserisci numero per tipo progetto"
-					required>
+					required value="{{ old('address_full')   }}">
 				@error('address_full')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
