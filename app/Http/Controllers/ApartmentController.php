@@ -75,6 +75,7 @@ class ApartmentController extends Controller
             "bathrooms" => "required|numeric|min:1",
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
+            "image"=>"required|image|size:5120",  
 
         ]);
 
@@ -83,7 +84,6 @@ class ApartmentController extends Controller
         //requesting data from form
         //creating new istance of Apartment
         $newApartment = new Apartment();
-        $newApartment->image = 'aaaaaaaaa';
         $newApartment->is_visible = true;
         $newApartment->user_id = Auth::id();
         if ($request->has('image')) {
@@ -157,6 +157,8 @@ class ApartmentController extends Controller
             "bathrooms" => "required|numeric|min:1",
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
+            "image"=>"required|image|size:5120",  
+
 
         ]);
         //$data=$request->all();

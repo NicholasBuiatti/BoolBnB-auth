@@ -40,10 +40,10 @@
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
 			</div>
-image
+
 			<div class="mb-3">
 				<label class="form-label">Inserisci Immagine</label>
-					<input type="file" class="form-control" name="image" placeholder="" required value="{{ old('image')  }}">
+					<input type="file" accept="image/*" id="image" class="form-control" name="image" placeholder="" required value="{{ old('image')  }}">
 				@error('image')
 					<div class="text-danger">{{ $message }}</div>
 				@enderror
@@ -74,4 +74,8 @@ image
 			<button type="submit" class="btn btn-primary" id='btnSend'>Inserisci Appartamento </button>
 		</form>
 	</div>
+	<script>
+		
+	</script>
+
 @endsection
