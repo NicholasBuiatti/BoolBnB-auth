@@ -160,7 +160,7 @@ class ApartmentController extends Controller
             "bathrooms" => "required|numeric|min:1",
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
-            "image" => "required|image|max:5120",
+            "image" => "image|max:5120",
 
 
         ]);

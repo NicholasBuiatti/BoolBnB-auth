@@ -72,7 +72,7 @@
         </form>
     </div>
 
-    <script>
+    {{-- <script>
         document.getElementById('image').addEventListener('change', function() {
             let file = this.files[0];
             if (file.size > 5 * 1024 * 1024) {
@@ -148,7 +148,7 @@
                 document.getElementById('addressError').style.display = 'block';
             }
         });
-    </script>
+    </script> --}}
     <style>
         #opzioni {
             width: 100%;
