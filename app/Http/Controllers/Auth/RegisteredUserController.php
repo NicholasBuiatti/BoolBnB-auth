@@ -32,16 +32,26 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            
             // 'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class,
+            function ($attribute, $value, $fail) {
+                // Definisci la regex per .com o .it
+                if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es
+                 )$/', $value)) {
+                    $fail('Il campo email deve terminare con un domninio riconosciuto(ad esempio .com o .it)');
+                }
+            },],
+
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            //chi c'ha voglia, c'è da sistemare il messaggio della data di nascita che mostra nell'errore il formato y-m-d
             'birth_date' => ['required', 'date', 'before:' . now()->subYears(18)->toDateString()]
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
-            'birth_date' => $request->birth_date,
+            'birth_date' =>$request->birth_date,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

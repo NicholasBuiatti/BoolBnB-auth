@@ -8,7 +8,7 @@ return [
     'alpha_dash' => 'Il campo :attribute può contenere solo lettere, numeri e trattini.',
     'alpha_num' => 'Il campo :attribute può contenere solo lettere e numeri.',
     'array' => 'Il campo :attribute deve essere un array.',
-    'before' => 'Il campo :attribute deve essere una data precedente a :date.',
+    'before' => 'Il campo data di nascita deve essere una data precedente a :date.',
     'between' => [
         'numeric' => 'Il campo :attribute deve essere compreso tra :min e :max.',
         'file' => 'Il file :attribute deve essere compreso tra :min e :max kilobytes.',
