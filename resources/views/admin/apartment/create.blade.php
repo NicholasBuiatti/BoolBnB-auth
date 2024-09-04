@@ -49,7 +49,7 @@
             <div class="mb-3">
                 <label class="form-label">Inserisci Immagine</label>
                 <input type="file" accept="image/*" id="image" class="form-control" name="image" placeholder=""
-                    required">
+                    required>
                 @error('image')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -90,8 +90,12 @@
             }
 
         });
+<<<<<<< HEAD
 
 
+=======
+        
+>>>>>>> branch-api
         let apiAnswer = [];
         const apiKey = "RUfkTtEK0CYbHBG3YE2RSEslSRGAWZcu";
         const limit = 5;
@@ -104,6 +108,7 @@
                     `https://api.tomtom.com/search/2/search/${encodeURIComponent(addressInput)}.json?key=${apiKey}&typeahead=true&limit=${limit}&countrySet={IT}`;
                 axios.get(url_tomtom)
                     .then(function(response) {
+<<<<<<< HEAD
 
                         apiAnswer = response.data;
 
@@ -112,25 +117,40 @@
                         let lista = document.getElementById('opzioni');
                         lista.innerHTML = '';
 
+=======
+                        apiAnswer = response.data;
+                        console.log(apiAnswer);
+                        let lista = document.getElementById('opzioni');
+                        lista.innerHTML = '';
+>>>>>>> branch-api
                         for (let i = 0; i < apiAnswer.results.length; i++) {
                             let indirizzoCompleto = apiAnswer.results[i].address.freeformAddress;
                             let newOption = document.createElement("li");
                             newOption.innerHTML = indirizzoCompleto;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch-api
                             newOption.addEventListener('click', function() {
                                 indirizzo.value = indirizzoCompleto;
                                 selectedAddress = indirizzoCompleto;
                                 apiAnswer = [];
                                 lista.innerHTML = '';
+<<<<<<< HEAD
 
                                 console.log("Indirizzo selezionato:", selectedAddress);
                             });
 
+=======
+                                console.log("Indirizzo selezionato:", selectedAddress);
+                            });
+>>>>>>> branch-api
                             lista.append(newOption);
                         }
                     });
             }
         })
+<<<<<<< HEAD
 
 
         document.getElementById('btnSend').addEventListener('click', function() {
@@ -171,4 +191,7 @@
             transition: .5s;
         }
     </style>
+=======
+    </script>
+>>>>>>> branch-api
 @endsection
