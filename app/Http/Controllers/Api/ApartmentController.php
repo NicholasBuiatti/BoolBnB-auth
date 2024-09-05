@@ -46,3 +46,33 @@ class ApartmentController extends Controller
         }
     }
 }
+
+// namespace App\Http\Controllers;
+
+// use League\Geotools\Coordinate\Coordinate;
+// use League\Geotools\Distance\Distance;
+// use League\Geotools\Geotools;
+
+// class LocationController extends Controller
+// {
+//     public function calculateDistance()
+//     {
+//         $geotools = new Geotools();
+
+//         // Coordinate di Milano (esempio)
+//         $coord1 = new Coordinate([45.464211, 9.191383]); // latitudine, longitudine
+
+//         // Coordinate di un altro punto
+//         $coord2 = new Coordinate([45.560, 9.210]);
+
+//         // Calcolo della distanza
+//         $distance = $geotools->distance()->setFrom($coord1)->setTo($coord2);
+
+//         // Distanza in chilometri
+//         $distanceInKm = $distance->flat(); // Puoi anche usare vincenty() o haversine() per altre metodologie
+
+//         return response()->json([
+//             'distance_km' => $distanceInKm
+//         ]);
+//     }
+// }
