@@ -57,7 +57,6 @@ class ApartmentController extends Controller
                 'longitude' => 'between:-180,180|numeric|decimal(11,9)',
                 'radiusKm' => 'numeric| min:1',
                 'beds' => 'numeric|min:1',
-                'bathrooms' => 'numeric|min:1',
                 'rooms' => 'numeric|min:1',
 
             ]
@@ -74,7 +73,6 @@ class ApartmentController extends Controller
         $radiusKm = $validate_data['radiusKm'];
         $beds = $validate_data['beds'];
         $rooms = $validate_data['rooms'];
-        $bathrooms = $validate_data['bathrooms'];
 
         // $latitude =45.4732;
         // $longitude =9.1895;
@@ -105,7 +103,6 @@ class ApartmentController extends Controller
         $apartments = Apartment::with(['user'])
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
-            ->where('bathrooms', '>=', $bathrooms)
             ->get();
         // Inizializza l'array per gli appartamenti vicini
         $searchApp = [];
