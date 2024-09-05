@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ApartmentController extends Controller
 {
@@ -50,26 +51,23 @@ class ApartmentController extends Controller
     {
         // $data = $request->all();
 
-
-        $validate_data = $request->validate(
-            [
-                'latitude' => 'required',
-                'longitude' => 'required',
-                'radius' => 'nullable',
-                'beds' => 'nullable',
-                'rooms' => 'nullable',
-            ]
-        );
-
-
-
-
-
-        // $latitude = $data['latitude'];
-        // $longitude = $data['longitude'];
-        // $beds = $data['beds'];
-        // $rooms = $data['rooms'];
-        // $radiusKm = $data['radius'];
+        try {
+            $validate_data = $request->validate(
+                [
+                    'latitude' => 'required|numeric|between:-90,90',
+                    'longitude' => 'required|numeric|between:-180,180',
+                    'radius' => 'nullable|numeric|min:1',
+                    'beds' => 'nullable|integer|min:1|max:10',
+                    'rooms' => 'nullable|integer|min:1|max:10',
+                    'services' => 'array|nullable',
+                ]
+            );
+        } catch (ValidationException $errors) {
+            return response()->json([
+                'success' => false,
+                'errors' => $errors->errors(),
+            ]);
+        }
 
 
         $latitude = $validate_data['latitude'];
@@ -77,14 +75,7 @@ class ApartmentController extends Controller
         $radiusKm = $validate_data['radius'];
         $beds = $validate_data['beds'];
         $rooms = $validate_data['rooms'];
-
-
-        // $beds=2;
-        // $rooms=3;
-        // $bathrooms=1;
-
-        //da definire come mandare i servizi;
-        // $radiusKm = 20;
+        $services = $validate_data['services'];
 
         if (!$radiusKm) {
             $radiusKm = 20;
@@ -107,10 +98,11 @@ class ApartmentController extends Controller
         }
 
         // Prendi tutti gli appartamenti
-        $apartments = Apartment::with(['user'])
+        $apartments  = Apartment::with(['user', 'services'])
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
             ->get();
+
         // Inizializza l'array per gli appartamenti vicini
         $searchApp = [];
         foreach ($apartments as $apartment) {
