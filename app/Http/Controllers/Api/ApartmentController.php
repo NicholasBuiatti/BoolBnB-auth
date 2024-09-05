@@ -24,7 +24,7 @@ class ApartmentController extends Controller
     public function show($id)
     {
 
-        $apartment = Apartment::with(['user'])->where('id', $id)->first();
+        $apartment = Apartment::with(['user', 'services'])->where('id', $id)->first();
 
         if ($apartment) {
 
@@ -101,6 +101,9 @@ class ApartmentController extends Controller
         $apartments  = Apartment::with(['user', 'services'])
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
+            ->whereHas('services', function ($q) use ($services) {
+                $q->whereIn('services.id', $services);
+            }, '=', count($services))
             ->get();
 
         // Inizializza l'array per gli appartamenti vicini
