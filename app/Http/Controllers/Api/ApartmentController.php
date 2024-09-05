@@ -48,12 +48,27 @@ class ApartmentController extends Controller
 
     public function search(Request $request)
     {
+        
         // Punto di riferimento
+        $validate_data=$request->validate(
+            ['latitude'=>'between:-90,90|numeric|decimal(11,9)',
+            'longitude'=>'between:-180,180|numeric|decimal(11,9)',
+            'radiusKm'=>'numeric| min:1']);
 
+        
+
+        
         //PROVA
-        $latitude = 45.4732;
-        $longitude = 9.1895;
+        $latitude = $validate_data['latitude'];
+        $longitude = $validate_data['longitude'];
+        $radiusKm = $validate_data['radiusKm'];
+        if(!$radiusKm){
+            $radiusKm=20;
+        }
 
+        
+
+    
         // Se latitudine o longitudine non sono fornite, restituisci tutti gli appartamenti
         if (!$latitude || !$longitude) {
             return response()->json([
@@ -79,7 +94,7 @@ class ApartmentController extends Controller
             $distance = sqrt($distLatKm * $distLatKm + $distLonKm * $distLonKm);
 
             // Se la distanza è inferiore a 20 km, aggiungi l'appartamento all'array
-            if ($distance <= 20) {
+            if ($distance <= $radiusKm) {
                 $searchApp[] = $apartment;
             }
         }
