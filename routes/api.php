@@ -23,4 +23,4 @@ Route::get('apartments', [ApiApartmentController::class, 'index']);
 Route::get('apartments/{apartment}', [ApiApartmentController::class, 'show']);
 
 //RICHIESTA DATI DAL FRONT
-Route::get('search', [ApiApartmentController::class, 'search']);
+Route::post('search', [ApiApartmentController::class, 'search']);
