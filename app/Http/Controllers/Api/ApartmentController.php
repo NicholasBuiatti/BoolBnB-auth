@@ -11,7 +11,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['user','services'])/*aggiungere servizi*/->paginate();
+        $apartments = Apartment::with(['user', 'services'])/*aggiungere servizi*/->paginate();
         return response()->json([
             'success' => true,
             'results' => $apartments,
@@ -50,43 +50,45 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
 
-         
-        //  $validate_data=$request->validate(
-        //      ['latitude'=>'between:-90,90|numeric|decimal(11,9)',
-        //      'longitude'=>'between:-180,180|numeric|decimal(11,9)',
-        //      'radiusKm'=>'numeric| min:1',
-        //      'beds'=>'numeric|min:1',
-        //      'bathrooms'=>'numeric|min:1',
-        //      'rooms'=>'numeric|min:1',
 
-        //     ]);
+        $validate_data = $request->validate(
+            [
+                'latitude' => 'between:-90,90|numeric|decimal(11,9)',
+                'longitude' => 'between:-180,180|numeric|decimal(11,9)',
+                'radiusKm' => 'numeric| min:1',
+                'beds' => 'numeric|min:1',
+                'bathrooms' => 'numeric|min:1',
+                'rooms' => 'numeric|min:1',
+
+            ]
+        );
 
 
 
 
-        
-            // $latitude = $data['latitude'];
-            //$longitude = $data['longitude'];
-        //$latitude = $validate_data['latitude'];
-        //$longitude = $validate_data['longitude'];
-        //$radiusKm = $validate_data['radiusKm'];
-        //$beds=$validate_data['beds'];
-        //$rooms=$validate_data['rooms'];
-        //$bathrooms=$validate_data['bathrooms'];
 
-        $latitude =45.4732;
-        $longitude =9.1895;
-        $radiusKm =20;
-        $beds=2;
-        $rooms=3;
-        $bathrooms=1;
+        $latitude = $data['latitude'];
+        $longitude = $data['longitude'];
+        $latitude = $validate_data['latitude'];
+        $longitude = $validate_data['longitude'];
+        $radiusKm = $validate_data['radiusKm'];
+        $beds = $validate_data['beds'];
+        $rooms = $validate_data['rooms'];
+        $bathrooms = $validate_data['bathrooms'];
+
+        // $latitude =45.4732;
+        // $longitude =9.1895;
+        // $radiusKm =20;
+        // $beds=2;
+        // $rooms=3;
+        // $bathrooms=1;
 
         //da definire come mandare i servizi;
-        $radiusKm = 20;
+        // $radiusKm = 20;
 
-         if(!$radiusKm){
-             $radiusKm=20;
-         }
+        if (!$radiusKm) {
+            $radiusKm = 20;
+        }
 
 
 
@@ -100,11 +102,11 @@ class ApartmentController extends Controller
         }
 
         // Prendi tutti gli appartamenti
-$apartments = Apartment::with(['user'])
-    ->where('beds', '>=', $beds)
-    ->where('rooms', '>=', $rooms)
-    ->where('bathrooms', '>=', $bathrooms)
-    ->get();
+        $apartments = Apartment::with(['user'])
+            ->where('beds', '>=', $beds)
+            ->where('rooms', '>=', $rooms)
+            ->where('bathrooms', '>=', $bathrooms)
+            ->get();
         // Inizializza l'array per gli appartamenti vicini
         $searchApp = [];
         foreach ($apartments as $apartment) {
@@ -131,5 +133,3 @@ $apartments = Apartment::with(['user'])
         ]);
     }
 }
-
-
