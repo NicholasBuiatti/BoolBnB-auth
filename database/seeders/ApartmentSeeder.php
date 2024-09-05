@@ -17,8 +17,10 @@ class ApartmentSeeder extends Seeder
     {
 
         // Base coordinates
-        $baseLatitude = 45.4732;
-        $baseLongitude = 9.1895; // Adjusted to be more accurate for Milano
+        $milanBaseLatitude = 45.4732;
+        $milanBaseLongitude = 9.1895; // Adjusted to be more accurate for Milano
+        $parmaBaseLatitude=44.801485;
+        $parmaBaseLongitude=10.3279036;
 
         // Function to generate random coordinates within a certain radius
         function generateRandomCoordinates($lat, $lon, $radiusKm)
@@ -38,7 +40,7 @@ class ApartmentSeeder extends Seeder
         }
 
         // Array of example streets in Milano
-        $streets = [
+        $milanStreets = [
             "Via Roma",
             "Via Dante",
             "Corso Vittorio Emanuele II",
@@ -70,24 +72,76 @@ class ApartmentSeeder extends Seeder
             "Via Tortona",
             "Via Pola"
         ];
+        $parmaStreets = [
+            "Via Farini",
+            "Strada della Repubblica",
+            "Via Mazzini",
+            "Viale Toschi",
+            "Viale Mentana",
+            "Strada Massimo d'Azeglio",
+            "Via Emilio Lepido",
+            "Via d'Azeglio",
+            "Strada Giuseppe Garibaldi",
+            "Via Verdi",
+            "Piazza Duomo",
+            "Strada Cavour",
+            "Strada Nino Bixio",
+            "Via Duca Alessandro",
+            "Strada al Duomo",
+            "Via Garibaldi",
+            "Via Emilia Est",
+            "Strada XXII Luglio",
+            "Via Sauro",
+            "Strada Martiri della Libertà",
+            "Viale Fratti",
+            "Strada della Repubblica",
+            "Strada Luigi Carlo Farini",
+            "Piazza Ghiaia",
+            "Via Università",
+            "Via Bixio",
+            "Via Zarotto",
+            "Strada Luigi Carlo Farini",
+            "Via Varese",
+            "Strada Nuova"
+        ];
 
 
-
+        //ciclo appartamenti Milano 
         for ($i = 0; $i < 30; $i++) {
             $newApartment = new Apartment();
             $newApartment->user_id = rand(1, 3);
-            $newApartment->title = "Villa " . $streets[$i];
+            $newApartment->title = "Villa " . $milanStreets[$i];
             $newApartment->rooms = rand(1, 5);
             $newApartment->beds = rand(1, 4);
             $newApartment->bathrooms = rand(1, 2);
             $newApartment->dimension_mq = rand(40, 120);
             $newApartment->image = "http://www.case-in-legno-progettolegno.it/wp-content/uploads/2015/12/Casa-in-legno-a-Fano-0003.jpg";
 
-            list($newApartment->latitude, $newApartment->longitude) = generateRandomCoordinates($baseLatitude, $baseLongitude, 40);
+            list($newApartment->latitude, $newApartment->longitude) = generateRandomCoordinates($milanBaseLatitude, $milanBaseLongitude, 40);
 
-            $newApartment->address_full = $streets[$i] . ", " . rand(1, 100) . ", 20100, Milano";
+            $newApartment->address_full = $milanStreets[$i] . ", " . rand(1, 100) . ", 20100, Milano";
             $newApartment->is_visible = true;
             $newApartment->save();
         }
+        //ciclo appartamenti Parma
+        for ($i = 0; $i < 15; $i++) {
+            $newApartment = new Apartment();
+            $newApartment->user_id = rand(1, 3);
+            $newApartment->title = "Villa " . $parmaStreets[$i];
+            $newApartment->rooms = rand(1, 5);
+            $newApartment->beds = rand(1, 4);
+            $newApartment->bathrooms = rand(1, 2);
+            $newApartment->dimension_mq = rand(40, 120);
+            $newApartment->image = "http://www.case-in-legno-progettolegno.it/wp-content/uploads/2015/12/Casa-in-legno-a-Fano-0003.jpg";
+
+            list($newApartment->latitude, $newApartment->longitude) = generateRandomCoordinates($parmaBaseLatitude, $parmaBaseLongitude, 40);
+
+            $newApartment->address_full = $parmaStreets[$i] . ", " . rand(1, 100) . ", 43125, Parma";
+            $newApartment->is_visible = true;
+            $newApartment->save();
+        }
+
     }
+
+
 }
