@@ -48,17 +48,16 @@ class ApartmentController extends Controller
 
     public function search(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
 
 
         $validate_data = $request->validate(
             [
-                'latitude' => 'between:-90,90|numeric|decimal(11,9)',
-                'longitude' => 'between:-180,180|numeric|decimal(11,9)',
-                'radiusKm' => 'numeric| min:1',
-                'beds' => 'numeric|min:1',
-                'rooms' => 'numeric|min:1',
-
+                'latitude' => 'required',
+                'longitude' => 'required',
+                'radius' => 'nullable',
+                'beds' => 'nullable',
+                'rooms' => 'nullable',
             ]
         );
 
@@ -66,17 +65,20 @@ class ApartmentController extends Controller
 
 
 
-        $latitude = $data['latitude'];
-        $longitude = $data['longitude'];
+        // $latitude = $data['latitude'];
+        // $longitude = $data['longitude'];
+        // $beds = $data['beds'];
+        // $rooms = $data['rooms'];
+        // $radiusKm = $data['radius'];
+
+
         $latitude = $validate_data['latitude'];
         $longitude = $validate_data['longitude'];
-        $radiusKm = $validate_data['radiusKm'];
+        $radiusKm = $validate_data['radius'];
         $beds = $validate_data['beds'];
         $rooms = $validate_data['rooms'];
 
-        // $latitude =45.4732;
-        // $longitude =9.1895;
-        // $radiusKm =20;
+
         // $beds=2;
         // $rooms=3;
         // $bathrooms=1;
@@ -87,7 +89,12 @@ class ApartmentController extends Controller
         if (!$radiusKm) {
             $radiusKm = 20;
         }
-
+        if (!$beds) {
+            $beds = 1;
+        }
+        if (!$rooms) {
+            $rooms = 1;
+        }
 
 
 
