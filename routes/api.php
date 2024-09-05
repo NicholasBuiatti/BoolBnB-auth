@@ -19,5 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('apartments',[ApiApartmentController::class,'index']);
-Route::get('apartments/{apartment}',[ApiApartmentController::class,'show']);
+Route::get('apartments', [ApiApartmentController::class, 'index']);
+Route::get('apartments/{apartment}', [ApiApartmentController::class, 'show']);
+
+//RICHIESTA DATI DAL FRONT
+Route::post('search', [ApiApartmentController::class, 'search']);
