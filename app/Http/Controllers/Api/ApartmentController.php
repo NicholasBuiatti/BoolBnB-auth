@@ -11,7 +11,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['user'])/*aggiungere servizi*/->paginate();
+        $apartments = Apartment::with(['user','services'])/*aggiungere servizi*/->paginate();
         return response()->json([
             'success' => true,
             'results' => $apartments,
@@ -50,25 +50,43 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
 
-        // Punto di riferimento
-        // $validate_data=$request->validate(
-        //     ['latitude'=>'between:-90,90|numeric|decimal(11,9)',
-        //     'longitude'=>'between:-180,180|numeric|decimal(11,9)',
-        //     'radiusKm'=>'numeric| min:1']);
+         
+        //  $validate_data=$request->validate(
+        //      ['latitude'=>'between:-90,90|numeric|decimal(11,9)',
+        //      'longitude'=>'between:-180,180|numeric|decimal(11,9)',
+        //      'radiusKm'=>'numeric| min:1',
+        //      'beds'=>'numeric|min:1',
+        //      'bathrooms'=>'numeric|min:1',
+        //      'rooms'=>'numeric|min:1',
+
+        //     ]);
 
 
 
 
-        //PROVA
-        // $latitude = $validate_data['latitude'];
-        // $longitude = $validate_data['longitude'];
-        // $radiusKm = $validate_data['radiusKm'];
-        $latitude = $data['latitude'];
-        $longitude = $data['longitude'];
+        
+            // $latitude = $data['latitude'];
+            //$longitude = $data['longitude'];
+        //$latitude = $validate_data['latitude'];
+        //$longitude = $validate_data['longitude'];
+        //$radiusKm = $validate_data['radiusKm'];
+        //$beds=$validate_data['beds'];
+        //$rooms=$validate_data['rooms'];
+        //$bathrooms=$validate_data['bathrooms'];
+
+        $latitude =45.4732;
+        $longitude =9.1895;
+        $radiusKm =20;
+        $beds=2;
+        $rooms=3;
+        $bathrooms=1;
+
+        //da definire come mandare i servizi;
         $radiusKm = 20;
-        // if(!$radiusKm){
-        //     $radiusKm=20;
-        // }
+
+         if(!$radiusKm){
+             $radiusKm=20;
+         }
 
 
 
@@ -82,8 +100,11 @@ class ApartmentController extends Controller
         }
 
         // Prendi tutti gli appartamenti
-        $apartments = Apartment::with(['user'])->get();
-
+$apartments = Apartment::with(['user'])
+    ->where('beds', '>=', $beds)
+    ->where('rooms', '>=', $rooms)
+    ->where('bathrooms', '>=', $bathrooms)
+    ->get();
         // Inizializza l'array per gli appartamenti vicini
         $searchApp = [];
         foreach ($apartments as $apartment) {
@@ -111,32 +132,4 @@ class ApartmentController extends Controller
     }
 }
 
-// namespace App\Http\Controllers;
 
-// use League\Geotools\Coordinate\Coordinate;
-// use League\Geotools\Distance\Distance;
-// use League\Geotools\Geotools;
-
-// class LocationController extends Controller
-// {
-//     public function calculateDistance()
-//     {
-//         $geotools = new Geotools();
-
-//         // Coordinate di Milano (esempio)
-//         $coord1 = new Coordinate([45.464211, 9.191383]); // latitudine, longitudine
-
-//         // Coordinate di un altro punto
-//         $coord2 = new Coordinate([45.560, 9.210]);
-
-//         // Calcolo della distanza
-//         $distance = $geotools->distance()->setFrom($coord1)->setTo($coord2);
-
-//         // Distanza in chilometri
-//         $distanceInKm = $distance->flat(); // Puoi anche usare vincenty() o haversine() per altre metodologie
-
-//         return response()->json([
-//             'distance_km' => $distanceInKm
-//         ]);
-//     }
-// }

@@ -48,7 +48,7 @@ class ApartmentController extends Controller
     {
 
         $user_id = Auth::id();
-        $catalogue = Apartment::where('user_id', $user_id)->get();
+        $catalogue = Apartment::where('user_id', $user_id)->get()->with(['services']);
         $data =
             [
                 'catalogue' => $catalogue,
