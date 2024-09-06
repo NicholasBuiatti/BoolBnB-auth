@@ -1,4 +1,4 @@
-
+//controllo peso file prima di inviare
 document.getElementById('image').addEventListener('change', function() {
     let file = this.files[0];
     if (file.size > 5 * 1024 * 1024) {
@@ -16,8 +16,9 @@ document.getElementById('image').addEventListener('change', function() {
     }
 
 });
+//---------------------
 
-
+//chiamata API per reperire l'indirizzo 
 let apiAnswer = [];
 const apiKey = "RUfkTtEK0CYbHBG3YE2RSEslSRGAWZcu";
 const limit = 5;
@@ -54,6 +55,13 @@ indirizzo.addEventListener('input', function() {
 
                     lista.append(newOption);
                 }
+                indirizzo.addEventListener('focusout',function(){
+                    setTimeout(()=>{
+                        lista.innerHTML="";
+
+                    },500);
+                });
+
             });
     }
 })

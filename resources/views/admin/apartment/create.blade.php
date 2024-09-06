@@ -66,4 +66,25 @@
 			<button type="submit" class="btn btn-primary" id='btnSend'>Inserisci Appartamento </button>
 		</form>
 	</div>
+	<p id="errorMail" class="text-danger"></p>
+	<style>
+        #opzioni {
+            width: 100%;
+            background-color: rgb(216, 216, 216);
+            border-radius: 10px;
+            max-height: 4.5rem;
+            overflow: auto;
+            padding-left: 0;
+        }
+        #opzioni li {
+            list-style: none;
+            cursor: pointer;
+            width: 100%;
+            padding-left: 1rem;
+        }
+        #opzioni li:hover {
+            background-color: rgba(0, 145, 255, 0.278);
+            transition: .5s;
+        }
+    </style>
 @endsection

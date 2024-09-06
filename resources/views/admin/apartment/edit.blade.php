@@ -71,8 +71,18 @@
                     @enderror
                     <p id="addressError" style="color:red; display:none;">L'indirizzo non è valido</p>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label me-2">Visibilità Appartamento  </label>
+                    <input type="checkbox" class=""  name="is_visible"
+                        {{ $apartment['is_visible'] ? 'checked': 'unchecked' }} >
+                    @error('is_visible')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
     
                 <button type="submit" class="btn btn-primary">Modifica appartamento </button>
+                
             </form>
             {{-- delete button --}}
             <form class="px-5 pb-5" action="{{ route('apartments.destroy', $apartment) }}" method="POST">

@@ -87,7 +87,7 @@ class ApartmentController extends Controller
         //requesting data from form
         //creating new istance of Apartment
         $newApartment = new Apartment();
-        $newApartment->is_visible = true;
+        $data['is_visible']=$request->has('is_visible')? 1 : 0 ;
         $newApartment->user_id = Auth::id();
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $request->image);
@@ -161,6 +161,7 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
             "image" => "image|max:5120",
+            
 
 
         ]);
@@ -182,6 +183,8 @@ class ApartmentController extends Controller
         $responseAddress = $this->getCoordinatesFromAddress($data['address_full']);
         $data['longitude'] = $responseAddress['longitude'];
         $data['latitude'] = $responseAddress['latitude'];
+        $data['is_visible']=$request->has('is_visible')? 1 : 0 ;
+
         // $apartment->latitude = $data['latitude'];
         // $apartment->longitude = $data['longitude'];
         // $apartment->address_full = $data['address_full'];
