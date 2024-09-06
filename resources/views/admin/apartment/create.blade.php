@@ -90,12 +90,7 @@
             }
 
         });
-<<<<<<< HEAD
 
-
-=======
-        
->>>>>>> branch-api
         let apiAnswer = [];
         const apiKey = "RUfkTtEK0CYbHBG3YE2RSEslSRGAWZcu";
         const limit = 5;
@@ -108,90 +103,25 @@
                     `https://api.tomtom.com/search/2/search/${encodeURIComponent(addressInput)}.json?key=${apiKey}&typeahead=true&limit=${limit}&countrySet={IT}`;
                 axios.get(url_tomtom)
                     .then(function(response) {
-<<<<<<< HEAD
-
-                        apiAnswer = response.data;
-
-                        console.log(apiAnswer);
-
-                        let lista = document.getElementById('opzioni');
-                        lista.innerHTML = '';
-
-=======
                         apiAnswer = response.data;
                         console.log(apiAnswer);
                         let lista = document.getElementById('opzioni');
                         lista.innerHTML = '';
->>>>>>> branch-api
                         for (let i = 0; i < apiAnswer.results.length; i++) {
                             let indirizzoCompleto = apiAnswer.results[i].address.freeformAddress;
                             let newOption = document.createElement("li");
                             newOption.innerHTML = indirizzoCompleto;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch-api
                             newOption.addEventListener('click', function() {
                                 indirizzo.value = indirizzoCompleto;
                                 selectedAddress = indirizzoCompleto;
                                 apiAnswer = [];
                                 lista.innerHTML = '';
-<<<<<<< HEAD
-
                                 console.log("Indirizzo selezionato:", selectedAddress);
                             });
-
-=======
-                                console.log("Indirizzo selezionato:", selectedAddress);
-                            });
->>>>>>> branch-api
                             lista.append(newOption);
                         }
                     });
             }
         })
-<<<<<<< HEAD
-
-
-        document.getElementById('btnSend').addEventListener('click', function() {
-            if (selectedAddress == indirizzo.value) {
-                console.log("l'indirizzo è uguale")
-                document.getElementById('addressError').style.display = 'none';
-                document.getElementById('apartmentForm').onsubmit = function(event) {
-                    return true;
-                };
-            } else {
-                console.log("l'indirizzo NON è uguale")
-                document.getElementById('apartmentForm').onsubmit = function(event) {
-                    event.preventDefault();
-                }
-                document.getElementById('addressError').style.display = 'block';
-            }
-        });
-    </script> --}}
-    <style>
-        #opzioni {
-            width: 100%;
-            background-color: rgb(216, 216, 216);
-            border-radius: 10px;
-            max-height: 4.5rem;
-            overflow: auto;
-            padding-left: 0;
-        }
-
-        #opzioni li {
-            list-style: none;
-            cursor: pointer;
-            width: 100%;
-            padding-left: 1rem;
-        }
-
-        #opzioni li:hover {
-            background-color: rgba(0, 145, 255, 0.278);
-            transition: .5s;
-        }
-    </style>
-=======
     </script>
->>>>>>> branch-api
-@endsection
+    @endsection
