@@ -23,9 +23,9 @@ class ApartmentController extends Controller
         $url = "https://api.tomtom.com/search/2/geocode/{$urlAddress}.json?key={$apiKey}";
 
         // effettuo la chiamata api,
-        $response = Http::withOptions(['verify' => false])->get($url); 
+        $response = Http::withOptions(['verify' => false])->get($url);
         // DA ELIMINARE IN CASO DI DEPLOY (IN PRODUZIONE)
-        
+
         // controllo che ci sia una risposta e la salvo nelle variabili latitude e longitude FUNZIONA!!!!
         if ($response->successful()) {
             $data = $response->json();
@@ -48,7 +48,7 @@ class ApartmentController extends Controller
     {
 
         $user_id = Auth::id();
-        $catalogue = Apartment::where('user_id', $user_id)->get()->with(['services']);
+        $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->get();
         $data =
             [
                 'catalogue' => $catalogue,
