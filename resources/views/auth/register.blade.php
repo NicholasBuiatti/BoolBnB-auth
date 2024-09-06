@@ -63,6 +63,7 @@
 								<div class="col-md-6">
 									<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
 										value="{{ old('email') }}" required autocomplete="email">
+										<p id="errorMail" class="text-danger"></p>
 
 									@error('email')
 										<span class="invalid-feedback" role="alert">
@@ -78,6 +79,7 @@
 								<div class="col-md-6">
 									<input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
 										name="password" required autocomplete="new-password">
+										<p id="message" class="error text-danger"></p>
 
 									@error('password')
 										<span class="invalid-feedback" role="alert">
@@ -97,7 +99,6 @@
 								</div>
 							</div>
 
-							<p id="message" class="error"></p>
 
 							<div class="mb-4 row mb-0">
 								<div class="col-md-6 offset-md-4">
@@ -129,6 +130,22 @@
 			} else {
 				messageElement.textContent = '';
 			}
+			let mail=document.getElementById('email').value;
+	
+			const regex = new RegExp('^[^\\s@]+@[^\\s@]+\\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es)$');
+			if (!regex.test(mail)) {
+				//console.log("L'email è valida.");
+				//console.log("L'email non è valida.");
+				event.preventDefault();
+				document.getElementById('errorMail').textContent="l'email non è valida";
+
+			} /*else if(mail==null) {
+				document.getElementById('errorMail').textContent="";
+			}*/
+			
+
 		});
+
+
 	</script>
 @endsection
