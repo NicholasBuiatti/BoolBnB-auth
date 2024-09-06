@@ -42,7 +42,7 @@
 							</div>
 
 							<div class="mb-4 row">
-								<label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
+								<label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}*</label>
 
 								<div class="col-md-6">
 									<input id="birth_date" type="date" required class="form-control @error('birth_date') is-invalid @enderror"
@@ -51,7 +51,7 @@
 
 									@error('birth_date')
 										<span class="invalid-feedback" role="alert">
-											<strong>{{$message}}</strong>
+											<strong>{{ $message }}</strong>
 										</span>
 									@enderror
 								</div>
@@ -114,4 +114,21 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		//controllo password identiche
+		const formRegister = document.getElementById('registrationForm');
+		formRegister.addEventListener('submit', function(event) {
+			const password = document.getElementById('password').value;
+			const confirmPassword = document.getElementById('password-confirm').value;
+			const messageElement = document.getElementById('message');
+
+			if (password !== confirmPassword) {
+				//prevengo il submit prima dell'invio
+				event.preventDefault();
+				messageElement.textContent = 'Le password non corrispondono.';
+			} else {
+				messageElement.textContent = '';
+			}
+		});
+	</script>
 @endsection

@@ -34,18 +34,3 @@ document.addEventListener('DOMContentLoaded', function () {
     checkRequiredFields();
 });
 
-//controllo password identiche
-const formRegister = document.getElementById('registrationForm');
-formRegister.addEventListener('submit', function (event) {
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('password-confirm').value;
-    const messageElement = document.getElementById('message');
-
-    if (password !== confirmPassword) {
-        //prevengo il submit prima dell'invio
-        event.preventDefault();
-        messageElement.textContent = 'Le password non corrispondono.';
-    } else {
-        messageElement.textContent = '';
-    }
-});
