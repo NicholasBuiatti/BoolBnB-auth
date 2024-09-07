@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('address_full');
             $table->boolean('is_visible');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

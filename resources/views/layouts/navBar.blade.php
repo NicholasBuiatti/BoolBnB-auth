@@ -59,6 +59,14 @@
 							</a>
 						</li>
 						<li>
+							<a href="{{ route('apartments.bin') }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.bin' ? 'bg-secondary' : '' }}"
+								aria-current="page">
+								Appartamenti eliminati
+							</a>
+						</li>
+
+						<li>
 							<a href="#" class="nav-link text-white">
 								Statistiche
 							</a>
