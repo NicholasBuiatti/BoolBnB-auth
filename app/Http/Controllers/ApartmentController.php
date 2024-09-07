@@ -49,14 +49,14 @@ class ApartmentController extends Controller
 
         $user_id = Auth::id();
         $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
-        $bin=Apartment::withTrashed()->get();
-        
+        $bin = Apartment::withTrashed()->get();
+
         $data =
             [
                 'catalogue' => $catalogue,
-                'bin'=>$bin,
+                'bin' => $bin,
             ];
-            //dd($data);
+        //dd($data);
         return view('admin.apartment.index', $data);
     }
 
@@ -201,6 +201,13 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+
+
+
+
+
+     //--------------------destroy function 
     public function destroy(Apartment $apartment)
     {
         $apartment->delete();
@@ -212,25 +219,29 @@ class ApartmentController extends Controller
         $apartment = Apartment::withTrashed()->find($id);
         $apartment->restore();
         return to_route('apartments.index')->with('success', 'Appartamento ripristinato!.');
-
-
-    }    public function forceDelete(Apartment $apartment)
-    {
-        $apartment->forceDelete();
-
-        return to_route('apartments.index')->with('message', 'Appartamento eliminato.');
     }
+    public function forceDelete($id)
+    {
+        $apartment = Apartment::onlyTrashed()->find($id);
 
+        if ($apartment) {
+            $apartment->forceDelete();
+            return redirect()->route('apartments.bin')->with('success', 'apartment permanently deleted');
+        }
+
+        return redirect()->route('apartments.index')->with('error', 'Post not found');
+    }
     public function bin()
     {
         $user_id = Auth::id();
-    
+
         // Ottieni solo gli appartamenti soft deleted
         $bin = Apartment::onlyTrashed()->where('user_id', $user_id)->get();
-    
+
         $data = [
             'bin' => $bin,
         ];
-    
+
         return view('admin.apartment.bin', $data);
-    }}
+    }
+}

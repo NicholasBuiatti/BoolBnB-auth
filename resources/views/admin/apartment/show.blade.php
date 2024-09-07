@@ -24,6 +24,12 @@
                     <div class="text-center">
                         <a class="btn btn-primary my-2" href="{{ route('apartments.index') }}">Indietro</a>
                         <a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">Modifica</a>
+                        <form class="px-5 pb-5" action="{{ route('apartments.destroy', $apartment) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button id="bottone" class="btn btn-danger" type="submit">Elimina l'appartamento dalla tua lista
+                            </button>
+                        </form>
                     </div>
 
                 </div>
