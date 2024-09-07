@@ -48,7 +48,7 @@ class ApartmentController extends Controller
     {
 
         $user_id = Auth::id();
-        $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->get();
+        $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
         $data =
             [
                 'catalogue' => $catalogue,
@@ -87,7 +87,7 @@ class ApartmentController extends Controller
         //requesting data from form
         //creating new istance of Apartment
         $newApartment = new Apartment();
-        $data['is_visible']=$request->has('is_visible')? 1 : 0 ;
+        $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
         $newApartment->user_id = Auth::id();
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $request->image);
@@ -161,7 +161,7 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
             "image" => "image|max:5120",
-            
+
 
 
         ]);
@@ -183,7 +183,7 @@ class ApartmentController extends Controller
         $responseAddress = $this->getCoordinatesFromAddress($data['address_full']);
         $data['longitude'] = $responseAddress['longitude'];
         $data['latitude'] = $responseAddress['latitude'];
-        $data['is_visible']=$request->has('is_visible')? 1 : 0 ;
+        $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
 
         // $apartment->latitude = $data['latitude'];
         // $apartment->longitude = $data['longitude'];

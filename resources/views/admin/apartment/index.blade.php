@@ -1,7 +1,35 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<div class="d-flex align-items-start w-100">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Nome</th>
+				<th scope="col">Stanze</th>
+				<th scope="col">Bagni</th>
+				<th scope="col">Letti</th>
+				<th scope="col">Mq</th>
+				<th scope="col">Dettagli/Modifica</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach ($catalogue as $apartment)
+				<tr>
+					<th scope="row">{{ $apartment->title }}</th>
+					<td>{{ $apartment->rooms }}</td>
+					<td>{{ $apartment->bathrooms }}</td>
+					<td>{{ $apartment->beds }}</td>
+					<td>{{ $apartment->dimension_mq }}</td>
+					<td>
+						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}">D</a>
+						<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">M</a>
+					</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
+	{{ $catalogue->links('pagination::bootstrap-5') }}
+	{{-- <div class="d-flex align-items-start w-100">
 
 		<div class="d-flex flex-wrap">
 			@foreach ($catalogue as $apartment)
@@ -25,10 +53,10 @@
 							<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}">Dettagli</a>
 							<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">Modifica</a>
 						</div>
-						
+
 					</div>
 				</div>
 			@endforeach
 		</div>
-	</div>
+	</div> --}}
 @endsection
