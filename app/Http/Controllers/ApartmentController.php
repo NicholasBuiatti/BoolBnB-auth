@@ -152,9 +152,11 @@ class ApartmentController extends Controller
             // Se l'utente non è autorizzato, mostra la pagina 404
             abort(403);
         }
-
+        $service = Service::all();
         $data = [
             'apartment' => $apartment,
+            'services' => $service,
+            "relations" => $apartment->services->pluck('id')->toArray()
         ];
 
         return view('admin.apartment.edit', $data);
@@ -174,8 +176,8 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
             "image" => "image|max:5120",
-
-
+            "services" => "array",
+            'services.*' => "exists:services,id",
 
         ]);
         //$data=$request->all();
@@ -204,6 +206,11 @@ class ApartmentController extends Controller
         // $apartment->is_visible=$data['is_visible'];
 
         $apartment->update($data);
+
+        if (isset($data['services'])) {
+            $apartment->services()->sync($data['services']);
+        }
+
         return redirect()->route('apartments.index');
     }
 
@@ -212,6 +219,11 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+
+        if ($apartment->img && !Str::startsWith($apartment->img, 'http')) {
+            Storage::delete($apartment->img);
+        }
+
         $apartment->delete();
 
         return to_route('apartments.index')->with('message', 'Appartamento eliminato.');

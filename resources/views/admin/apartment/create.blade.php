@@ -83,6 +83,13 @@
 				@enderror
 				<p id="addressError" style="color:red; display:none;">L'indirizzo non è valido</p>
 			</div>
+			<div class="mb-3">
+				<label class="form-label me-2">Visibilità Appartamento </label>
+				<input type="checkbox" class="" name="is_visible">
+				@error('is_visible')
+					<div class="text-danger">{{ $message }}</div>
+				@enderror
+			</div>
 			<button type="submit" class="btn btn-primary" id='btnSend'>Inserisci Appartamento </button>
 		</form>
 	</div>
