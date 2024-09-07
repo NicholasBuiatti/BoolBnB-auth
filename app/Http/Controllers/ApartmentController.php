@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +62,12 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartment.create');
+
+        $data = [
+            "services" => Service::all(),
+        ];
+
+        return view('admin.apartment.create', $data);
     }
 
     /**
@@ -79,7 +85,8 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
             "image" => "required|image|max:5120",
-
+            "services" => "array",
+            'services.*' => "exists:services,id",
         ]);
 
         // mando i dati dell'indirizzo alla mia funzione per le coordinate
@@ -87,7 +94,9 @@ class ApartmentController extends Controller
         //requesting data from form
         //creating new istance of Apartment
         $newApartment = new Apartment();
+
         $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
+
         $newApartment->user_id = Auth::id();
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $request->image);
@@ -99,8 +108,12 @@ class ApartmentController extends Controller
         $newApartment->latitude = $responseAddress['latitude'];
         $newApartment->fill($data);
 
-        //dd($data);
         $newApartment->save();
+
+        if (isset($data['services'])) {
+            $newApartment->services()->attach($data['services']);
+        }
+        dd($newApartment);
         return redirect()->route('apartments.index');
     }
 

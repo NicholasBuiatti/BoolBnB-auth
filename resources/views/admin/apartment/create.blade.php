@@ -43,6 +43,26 @@
 				@enderror
 			</div>
 
+			<div class="mb-4 row">
+				<label for="services" class="col-md-2 col-form-label text-md-right">Servizi</label>
+				<div class="col-md-10">
+					@foreach ($services as $service)
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}"
+								id="service{{ $service->id }}">
+							<label class="form-check-label" for="service{{ $service->id }}">
+								{{ $service->name }}
+							</label>
+						</div>
+					@endforeach
+					@error('services')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+			</div>
+
 			<div class="mb-3">
 				<label class="form-label">Inserisci Immagine</label>
 				<input type="file" accept="image/*" id="image" class="form-control" name="image" placeholder="" required>
@@ -66,25 +86,32 @@
 			<button type="submit" class="btn btn-primary" id='btnSend'>Inserisci Appartamento </button>
 		</form>
 	</div>
-	<p id="errorMail" class="text-danger"></p>
+
+
+
+
+
+
 	<style>
-        #opzioni {
-            width: 100%;
-            background-color: rgb(216, 216, 216);
-            border-radius: 10px;
-            max-height: 4.5rem;
-            overflow: auto;
-            padding-left: 0;
-        }
-        #opzioni li {
-            list-style: none;
-            cursor: pointer;
-            width: 100%;
-            padding-left: 1rem;
-        }
-        #opzioni li:hover {
-            background-color: rgba(0, 145, 255, 0.278);
-            transition: .5s;
-        }
-    </style>
+		#opzioni {
+			width: 100%;
+			background-color: rgb(216, 216, 216);
+			border-radius: 10px;
+			max-height: 4.5rem;
+			overflow: auto;
+			padding-left: 0;
+		}
+
+		#opzioni li {
+			list-style: none;
+			cursor: pointer;
+			width: 100%;
+			padding-left: 1rem;
+		}
+
+		#opzioni li:hover {
+			background-color: rgba(0, 145, 255, 0.278);
+			transition: .5s;
+		}
+	</style>
 @endsection
