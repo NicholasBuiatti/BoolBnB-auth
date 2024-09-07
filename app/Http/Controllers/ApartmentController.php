@@ -113,7 +113,7 @@ class ApartmentController extends Controller
         if (isset($data['services'])) {
             $newApartment->services()->attach($data['services']);
         }
-        dd($newApartment);
+        // dd($newApartment);
         return redirect()->route('apartments.index');
     }
 
