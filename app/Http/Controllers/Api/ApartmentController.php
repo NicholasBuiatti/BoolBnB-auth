@@ -84,7 +84,7 @@ class ApartmentController extends Controller
             ->having("distance", "<=", $radiusKm) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
-            ->orderBy('distance'); //ordino per distanza
+            ->orderBy('distance', 'desc'); //ordino per distanza
 
         // Se ci sono servizi, aggiungi un filtro
         if (!empty($services)) {

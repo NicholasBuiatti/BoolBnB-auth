@@ -77,7 +77,7 @@
 					@enderror
 				</div>
 				<div class="mb-4 row">
-					<label for="services" class="col-md-2 col-form-label text-md-right">Linguaggi</label>
+					<label for="services" class="col-md-2 col-form-label text-md-right">Servizi</label>
 					<div class="col-md-10">
 						@foreach ($services as $service)
 							<div class="form-check">
