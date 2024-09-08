@@ -41,22 +41,16 @@ class ApartmentController extends Controller
             }
         }
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-
         $user_id = Auth::id();
         $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
-        $bin = Apartment::withTrashed()->get();
-
         $data =
             [
                 'catalogue' => $catalogue,
-                'bin' => $bin,
             ];
-        //dd($data);
+
         return view('admin.apartment.index', $data);
     }
 
@@ -207,7 +201,7 @@ class ApartmentController extends Controller
 
 
 
-     //--------------------destroy function 
+    //--------------------destroy function 
     public function destroy(Apartment $apartment)
     {
         $apartment->delete();

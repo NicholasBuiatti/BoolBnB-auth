@@ -2,16 +2,7 @@
 
 @section('content')
 	<div class="d-flex gap-5">
-		{{-- <div id="right-dashboard" class="col-2">
 
-			<h1>Dashboard</h1>
-			<ul>
-				<li><a href="{{ route('apartments.index') }}">Elenco Appartamenti</a></li>
-				<li><a href="{{ route('apartments.create') }}">Inserisci nuovo appartamento</a></li>
-				<li><a href="">Messaggi ricevuti</a></li>
-				<li><a href="">Storico acquisti</a></li>
-			</ul>
-		</div> --}}
 		<div class="col">
 			<h2 class="fs-4 text-secondary my-4">
 				{{ __('Dashboard') }}
@@ -30,7 +21,43 @@
 
 							{{ __('Login eseguito con successo!') }}
 						</div>
+
+
+
 					</div>
+					<section class="container mt-4">
+						<div class="row justify-content-between">
+
+							<div class="card col-6">
+								<div class="card-header">
+									I miei Appartamenti
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">Posseduti: {{ $catalogue->total() }} ecco i primi {{ count($catalogue) }}</h5>
+									<ul>
+										@foreach ($catalogue as $apartment)
+											<li>{{ $apartment->title }}</li>
+										@endforeach
+									</ul>
+									<a href="{{ route('apartments.index') }}" class="btn btn-primary">{{ __('Vai alla lista dettagliata') }}</a>
+								</div>
+							</div>
+							<div class="card col-5">
+								<div class="card-header">
+									Messaggi
+								</div>
+								<div class="card-body">
+									{{-- <h5 class="card-title">Posseduti: {{ $catalogue->total() }} ecco i primi {{ count($catalogue) }}</h5>
+									<ul>
+										@foreach ($catalogue as $apartment)
+											<li>{{ $apartment->title }}</li>
+										@endforeach
+									</ul> --}}
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>

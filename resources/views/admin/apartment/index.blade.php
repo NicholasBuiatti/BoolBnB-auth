@@ -29,10 +29,6 @@
 		</tbody>
 	</table>
 	{{ $catalogue->links('pagination::bootstrap-5') }}
-	@foreach($bin as $apartment)
-
-	<div>{{$apartment->name}}</div>
-	@endforeach
 	{{-- <div class="d-flex align-items-start w-100">
 
 		<div class="d-flex flex-wrap">

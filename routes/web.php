@@ -3,6 +3,9 @@
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Apartment;
+use Illuminate\Support\Facades\Auth;
+
 
 
 /*
@@ -21,18 +24,23 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return view('dashboard');
+    $user_id = Auth::id();
+    $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
+    $data =
+        [
+            'catalogue' => $catalogue,
+        ];
+    return view('dashboard', $data);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::delete('/apartments/force-delete/{id}',[ApartmentController::class,'forceDelete'])->name('apartments.forceDelete');
-    Route::get('/apartments/bin',[ApartmentController::class,'bin'])->name('apartments.bin');
+    Route::delete('/apartments/force-delete/{id}', [ApartmentController::class, 'forceDelete'])->name('apartments.forceDelete');
+    Route::get('/apartments/bin', [ApartmentController::class, 'bin'])->name('apartments.bin');
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
-    
 });
 
 require __DIR__ . '/auth.php';
