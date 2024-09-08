@@ -24,6 +24,8 @@ class Apartment extends Model
         'longitude',
         'address_full',
         'is_visible',
+        //METTO IL TYPE ID PER COLLEGARLO ALLA TABELLA TYPE
+        "service_id",
     ];
 
     protected $dates=['deleted_at'];
@@ -33,8 +35,8 @@ class Apartment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function services(){
+    public function services()
+    {
         return $this->belongsToMany(Service::class);
-
-    } 
+    }
 }

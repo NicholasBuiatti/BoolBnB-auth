@@ -9,6 +9,7 @@
 				<th scope="col">Bagni</th>
 				<th scope="col">Letti</th>
 				<th scope="col">Mq</th>
+				<th scope="col">Servizi</th>
 				<th scope="col">Dettagli/Modifica</th>
 			</tr>
 		</thead>
@@ -20,6 +21,13 @@
 					<td>{{ $apartment->bathrooms }}</td>
 					<td>{{ $apartment->beds }}</td>
 					<td>{{ $apartment->dimension_mq }}</td>
+					<td>
+						<ul>
+							@foreach ($apartment->services as $service)
+								<li>{{ $service->name }}</li>
+							@endforeach
+						</ul>
+					</td>
 					<td>
 						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}">D</a>
 						<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">M</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
-
     // creo la funzione per trasformare l'indirizzo in coordinate tramite chiamata api
     public function getCoordinatesFromAddress($address)
     {
@@ -45,29 +45,26 @@ class ApartmentController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-        $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
         $data =
             [
-                'catalogue' => $catalogue,
+                'catalogue' => Apartment::where('user_id', $user_id)->with(['services'])->paginate(8),
             ];
 
         return view('admin.apartment.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.apartment.create');
+
+        $data = [
+            "services" => Service::all(),
+        ];
+
+        return view('admin.apartment.create', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-
         //validating data inserted
         $data = $request->validate([
             "title" => "string|required|min:6",
@@ -77,7 +74,8 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
             "image" => "required|image|max:5120",
-
+            "services" => "array",
+            'services.*' => "exists:services,id",
         ]);
 
         // mando i dati dell'indirizzo alla mia funzione per le coordinate
@@ -85,7 +83,8 @@ class ApartmentController extends Controller
         //requesting data from form
         //creating new istance of Apartment
         $newApartment = new Apartment();
-        $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
+
+
         $newApartment->user_id = Auth::id();
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $request->image);
@@ -95,21 +94,22 @@ class ApartmentController extends Controller
         // salvo i dati delle coordinate nel database FUNZIONAAAAAAAA!
         $newApartment->longitude = $responseAddress['longitude'];
         $newApartment->latitude = $responseAddress['latitude'];
-        $newApartment->fill($data);
+        $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
 
-        //dd($data);
+        $newApartment->fill($data);
         $newApartment->save();
+
+        if (isset($data['services'])) {
+            $newApartment->services()->attach($data['services']);
+        }
+
         return redirect()->route('apartments.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Apartment $apartment)
     {
         // Ottieni l'utente autenticato
         $user = auth()->user();
-
         // Verifica se l'utente autenticato è lo stesso dell'appartamento
         if ($apartment->user_id != $user->id) {
             // Se l'utente non è autorizzato, mostra la pagina 404
@@ -124,9 +124,6 @@ class ApartmentController extends Controller
         return view('admin.apartment.show', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Apartment $apartment)
     {
         // Ottieni l'utente autenticato
@@ -140,14 +137,13 @@ class ApartmentController extends Controller
 
         $data = [
             'apartment' => $apartment,
+            'services' => Service::all(),
+            "relations" => $apartment->services->pluck('id')->toArray()
         ];
 
         return view('admin.apartment.edit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Apartment $apartment)
     {
 
@@ -159,17 +155,11 @@ class ApartmentController extends Controller
             "dimension_mq" => "required|numeric|min:15",
             "address_full" => "required|string|min:8",
             "image" => "image|max:5120",
-
-
+            "services" => "array",
+            'services.*' => "exists:services,id",
 
         ]);
-        //$data=$request->all();
-        // $apartment->title = $data['title'];
-        // $apartment->rooms = $data['rooms'];
-        // $apartment->beds = $data['beds'];
-        // $apartment->bathrooms = $data['bathrooms'];
-        // $apartment->dimension_mq = $data['dimension_mq'];
-        // $apartment->image = $data['image'];
+
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $request->image);
             $data['image'] = $img_path;
@@ -181,14 +171,15 @@ class ApartmentController extends Controller
         $responseAddress = $this->getCoordinatesFromAddress($data['address_full']);
         $data['longitude'] = $responseAddress['longitude'];
         $data['latitude'] = $responseAddress['latitude'];
+
         $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
 
-        // $apartment->latitude = $data['latitude'];
-        // $apartment->longitude = $data['longitude'];
-        // $apartment->address_full = $data['address_full'];
-        // $apartment->is_visible=$data['is_visible'];
-
         $apartment->update($data);
+
+        if (isset($data['services'])) {
+            $apartment->services()->sync($data['services']);
+        }
+
         return redirect()->route('apartments.index');
     }
 
@@ -204,6 +195,11 @@ class ApartmentController extends Controller
     //--------------------destroy function 
     public function destroy(Apartment $apartment)
     {
+
+        if ($apartment->img && !Str::startsWith($apartment->img, 'http')) {
+            Storage::delete($apartment->img);
+        }
+
         $apartment->delete();
 
         return to_route('apartments.index')->with('message', 'Appartamento eliminato.');
