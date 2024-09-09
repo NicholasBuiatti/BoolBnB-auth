@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/apartments/bin', [ApartmentController::class, 'bin'])->name('apartments.bin');
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
+
+    Route::get('/sponsorship/create', [SponsorshipController::class, 'create'])->name('sponsorship.create');
+    Route::post('/sponsorship/store', [SponsorshipController::class, 'store'])->name('sponsorship.store');
+    Route::get('/sponsorship/success', [SponsorshipController::class, 'success'])->name('sponsorship.success');
 });
 
 require __DIR__ . '/auth.php';
