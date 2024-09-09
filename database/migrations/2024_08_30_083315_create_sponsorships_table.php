@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('price', 53);
             $table->smallInteger('duration');
             $table->boolean('active');
+            $table->timestamps();
         });
     }
 

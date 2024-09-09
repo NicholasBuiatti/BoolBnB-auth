@@ -49,6 +49,13 @@ class ApartmentController extends Controller
 
     public function search(Request $request)
     {
+        $latitude = $request->query('latitude');
+        $longitude = $request->query('longitude');
+        $radius = $request->query('radius', 20); // Default a 20 se non specificato
+        $beds = $request->query('beds', 1); // Default a 1 se non specificato
+        $rooms = $request->query('rooms', 1); // Default a 1 se non specificato
+        $services = $request->query('services', []); // Default a un array vuoto
+
         try {
             $validate_data = $request->validate(
                 [
@@ -58,8 +65,15 @@ class ApartmentController extends Controller
                     'beds' => 'nullable|integer|min:1|max:10',
                     'rooms' => 'nullable|integer|min:1|max:10',
                     'services' => 'array|nullable',
+                    'services.*' => 'string' // Opzionale, valida ogni elemento dell'array come stringa
                 ]
             );
+
+            // Continua con la logica della tua applicazione se la validazione è corretta
+            return response()->json([
+                'success' => true,
+                'data' => $validate_data
+            ]);
         } catch (ValidationException $errors) {
             return response()->json([
                 'success' => false,
@@ -67,12 +81,12 @@ class ApartmentController extends Controller
             ]);
         }
 
-        $latitude = $validate_data['latitude'];
-        $longitude = $validate_data['longitude'];
-        $radiusKm = $validate_data['radius'] ?? 20; // Default 20 km
-        $beds = $validate_data['beds'] ?? 1;
-        $rooms = $validate_data['rooms'] ?? 1;
-        $services = $validate_data['services'];
+        // $latitude = $validate_data['latitude'];
+        // $longitude = $validate_data['longitude'];
+        // $radiusKm = $validate_data['radius'] ?? 20; // Default 20 km
+        // $beds = $validate_data['beds'] ?? 1;
+        // $rooms = $validate_data['rooms'] ?? 1;
+        // $services = $validate_data['services'];
 
         // Query di base per gli appartamenti con numero di letti e stanze richiesti
         $apartments = Apartment::with(['user', 'services'])
@@ -81,7 +95,7 @@ class ApartmentController extends Controller
                         POINT(longitude, latitude), 
                         POINT($longitude, $latitude)
                         ) * 0.001 AS distance")
-            ->having("distance", "<=", $radiusKm) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
+            ->having("distance", "<=", $radius) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
             ->orderBy('distance', 'desc'); //ordino per distanza

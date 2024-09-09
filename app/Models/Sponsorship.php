@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Apartment;
 
-class Service extends Model
-{
-    //tolto timestamps così lancia il seeder;
 
+class Sponsorship extends Model
+{
     use HasFactory;
     protected $fillable = [
         'name',
+        'price',
+        'duration',
+        'active',
     ];
+
     protected $hidden = [
         'created_at',
         'updated_at'
@@ -23,4 +26,4 @@ class Service extends Model
     {
         return $this->belongsToMany(Apartment::class);
     }
-};
+}
