@@ -49,6 +49,12 @@ class ApartmentController extends Controller
 
     public function search(Request $request)
     {
+        $latitude = $request->query('latitude');
+        $longitude = $request->query('longitude');
+        $radiusKm = $request->query('radius', 20); // Default a 20 se non specificato
+        $beds = $request->query('beds', 1); // Default a 1 se non specificato
+        $rooms = $request->query('rooms', 1); // Default a 1 se non specificato
+        $services = $request->query('services', []); // Default a un array vuoto
         try {
             $validate_data = $request->validate(
                 [
@@ -67,12 +73,12 @@ class ApartmentController extends Controller
             ]);
         }
 
-        $latitude = $validate_data['latitude'];
-        $longitude = $validate_data['longitude'];
-        $radiusKm = $validate_data['radius'] ?? 20; // Default 20 km
-        $beds = $validate_data['beds'] ?? 1;
-        $rooms = $validate_data['rooms'] ?? 1;
-        $services = $validate_data['services'];
+        //$latitude = $validate_data['latitude'];
+        //$longitude = $validate_data['longitude'];
+        //$radiusKm = $validate_data['radius'] ?? 20; // Default 20 km
+        //$beds = $validate_data['beds'] ?? 1;
+        //$rooms = $validate_data['rooms'] ?? 1;
+        //$services = $validate_data['services'];
 
         // Query di base per gli appartamenti con numero di letti e stanze richiesti
         $apartments = Apartment::with(['user', 'services'])
