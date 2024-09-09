@@ -43,9 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
 
-    Route::get('/sponsorship/create', [SponsorshipController::class, 'create'])->name('sponsorship.create');
-    Route::post('/sponsorship/store', [SponsorshipController::class, 'store'])->name('sponsorship.store');
-    Route::get('/sponsorship/success', [SponsorshipController::class, 'success'])->name('sponsorship.success');
+    Route::get('/sponsorships', [SponsorshipController::class, 'showSponsorships'])->name('sponsorships.index');
+    Route::post('/sponsorships/payment', [SponsorshipController::class, 'processPayment'])->name('sponsorships.payment');
 });
 
 require __DIR__ . '/auth.php';
