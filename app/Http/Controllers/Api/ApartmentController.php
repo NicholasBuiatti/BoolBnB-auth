@@ -63,7 +63,7 @@ class ApartmentController extends Controller
                     'radius' => 'nullable|numeric|min:1',
                     'beds' => 'nullable|integer|min:1|max:10',
                     'rooms' => 'nullable|integer|min:1|max:10',
-                    'services' => 'array|nullable',
+                    'services' => 'nullable',
                 ]
             );
         } catch (ValidationException $errors) {
