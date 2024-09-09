@@ -54,7 +54,18 @@ class ApartmentController extends Controller
         $radiusKm = $request->query('radius', 20); // Default a 20 se non specificato
         $beds = $request->query('beds', 1); // Default a 1 se non specificato
         $rooms = $request->query('rooms', 1); // Default a 1 se non specificato
-        $services = $request->query('services', []); // Default a un array vuoto
+        $servicesString = $request->query('services', []); // Default a un array vuoto
+        $services = null;
+
+        if ($servicesString == []) {
+
+            $services = $servicesString;
+        } else {
+
+            $services = explode(',',  $servicesString);
+        }
+
+
         try {
             $validate_data = $request->validate(
                 [
@@ -82,9 +93,9 @@ class ApartmentController extends Controller
 
         // Query di base per gli appartamenti con numero di letti e stanze richiesti
         $apartments = Apartment::with(['user', 'services'])
-            ->selectRaw("apartments.*, 
-                        ST_Distance_Sphere(         
-                        POINT(longitude, latitude), 
+            ->selectRaw("apartments.*,
+                        ST_Distance_Sphere(
+                        POINT(longitude, latitude),
                         POINT($longitude, $latitude)
                         ) * 0.001 AS distance")
             ->having("distance", "<=", $radiusKm) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
