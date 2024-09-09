@@ -49,7 +49,7 @@ class ApartmentController extends Controller
         $data =
             [
                 'catalogue' => Apartment::where('user_id', $user_id)->with(['services',])->paginate(8),
-                'messages'=>Message::all(),
+                
             ];
 
         return view('admin.apartment.index', $data);

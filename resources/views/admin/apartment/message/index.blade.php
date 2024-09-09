@@ -15,13 +15,7 @@
 					<th scope="row">{{ $message->name }}</th>
 					<td>{{ $message->email }}</td>
 					<td>{{ $message->text }}</td>
-					<td>
-						<ul>
-							@foreach ($message->services as $service)
-								<li>{{ $service->name }}</li>
-							@endforeach
-						</ul>
-					</td>
+					
 					<td>
 						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $message->id) }}">D</a>
 						<a class="btn btn-secondary" href="{{ route('apartments.edit', $message->id) }}">M</a>
@@ -30,4 +24,5 @@
 			@endforeach
 		</tbody>
 	</table>
-	{{ $messages->links('pagination::bootstrap-5') }}
+    @endsection
+	{{-- {{ $messages->links('pagination::bootstrap-5') }} --}}

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Apartment;
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/apartments/bin', [ApartmentController::class, 'bin'])->name('apartments.bin');
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
+    Route::get('/message',[MessageController::class,'index'])->name('message.index');
 });
 
 require __DIR__ . '/auth.php';

@@ -72,7 +72,9 @@
 							</a>
 						</li>
 						<li>
-							<a href="#" class="nav-link text-white">
+							<a href="{{ route('message.index') }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'messag	e.index' ? 'bg-secondary' : '' }}"
+								aria-current="page">
 								Messaggi
 							</a>
 						</li>
