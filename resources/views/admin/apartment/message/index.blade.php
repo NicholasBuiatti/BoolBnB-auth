@@ -7,6 +7,7 @@
 				<th scope="col">Nome</th>
 				<th scope="col">email</th>
 				<th scope="col">messaggio</th>
+				<th scope="col">Relativo all'appartamento:</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -15,11 +16,9 @@
 					<th scope="row">{{ $message->name }}</th>
 					<td>{{ $message->email }}</td>
 					<td>{{ $message->text }}</td>
+					<td>{{$message->apartment->title}}</td>
 					
-					<td>
-						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $message->id) }}">D</a>
-						<a class="btn btn-secondary" href="{{ route('apartments.edit', $message->id) }}">M</a>
-					</td>
+				
 				</tr>
 			@endforeach
 		</tbody>

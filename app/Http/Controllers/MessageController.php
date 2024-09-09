@@ -16,8 +16,7 @@ class MessageController extends Controller
             [
             'messages' => Message::whereHas('apartment',
              function ($query) use ($user_id) {
-            $query->where('user_id', $user_id);
-        })->get(),
+            $query->where('user_id', $user_id);})->get(),
             ];
 
         return view('admin.apartment.message.index', $data);
