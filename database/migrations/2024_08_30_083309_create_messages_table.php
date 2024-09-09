@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email', 255);
             $table->text('text');
             $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

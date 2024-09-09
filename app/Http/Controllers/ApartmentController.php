@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Apartment;
+use App\Models\Message;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,8 @@ class ApartmentController extends Controller
         $user_id = Auth::id();
         $data =
             [
-                'catalogue' => Apartment::where('user_id', $user_id)->with(['services'])->paginate(8),
+                'catalogue' => Apartment::where('user_id', $user_id)->with(['services',])->paginate(8),
+                'messages'=>Message::all(),
             ];
 
         return view('admin.apartment.index', $data);
