@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
 
-    Route::get('/apartments/{apartment}/sponsorships', [SponsorshipController::class, 'showSponsorships'])->name('sponsorships.index');
+    Route::get('/apartments/{apartment}/sponsorships', [ApartmentController::class, 'showSponsorships'])->name('sponsorships.index');
 
     Route::post('/apartments/{apartment}/sponsorships/payment', [SponsorshipController::class, 'processPayment'])->name('sponsorships.payment');
 });

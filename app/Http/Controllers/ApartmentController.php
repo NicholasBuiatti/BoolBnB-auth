@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Apartment;
 use App\Models\Service;
+use App\Models\Sponsorship;
+use App\Services\BraintreeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -106,7 +108,15 @@ class ApartmentController extends Controller
         return redirect()->route('apartments.index');
     }
 
-    public function show(Apartment $apartment)
+
+    protected $braintree;
+
+    public function __construct(BraintreeService $braintree)
+    {
+        $this->braintree = $braintree;
+    }
+
+    public function show(Request $request, Apartment $apartment)
     {
         // Ottieni l'utente autenticato
         $user = auth()->user();
@@ -119,6 +129,8 @@ class ApartmentController extends Controller
         // Se l'utente è autorizzato, passa i dati alla vista
         $data = [
             'apartment' => $apartment,
+            'sponsorships' => Sponsorship::all(),
+            'clientToken' => $this->braintree->clientToken()
         ];
 
         return view('admin.apartment.show', $data);
