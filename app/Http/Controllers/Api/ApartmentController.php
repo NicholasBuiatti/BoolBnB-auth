@@ -11,8 +11,21 @@ use Illuminate\Validation\ValidationException;
 class ApartmentController extends Controller
 {
     public function index()
-    {
-        $apartments = Apartment::with(['user', 'services'])/*aggiungere servizi*/->paginate(4);
+    {   
+
+        // $apartments = Apartment::with(['user', 'services','sponsorships'])
+        // ->orderByRaw("(SELECT COUNT(*) 
+        //             FROM sponsorships 
+        //             WHERE sponsorships.apartment_id = apartments.id 
+        //             AND sponsorships.ending_date >= NOW()) DESC")
+        // ->paginate(4);
+        $apartments = Apartment::with(['user', 'services', 'sponsorships'])
+        ->whereHas('sponsorships', function ($query) {
+            $query->where('starting_date', '<=', now())
+                  ->where('ending_date', '>=', now());
+        })
+        // ->orderBy('created_at', 'asc')
+        ->paginate(8);
         return response()->json([
             'success' => true,
             'results' => $apartments,
