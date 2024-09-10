@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Auth;
@@ -42,9 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/apartments/bin', [ApartmentController::class, 'bin'])->name('apartments.bin');
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
-    Route::get('/message',[MessageController::class,'index'])->name('message.index');
-    Route::post('/message/store',[MessageController::class,'store'])->name('message.store');
-    Route::get('/message/{message}',[MessageController::class,'show'])->name('message.show');
+    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
+    Route::get('/message/{message}', [MessageController::class, 'show'])->name('message.show');
+
+    Route::get('/apartments/{apartment}/sponsorships', [ApartmentController::class, 'showSponsorships'])->name('sponsorships.index');
+
+    Route::post('/apartments/{apartment}/sponsorships/payment', [SponsorshipController::class, 'processPayment'])->name('sponsorships.payment');
 });
 
 require __DIR__ . '/auth.php';

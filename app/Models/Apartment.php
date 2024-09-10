@@ -29,7 +29,7 @@ class Apartment extends Model
         "service_id",
     ];
 
-    protected $dates=['deleted_at'];
+    protected $dates = ['deleted_at'];
 
     public function user()
     {
@@ -42,5 +42,12 @@ class Apartment extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    public function sponsorships()
+    {
+        return $this->belongsToMany(Sponsorship::class)
+            ->withPivot('start_date', 'end_date')
+            ->withTimestamps();
     }
 }
