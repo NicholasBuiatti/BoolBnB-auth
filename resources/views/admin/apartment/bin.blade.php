@@ -2,29 +2,31 @@
 
 @section('content')
 	<table class="table table-hover">
-		<thead>
-			<tr>
+
+		<thead class="">
+			<tr class="table-dark text-center">
+				<th scope="col"></th>
 				<th scope="col">Nome</th>
-				<th scope="col">Stanze</th>
-				<th scope="col">Bagni</th>
-				<th scope="col">Letti</th>
-				<th scope="col">Mq</th>
+				<th scope="col">Data di cancellazione</th>
 				<th scope="col">ripristina</th>
 				<th>elimina definitivamente</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($bin as $apartment)
-				<tr>
-					<th scope="row">{{ $apartment->title }}</th>
-					<td>{{ $apartment->rooms }}</td>
-					<td>{{ $apartment->bathrooms }}</td>
-					<td>{{ $apartment->beds }}</td>
-					<td>{{ $apartment->dimension_mq }}</td>
+				<tr class="align-middle text-center">
+					<th scope="row">
+						<img class="object-fit" src="{{ $apartment->image }}" alt="" style="height: 10rem; width:12rem">
+					</th>
+					<td class="fs-2 fw-bolder">{{ $apartment->title }}</td>
 					<td>
-						<a class="btn btn-secondary" href="{{ route('apartments.restore', $apartment->id) }}">Restore</a>
+						{{ $apartment->deleted_at }}
 					</td>
 					<td>
+						<a class="btn btn-secondary" href="{{ route('apartments.restore', $apartment->id) }}">Ripristina</a>
+					</td>
+					<td>
+
 						{{-- BOTTONE CHE ATTIVA IL MODALE --}}
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ $apartment->id }}">
 							Cancella
@@ -63,6 +65,7 @@
 					</td>
 				</tr>
 			@endforeach
+
 		</tbody>
 	</table>
 	{{-- {{ $bin->links('pagination::bootstrap-5') }} --}}
