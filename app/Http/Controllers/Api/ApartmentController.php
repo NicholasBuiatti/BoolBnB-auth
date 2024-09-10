@@ -81,15 +81,8 @@ class ApartmentController extends Controller
             ]);
         }
 
-        // $latitude = $validate_data['latitude'];
-        // $longitude = $validate_data['longitude'];
-        // $radiusKm = $validate_data['radius'] ?? 20; // Default 20 km
-        // $beds = $validate_data['beds'] ?? 1;
-        // $rooms = $validate_data['rooms'] ?? 1;
-        // $services = $validate_data['services'];
-
         // Query di base per gli appartamenti con numero di letti e stanze richiesti
-        $apartments = Apartment::with(['user', 'services'])
+        $apartments = Apartment::with(['user', 'services', 'sponsorships'])
             ->selectRaw("apartments.*, 
                         ST_Distance_Sphere(         
                         POINT(longitude, latitude), 
@@ -98,6 +91,7 @@ class ApartmentController extends Controller
             ->having("distance", "<=", $radius) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
+            // ->orderby('è sponsorizzato',)
             ->orderBy('distance', 'desc'); //ordino per distanza
 
         // Se ci sono servizi, aggiungi un filtro
@@ -106,34 +100,6 @@ class ApartmentController extends Controller
                 $q->whereIn('services.id', $services);
             }, '=', count($services));
         }
-
-        // // Prendi tutti gli appartamenti
-        // $apartments  = Apartment::with(['user', 'services'])
-        //     ->where('beds', '>=', $beds)
-        //     ->where('rooms', '>=', $rooms)
-        //     ->whereHas('services', function ($q) use ($services) {
-        //         $q->whereIn('services.id', $services);
-        //     }, '=', count($services))
-        //     ->get();
-
-        // // Inizializza l'array per gli appartamenti vicini
-        // $searchApp = [];
-        // foreach ($apartments as $apartment) {
-        //     // Calcolo della distanza in gradi
-        //     $distLat = $apartment->latitude - $latitude;
-        //     $distLon = $apartment->longitude - $longitude;
-
-        //     // Converti la differenza di longitudine in chilometri
-        //     $distLonKm = $distLon * 111;
-        //     $distLatKm = $distLat * 111;
-        //     // Distanza in chilometri
-        //     $distance = sqrt($distLatKm * $distLatKm + $distLonKm * $distLonKm);
-
-        //     // Se la distanza è inferiore a 20 km, aggiungi l'appartamento all'array
-        //     if ($distance <= $radiusKm) {
-        //         $searchApp[] = $apartment;
-        //     }
-        // }
 
         $searchApp = $apartments->get();
         return response()->json([
