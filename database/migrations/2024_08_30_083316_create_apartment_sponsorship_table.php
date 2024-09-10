@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('sponsorship_id')->constrained()->onDelete('cascade');
             $table->dateTime('starting_date');
             $table->dateTime('ending_date');
+            $table->timestamps();
         });
     }
 
