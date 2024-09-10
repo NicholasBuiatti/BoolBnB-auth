@@ -12,7 +12,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['user', 'services'])/*aggiungere servizi*/->paginate();
+        $apartments = Apartment::with(['user', 'services'])/*aggiungere servizi*/->paginate(4);
         return response()->json([
             'success' => true,
             'results' => $apartments,
