@@ -59,6 +59,9 @@
 								</div>
 							</div>
 						</div>
+						<a href="{{ route('sponsorships.index', ['apartment' => $apartment->id]) }}" class="btn btn-primary">
+							Sponsorizza questo appartamento
+						</a>
 					</div>
 
 				</div>

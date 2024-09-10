@@ -23,7 +23,7 @@ class SponsorshipSeeder extends Seeder
         $newSponsorship = new Sponsorship();
         $newSponsorship->price = 5.99;
         $newSponsorship->name = "Premium";
-        $newSponsorship->duration = 24;
+        $newSponsorship->duration = 72;
         $newSponsorship->active = true;
         $newSponsorship->save();
 

@@ -3,15 +3,21 @@
 @section('content')
 	<h1>Seleziona una Sponsorizzazione</h1>
 
-	<form id="payment-form" method="POST" action="{{ route('sponsorships.payment') }}">
+	<form id="payment-form" method="POST" action="{{ route('sponsorships.payment', ['apartment' => $apartment->id]) }}">
+		<!-- Solo apartment->id -->
 		@csrf
 
 		<label for="sponsorship">Scegli la tua sponsorizzazione:</label>
-		<select name="amount" id="sponsorship">
+		<select name="sponsorship_id" id="sponsorship">
 			@foreach ($sponsorships as $sponsorship)
-				<option value="{{ $sponsorship['price'] }}">{{ $sponsorship['name'] }} - ${{ $sponsorship['price'] }}</option>
+				<option value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
+					{{ $sponsorship->name }} - ${{ $sponsorship->price }}
+				</option>
+				<!-- Input nascosto per amount -->
+				{{-- <input type="hidden" name="amount" id="amount" value="{{$sponsorship->price}}"> --}}
 			@endforeach
 		</select>
+
 
 		<div id="dropin-container"></div>
 
