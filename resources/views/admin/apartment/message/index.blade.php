@@ -8,6 +8,7 @@
 				<th scope="col">email</th>
 				<th scope="col">messaggio</th>
 				<th scope="col">Relativo all'appartamento:</th>
+				<th scope="col">dettagli </th>				
 			</tr>
 		</thead>
 		<tbody>
@@ -17,8 +18,9 @@
 					<td>{{ $message->email }}</td>
 					<td>{{ $message->text }}</td>
 					<td>{{$message->apartment->title}}</td>
-					
-				
+					<td>
+						<a class="btn btn-primary my-2" href="{{ route('message.show', $message->id) }}">D</a>
+					</td>
 				</tr>
 			@endforeach
 		</tbody>
