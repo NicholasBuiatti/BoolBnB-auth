@@ -14,22 +14,28 @@ class MessageController extends Controller
     {
 
         $data = $request->validate([
-            'name'=>"string",
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class,
-            function ($attribute, $value, $fail) {
-                // Definisci la regex per .com o .it
-                if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es
+            'name' => "string",
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                'unique:' . User::class,
+                function ($attribute, $value, $fail) {
+                    // Definisci la regex per .com o .it
+                    if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es
                  )$/', $value)) {
-                    $fail('Il campo email deve terminare con un domninio riconosciuto(ad esempio .com o .it)');
-                }
-            },],
-            'text'=>"required|string",
+                        $fail('Il campo email deve terminare con un domninio riconosciuto(ad esempio .com o .it)');
+                    }
+                },
+            ],
+            'text' => "required|string",
         ]);
-        $newMsg=new Message();
+
+        // $data = $request->all();
+        $newMsg = new Message();
         $newMsg->fill($data);
         $newMsg->save();
-
-
     }
-
 }
