@@ -24,7 +24,7 @@ class ApartmentController extends Controller
             $query->where('starting_date', '<=', now())
                   ->where('ending_date', '>=', now());
         })
-        // ->orderBy('created_at', 'asc')
+        ->orderBy('created_at', 'asc')
         ->paginate(8);
         return response()->json([
             'success' => true,
@@ -92,10 +92,11 @@ class ApartmentController extends Controller
             );
 
             // Continua con la logica della tua applicazione se la validazione è corretta
-            return response()->json([
-                'success' => true,
-                'data' => $validate_data
-            ]);
+            // return response()->json([
+            //     'success' => true,
+            //     'data' => $validate_data
+            // ])
+            
         } catch (ValidationException $errors) {
             return response()->json([
                 'success' => false,
@@ -110,11 +111,15 @@ class ApartmentController extends Controller
                         POINT(longitude, latitude), 
                         POINT($longitude, $latitude)
                         ) * 0.001 AS distance")
-            ->having("distance", "<=", $radius) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
+            ->having("distance", "<=", $radiusKm) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
             // ->orderby('è sponsorizzato',)
-            ->orderBy('distance', 'desc'); //ordino per distanza
+            ->orderByRaw('IF((SELECT COUNT(*)
+             FROM apartment_sponsorship 
+             WHERE apartment_sponsorship.apartment_id = apartments.id
+              AND apartment_sponsorship.starting_date <= NOW() 
+              AND apartment_sponsorship.ending_date >= NOW()) > 0, 1, 0) DESC, distance ASC'); //ordino per distanza
 
         // Se ci sono servizi, aggiungi un filtro
         if (!empty($services)) {
