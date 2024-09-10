@@ -31,6 +31,7 @@ class MessageController extends Controller
                 },
             ],
             'text' => "required|string",
+            'apartment_id' => "required"
         ]);
 
         // $data = $request->all();
