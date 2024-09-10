@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentController as ApiApartmentController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
 
 /*
@@ -25,6 +26,6 @@ Route::get('apartments/{apartment}', [ApiApartmentController::class, 'show']);
 
 //RICHIESTA DATI DAL FRONT
 Route::get('search', [ApiApartmentController::class, 'search']);
-
 Route::get('services', [ServiceController::class, 'index']);
+Route::post('messages',[MessageController::class,'store']); 
 

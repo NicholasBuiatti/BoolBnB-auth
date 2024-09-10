@@ -24,29 +24,27 @@ class MessageController extends Controller
 
     }
 
-   
-    public function store(Request $request)
+    public function show(Message $message)
 
     {
+        $user_id = Auth::id();
+        // Verifica se l'utente autenticato è lo stesso dell'appartamento
+        if ($message->apartment->user_id != $user_id) {
+            // Se l'utente non è autorizzato, mostra la pagina 404
+             abort(403);
+        }
+        $data = [
+            'message' => $message,
+        ];
 
-        $data = $request->validate([
-            'name'=>"string",
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class,
-            function ($attribute, $value, $fail) {
-                // Definisci la regex per .com o .it
-                if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es
-                 )$/', $value)) {
-                    $fail('Il campo email deve terminare con un domninio riconosciuto(ad esempio .com o .it)');
-                }
-            },],
-            'text'=>"required|string",
-        ]);
-        $newMsg=new Message();
-        $newMsg->fill($data);
-        $newMsg->save();
+        //dd($message);
 
-        return redirect()->route('message.index');
+        return view('admin.apartment.message.show', $data);
+    }
 
     }
 
-}
+
+   
+
+

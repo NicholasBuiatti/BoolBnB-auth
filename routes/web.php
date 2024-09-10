@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
     Route::get('/message',[MessageController::class,'index'])->name('message.index');
     Route::post('/message/store',[MessageController::class,'store'])->name('message.store');
+    Route::get('/message/{message}',[MessageController::class,'show'])->name('message.show');
 });
 
 require __DIR__ . '/auth.php';
