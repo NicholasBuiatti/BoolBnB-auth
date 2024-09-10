@@ -5,22 +5,37 @@
 
 		<div class="d-flex flex-wrap">
 			<div id="card-container" class="card col">
-
-				<div class="img-container">
-					@if (Str::startsWith($apartment->image, 'http'))
-						<img width="140" class="card-img-top" src="{{ $apartment->image }}" alt="">
-					@else
-						<img width="140" class="card-img-top" src="{{ asset('storage/' . $apartment->image) }}" alt="">
-					@endif
+				<div class="row justify-content-between">
+					<div class="col-7">
+						@if (Str::startsWith($apartment->image, 'http'))
+							<img width="140" class="card-img-top h-100" src="{{ $apartment->image }}" alt="">
+						@else
+							<img width="140" class="card-img-top h-100" src="{{ asset('storage/' . $apartment->image) }}" alt="">
+						@endif
+					</div>
+					<div class="col-5">
+						<h2 class="card-title">{{ $apartment->title }}</h2>
+						<p><i class="fa-solid fa-house"></i> Indirizzo: {{ $apartment->address_full }}</p>
+						@if ($apartment->sponsorships->isNotEmpty())
+							@foreach ($apartment->sponsorships as $sponsorship)
+								<p>Inizio Sponsorizzazione:{{ $sponsorship->pivot->ending_date }}</p>
+								<p>Fine Sponsorizzazione:{{ $sponsorship->pivot->ending_date }}</p>
+							@endforeach
+						@else
+							<p>Non Sponsorizzato</p>
+						@endif
+						<p><i class="fa-solid fa-person-shelter"></i> Stanze: {{ $apartment->rooms }}</p>
+						<p><i class="fa-solid fa-bed"></i> Letti: {{ $apartment->beds }}</p>
+						<p><i class="fa-solid fa-bath"></i> Bagni: {{ $apartment->bathrooms }}</p>
+						<p><i class="fa-solid fa-maximize"></i> Superficie: {{ $apartment->dimension_mq }}mq</p>
+					</div>
 				</div>
+
 				<div class="card-body">
-					<h2 class="card-title">{{ $apartment->title }}</h2>
+
 					<p class="card-text">
-					<p><i class="fa-solid fa-person-shelter"></i> Stanze: {{ $apartment->rooms }}</p>
-					<p><i class="fa-solid fa-bed"></i> Letti: {{ $apartment->beds }}</p>
-					<p><i class="fa-solid fa-bath"></i> Bagni: {{ $apartment->bathrooms }}</p>
-					<p><i class="fa-solid fa-maximize"></i> Superficie: {{ $apartment->dimension_mq }}mq</p>
-					<p><i class="fa-solid fa-house"></i> Indirizzo: {{ $apartment->address_full }}</p>
+
+
 					<div class="text-center">
 						<a class="btn btn-primary my-2" href="{{ route('apartments.index') }}">Indietro</a>
 						<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">Modifica</a>
@@ -62,11 +77,11 @@
 						</div>
 
 						<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-							aria-controls="offcanvasRight">Toggle right offcanvas</button>
+							aria-controls="offcanvasRight">Sponsorizza</button>
 
 						<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 							<div class="offcanvas-header">
-								<h5 id="offcanvasRightLabel">Offcanvas right</h5>
+								<h5 id="offcanvasRightLabel">Seleziona ed effettua il pagamento</h5>
 								<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 							</div>
 							<div class="offcanvas-body">
