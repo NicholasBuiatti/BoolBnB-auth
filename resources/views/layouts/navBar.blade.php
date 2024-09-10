@@ -119,7 +119,8 @@
 
 
 			<div class="row h-100 d-none d-md-flex">
-				<nav class="col-md-3 col-lg-2 d-flex flex-column flex-shrink-0 p-3 text-white bg-success navbar-dark sidebar h-100"
+				<nav
+					class="col-md-3 col-lg-2 d-flex flex-column flex-shrink-0 p-3 text-white bg-success navbar-dark sidebar h-100 rounded-end border border-start-0 border-4 border-black"
 					style="background: linear-gradient(to right, #fccc52, #8a1e1e);>
 					<a class="d-none d-md-block navbar-brand
 					d-flex align-items-center" href="{{ url('/') }}">
@@ -131,28 +132,28 @@
 					<ul class="nav nav-pills flex-md-column justify-content-between mb-auto">
 						<li class="nav-item">
 							<a href="{{ route('dashboard') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? 'bg-secondary' : '' }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? 'border border-3 border-dark' : '' }}"
 								aria-current="page">
 								Home
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('apartments.index') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.index' ? 'bg-secondary' : '' }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.index' ? 'border border-3 border-dark' : '' }}"
 								aria-current="page">
 								I miei appartamenti
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('apartments.create') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.create' ? 'bg-secondary' : '' }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.create' ? 'border border-3 border-dark' : '' }}"
 								aria-current="page">
 								Aggiungi un appartamento
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('apartments.bin') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.bin' ? 'bg-secondary' : '' }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.bin' ? 'border border-3 border-dark' : '' }}"
 								aria-current="page">
 								Appartamenti eliminati
 							</a>
@@ -165,7 +166,7 @@
 						</li>
 						<li>
 							<a href="{{ route('message.index') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'message.index' ? 'bg-secondary' : '' }}"
+								class="nav-link text-white {{ Route::currentRouteName() == 'message.index' ? 'border border-3 border-dark' : '' }}"
 								aria-current="page">
 								Messaggi
 							</a>
@@ -194,7 +195,7 @@
 						</ul>
 					</div>
 				</nav>
-				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100">
+				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100 p-3">
 					@yield('content')
 				</main>
 			</div>

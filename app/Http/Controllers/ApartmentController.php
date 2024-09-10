@@ -50,8 +50,8 @@ class ApartmentController extends Controller
         $user_id = Auth::id();
         $data =
             [
-                'catalogue' => Apartment::where('user_id', $user_id)->with(['services',])->paginate(8),
-                
+                'catalogue' => Apartment::where('user_id', $user_id)->with(['services', 'sponsorships'])->paginate(8),
+
             ];
 
         return view('admin.apartment.index', $data);
