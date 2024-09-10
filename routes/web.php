@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
     Route::get('/message',[MessageController::class,'index'])->name('message.index');
+    Route::post('/message/store',[MessageController::class,'store'])->name('message.store');
 });
 
 require __DIR__ . '/auth.php';
