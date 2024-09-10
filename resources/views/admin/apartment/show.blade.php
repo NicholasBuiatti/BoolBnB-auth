@@ -5,6 +5,7 @@
 
 		<div class="d-flex flex-wrap">
 			<div id="card-container" class="card col">
+
 				<div class="img-container">
 					@if (Str::startsWith($apartment->image, 'http'))
 						<img width="140" class="card-img-top" src="{{ $apartment->image }}" alt="">
@@ -59,9 +60,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="{{ route('sponsorships.index', ['apartment' => $apartment->id]) }}" class="btn btn-primary">
-							Sponsorizza questo appartamento
-						</a>
+
 						<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
 							aria-controls="offcanvasRight">Toggle right offcanvas</button>
 
@@ -94,6 +93,7 @@
 								</form>
 							</div>
 						</div>
+
 					</div>
 
 				</div>

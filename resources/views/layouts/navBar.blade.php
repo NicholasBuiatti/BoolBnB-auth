@@ -28,8 +28,8 @@
 <body>
 	<div id="app">
 		<div class="container-fluid vh-100">
-			<div class="row d-md-none">
-				<nav class="navbar navbar-expand-lg bg-light fixed-top"
+			<div class="row h-100 d-md-flex">
+				<nav class="d-md-none navbar navbar-expand-lg bg-light fixed-top"
 					style="background: linear-gradient(to right, #fccc52, #8a1e1e);">
 					<div class="container-fluid">
 						<a class="col-3 navbar-brand d-flex align-items-center" href="{{ url('/') }}">
@@ -109,18 +109,11 @@
 						</div>
 					</div>
 				</nav>
-				<main class="col ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100">
-					@yield('content')
-				</main>
-			</div>
 
 
-			{{-- NAV-BAR PER SCHERMI OVER MD --}}
 
-
-			<div class="row h-100 d-none d-md-flex">
 				<nav
-					class="col-md-3 col-lg-2 d-flex flex-column flex-shrink-0 p-3 text-white bg-success navbar-dark sidebar h-100 rounded-end border border-start-0 border-4 border-black"
+					class="d-none col-md-3 col-lg-2 d-md-flex flex-column flex-shrink-0 p-3 text-white bg-success navbar-dark sidebar h-100 rounded-end border border-start-0 border-4 border-black"
 					style="background: linear-gradient(to right, #fccc52, #8a1e1e);>
 					<a class="d-none d-md-block navbar-brand
 					d-flex align-items-center" href="{{ url('/') }}">
