@@ -14,7 +14,7 @@ class MessageController extends Controller
     {
 
         $data = $request->validate([
-            'name' => "string",
+            'name' => "string|nullable",
             'email' => [
                 'required',
                 'string',
