@@ -1,30 +1,37 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<table class="table table-hover table-responsive">
-		<thead class="">
-			<tr class="table-dark text-center">
+	<table class="table table-striped table-responsive shadow-lg rounded"
+		style="background-color: #f5f7fa; border-collapse: separate; border-spacing: 0 1rem; max-width: 1000px;">
+		<thead class="text-center" style="background-color: #34495e; color: #ecf0f1; border-radius: 8px;">
+			<tr class="d-none d-md-table-row">
 				<th scope="col"></th>
-				<th scope="col">Nome</th>
-				<th scope="col">Data di fine Sponsorizzazione</th>
-				<th scope="col">Visibile</th>
-				<th scope="col">Dettagli/Modifica</th>
+				<th scope="col" class="text-uppercase">Nome</th>
+				<th scope="col" class="text-uppercase">Sponsorizzazione</th>
+				<th scope="col" class="text-uppercase">Visibile</th>
+				<th scope="col" class="text-uppercase">Azioni</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($catalogue as $apartment)
-				<tr class="align-middle text-center">
-					<th scope="row">
-						<img class="object-fit" src="{{ $apartment->image }}" alt="" style="height: 10rem; width:12rem">
+				<tr class="text-center align-middle" style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+					<th scope="row" class="d-block d-sm-table-cell col-12">
+						<img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
+							style="height: 8rem; width:10rem; object-fit: cover;">
 					</th>
-					<td class="fs-2 fw-bolder">{{ $apartment->title }}</td>
-					<td>
+					<td class="d-block d-sm-table-cell col-12 col-md-6">
+						<h3 class="fs-4 title-shadow">{{ $apartment->title }}</h3>
+					</td>
+
+
+					<td class="d-block d-sm-table-cell col-12 col-md-6">
 						@if ($apartment->lastSponsorship)
-							<p>{{ $apartment->lastSponsorship->pivot->ending_date }}</p>
+							<p class="fw-light">Fine della Sponsorizzazione: <br> {{ $apartment->lastSponsorship->pivot->ending_date }}</p>
 						@endif
-						<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+						<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
 							data-bs-target="#offcanvasRight-{{ $apartment->id }}" aria-controls="offcanvasRight">
-							Sponsorizza
+							<i class="fa-solid fa-bullhorn"></i> Sponsorizza
 						</button>
 
 						<div class="offcanvas w-100 offcanvas-end"
@@ -48,7 +55,7 @@
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
 													 {{ $sponsorship->name == 'Elite'
 													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
-																																																																																																																																																																																																																'
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													'
 													    : '' }}">
 													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
 													<div class="card-body">
@@ -71,27 +78,28 @@
 								</div>
 							</div>
 						</div>
-
 					</td>
-					<td>
+					<td class="d-none d-sm-table-cell">
 						@if ($apartment->is_visible == 1)
 							<i class="fa-solid fa-check fs-3 text-success"></i>
 						@else
-							<i class="fa-solid fa-xmark text-danger"></i>
+							<i class="fa-solid fa-xmark fs-3 text-danger"></i>
 						@endif
 					</td>
-					<td>
-						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}">
-							<i class="fa-solid fa-eye"></i>
+					<td class="d-block d-sm-table-cell col-12 col-md-6">
+						<a class="btn btn-light border my-1" href="{{ route('apartments.show', $apartment->id) }}"
+							style="background-color: #ecf0f1;">
+							<i class="fa-solid fa-eye"></i> Visualizza
 						</a>
-						<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">
-							<i class="fa-solid fa-pen"></i>
+						<a class="btn btn-warning text-dark my-1" href="{{ route('apartments.edit', $apartment->id) }}">
+							<i class="fa-solid fa-pen"></i> Modifica
 						</a>
 					</td>
 				</tr>
 			@endforeach
 		</tbody>
 	</table>
+
 	{{ $catalogue->links('pagination::bootstrap-5') }}
 
 	<script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
@@ -141,6 +149,11 @@
 	</script>
 
 	<style>
+		.title-shadow {
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			/* Direzione e ombra */
+		}
+
 		/* CSS PER PULSANTE CUSTOM */
 
 		.btn-custom {
