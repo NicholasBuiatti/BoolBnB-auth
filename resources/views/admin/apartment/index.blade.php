@@ -55,7 +55,7 @@
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
 													 {{ $sponsorship->name == 'Elite'
 													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							'
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				'
 													    : '' }}">
 													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
 													<div class="card-body">
@@ -81,7 +81,7 @@
 					</td>
 					<td class="d-block d-sm-table-cell col-12 col-md-6">
 						@if ($apartment->is_visible == 1)
-							<i class="fa-solid fa-eye fs-3"></i>
+							<i class="fa-solid fa-eye fs-3 "></i>
 						@else
 							<i class="fa-solid fa-eye-slash fs-3"></i>
 						@endif
