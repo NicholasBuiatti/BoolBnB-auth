@@ -11,21 +11,21 @@ use Illuminate\Validation\ValidationException;
 class ApartmentController extends Controller
 {
     public function index()
-    {   
+    {
 
         // $apartments = Apartment::with(['user', 'services','sponsorships'])
-        // ->orderByRaw("(SELECT COUNT(*) 
-        //             FROM sponsorships 
-        //             WHERE sponsorships.apartment_id = apartments.id 
+        // ->orderByRaw("(SELECT COUNT(*)
+        //             FROM sponsorships
+        //             WHERE sponsorships.apartment_id = apartments.id
         //             AND sponsorships.ending_date >= NOW()) DESC")
         // ->paginate(4);
         $apartments = Apartment::with(['user', 'services', 'sponsorships'])
-        ->whereHas('sponsorships', function ($query) {
-            $query->where('starting_date', '<=', now())
-                  ->where('ending_date', '>=', now());
-        })
-        ->orderBy('created_at', 'asc')
-        ->paginate(8);
+            ->whereHas('sponsorships', function ($query) {
+                $query->where('starting_date', '<=', now())
+                    ->where('ending_date', '>=', now());
+            })
+            ->orderBy('created_at', 'asc')
+            ->paginate(8);
         return response()->json([
             'success' => true,
             'results' => $apartments,
@@ -34,10 +34,10 @@ class ApartmentController extends Controller
     }
 
 
-    public function show($id)
+    public function show($slug)
     {
 
-        $apartment = Apartment::with(['user', 'services'])->where('id', $id)->first();
+        $apartment = Apartment::with(['user', 'services'])->where('title', $slug)->first();
 
         if ($apartment) {
 
@@ -96,7 +96,7 @@ class ApartmentController extends Controller
             //     'success' => true,
             //     'data' => $validate_data
             // ])
-            
+
         } catch (ValidationException $errors) {
             return response()->json([
                 'success' => false,
@@ -106,9 +106,9 @@ class ApartmentController extends Controller
 
         // Query di base per gli appartamenti con numero di letti e stanze richiesti
         $apartments = Apartment::with(['user', 'services', 'sponsorships'])
-            ->selectRaw("apartments.*, 
-                        ST_Distance_Sphere(         
-                        POINT(longitude, latitude), 
+            ->selectRaw("apartments.*,
+                        ST_Distance_Sphere(
+                        POINT(longitude, latitude),
                         POINT($longitude, $latitude)
                         ) * 0.001 AS distance")
             ->having("distance", "<=", $radiusKm) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
@@ -116,9 +116,9 @@ class ApartmentController extends Controller
             ->where('rooms', '>=', $rooms)
             // ->orderby('è sponsorizzato',)
             ->orderByRaw('IF((SELECT COUNT(*)
-             FROM apartment_sponsorship 
+             FROM apartment_sponsorship
              WHERE apartment_sponsorship.apartment_id = apartments.id
-              AND apartment_sponsorship.starting_date <= NOW() 
+              AND apartment_sponsorship.starting_date <= NOW()
               AND apartment_sponsorship.ending_date >= NOW()) > 0, 1, 0) DESC, distance ASC'); //ordino per distanza
 
         // Se ci sono servizi, aggiungi un filtro
