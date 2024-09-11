@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Apartment;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -50,6 +51,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/apartments/{apartment}/sponsorships', [ApartmentController::class, 'showSponsorships'])->name('sponsorships.index');
 
     Route::post('/apartments/{apartment}/sponsorships/payment', [SponsorshipController::class, 'processPayment'])->name('sponsorships.payment');
+
+});
+Route::get('/mailable',function(){
+    //$message=['name'=>'Matteo','email'=>'matteo@matteo.it','text'=>'lorem ipsum ','apartment_id'=>1];
+    $message=Message::first();
+    return new App\Mail\NewContact($message);
+
+    
 });
 
 require __DIR__ . '/auth.php';
