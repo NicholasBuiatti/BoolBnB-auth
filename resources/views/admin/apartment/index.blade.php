@@ -40,14 +40,15 @@
 									action="{{ route('sponsorships.payment', ['apartment' => $apartment->id]) }}">
 									@csrf
 									<label for="sponsorship">Scegli la tua sponsorizzazione:</label>
-									<select name="sponsorship_id" id="sponsorship">
-										@foreach ($sponsorships as $sponsorship)
-											<option value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
-												{{ $sponsorship->name }} - ${{ $sponsorship->price }}
-											</option>
-										@endforeach
-									</select>
-
+									@foreach ($sponsorships as $sponsorship)
+										<div>
+											<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
+												value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
+											<label for="sponsorship_{{ $sponsorship->id }}">
+												{{ $sponsorship->name }} - €{{ $sponsorship->price }}
+											</label>
+										</div>
+									@endforeach
 									<div id="dropin-container-{{ $apartment->id }}"></div>
 
 									<button type="submit">Paga ora</button>
@@ -91,7 +92,8 @@
 				// Inizializza Braintree Drop-in per questo specifico appartamento
 				braintree.dropin.create({
 					authorization: "{{ $clientToken }}",
-					container: dropinContainer
+					container: dropinContainer,
+					locale: 'it' // Imposta la lingua italiana
 				}, function(createErr, instance) {
 					if (createErr) {
 						console.error(createErr);
