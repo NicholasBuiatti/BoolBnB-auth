@@ -5,6 +5,7 @@
 
 		<thead class="">
 			<tr class="table-dark text-center">
+				<th></th>
 				<th scope="col">RICEVUTO</th>
 				<th scope="col">DA</th>
 				<th scope="col">EMAIL</th>
@@ -15,7 +16,10 @@
 		<tbody class="text-center align-middle">
 			@foreach ($messages as $message)
 				<tr>
-					<th scope="row">{{ $message->created_at }}</th>
+					<th scope="row">
+						<img src="{{ $message->apartment->image }}" alt="" style="height: 10rem; width:12rem">
+					</th>
+					<td>{{ $message->created_at }}</td>
 					<td>{{ $message->name }}</td>
 					<td>{{ $message->email }}</td>
 					<td>{{ $message->apartment->title }}</td>
