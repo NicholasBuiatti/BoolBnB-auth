@@ -27,10 +27,9 @@
 
 <body>
 	<div id="app">
-		<div class="container-fluid vh-100">
+		<div class="container-fluid vh-100" style="background: linear-gradient(130deg, #fff6e7, #a8c2cb);">
 			<div class="row h-100 d-md-flex">
-				<nav class="d-md-none navbar navbar-expand-lg bg-light fixed-top"
-					style="background: linear-gradient(to right, #fccc52, #8a1e1e);">
+				<nav class="d-md-none navbar navbar-expand-lg">
 					<div class="container-fluid">
 						<a class="col-3 navbar-brand d-flex align-items-center" href="{{ url('/') }}">
 							<div class="logo_laravel">
@@ -113,53 +112,52 @@
 
 
 				<nav
-					class="d-none col-md-3 col-lg-2 d-md-flex flex-column flex-shrink-0 p-3 text-white bg-success navbar-dark sidebar h-100 rounded-end border border-start-0 border-4 border-black"
-					style="background: linear-gradient(to right, #fccc52, #8a1e1e);>
+					class="text-center d-none col-md-3 col-lg-2 d-md-flex flex-column flex-shrink-0 p-3 text-white navbar-dark sidebar h-100 border border-2 border-end">
 					<a class="d-none d-md-block navbar-brand
 					d-flex align-items-center" href="{{ url('/') }}">
-					<div class="logo_laravel">
-						<img src="{{ asset('logo.png') }}" class="img-fluid" alt="">
-					</div>
+						<div class="logo_laravel">
+							<img src="{{ asset('logo.png') }}" class="img-fluid" alt="">
+						</div>
 					</a>
 					<hr class="d-none d-md-block">
 					<ul class="nav nav-pills flex-md-column justify-content-between mb-auto">
 						<li class="nav-item">
 							<a href="{{ route('dashboard') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? 'border border-3 border-dark' : '' }}"
+								class="nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'fw-bold text-decoration-underline' : '' }}"
 								aria-current="page">
 								Home
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('apartments.index') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.index' ? 'border border-3 border-dark' : '' }}"
+								class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'fw-bold text-decoration-underline' : '' }}"
 								aria-current="page">
 								I miei appartamenti
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('apartments.create') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.create' ? 'border border-3 border-dark' : '' }}"
+								class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.create' ? 'fw-bold text-decoration-underline' : '' }}"
 								aria-current="page">
 								Aggiungi un appartamento
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('apartments.bin') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'apartments.bin' ? 'border border-3 border-dark' : '' }}"
+								class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.bin' ? 'fw-bold text-decoration-underline' : '' }}"
 								aria-current="page">
 								Appartamenti eliminati
 							</a>
 						</li>
 
 						<li>
-							<a href="#" class="nav-link text-white">
+							<a href="#" class="nav-link text-dark">
 								Statistiche
 							</a>
 						</li>
 						<li>
 							<a href="{{ route('message.index') }}"
-								class="nav-link text-white {{ Route::currentRouteName() == 'message.index' ? 'border border-3 border-dark' : '' }}"
+								class="nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'fw-bold text-decoration-underline' : '' }}"
 								aria-current="page">
 								Messaggi
 							</a>
@@ -167,7 +165,7 @@
 					</ul>
 					<hr>
 					<div class="dropdown">
-						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+						<a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#" role="button"
 							data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 							{{ Auth::user()->email }}
 						</a>
