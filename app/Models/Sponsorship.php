@@ -14,7 +14,7 @@ class Sponsorship extends Model
         'name',
         'price',
         'duration',
-        'active',
+        'description',
     ];
 
     protected $hidden = [

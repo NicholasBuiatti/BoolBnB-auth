@@ -27,32 +27,48 @@
 							Sponsorizza
 						</button>
 
-						<div class="offcanvas w-100 offcanvas-end" tabindex="-1" id="offcanvasRight-{{ $apartment->id }}"
-							aria-labelledby="offcanvasRightLabel-{{ $apartment->id }}">
+						<div class="offcanvas w-100 offcanvas-end"
+							style="background: linear-gradient(130deg, #fff6e7, #a8c2cb); tabindex="-1"
+							id="offcanvasRight-{{ $apartment->id }}" aria-labelledby="offcanvasRightLabel-{{ $apartment->id }}">
 							<div class="offcanvas-header">
-								<h5 id="offcanvasRightLabel-{{ $apartment->id }}">Seleziona ed effettua il pagamento</h5>
-								<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+								<h1 class="mx-auto">Seleziona una Sponsorizzazione</h1>
+								<button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 							</div>
 							<div class="offcanvas-body">
-								<h1>Seleziona una Sponsorizzazione</h1>
+								<div class="container">
 
-								<form id="payment-form-{{ $apartment->id }}" method="POST"
-									action="{{ route('sponsorships.payment', ['apartment' => $apartment->id]) }}">
-									@csrf
-									<label for="sponsorship">Scegli la tua sponsorizzazione:</label>
-									@foreach ($sponsorships as $sponsorship)
-										<div>
-											<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
-												value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
-											<label for="sponsorship_{{ $sponsorship->id }}">
-												{{ $sponsorship->name }} - €{{ $sponsorship->price }}
-											</label>
+
+									<form id="payment-form-{{ $apartment->id }}" method="POST"
+										action="{{ route('sponsorships.payment', ['apartment' => $apartment->id]) }}">
+										@csrf
+										<div class="row justify-content-between">
+											@foreach ($sponsorships as $sponsorship)
+												<div class="card border-info mb-3 col-3 shadow p-3 mb-5 bg-body rounded"
+													style="{{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}
+													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
+													 {{ $sponsorship->name == 'Elite'
+													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
+																																																																																																								'
+													    : '' }}">
+													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
+													<div class="card-body">
+														<p>{{ $sponsorship->description }}</p>
+														<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
+															value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
+														<label for="sponsorship_{{ $sponsorship->id }}">
+															{{ $sponsorship->name }} - €{{ $sponsorship->price }}
+														</label>
+													</div>
+												</div>
+											@endforeach
+
 										</div>
-									@endforeach
-									<div id="dropin-container-{{ $apartment->id }}"></div>
+										<div id="dropin-container-{{ $apartment->id }}" class="col-4 mx-auto shadow p-3 mb-5 rounded"></div>
 
-									<button type="submit">Paga ora</button>
-								</form>
+										<button type="submit" class="btn btn-custom">Paga ora</button>
+									</form>
+
+								</div>
 							</div>
 						</div>
 
@@ -123,4 +139,28 @@
 			});
 		});
 	</script>
+
+	<style>
+		/* CSS PER PULSANTE CUSTOM */
+
+		.btn-custom {
+			background: linear-gradient(130deg, #f7c6c7, #f9e1d1);
+			border: none;
+			color: #333;
+			font-weight: bold;
+			border-radius: 30px;
+			padding: 10px 20px;
+			transition: background 0.3s, transform 0.3s;
+		}
+
+		.btn-custom:hover {
+			background: linear-gradient(130deg, #f4a4a5, #f7d0c5);
+			transform: scale(1.05);
+		}
+
+		.btn-custom:focus,
+		.btn-custom:active {
+			box-shadow: none;
+		}
+	</style>
 @endsection

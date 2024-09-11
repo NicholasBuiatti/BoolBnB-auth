@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->float('price', 53);
             $table->smallInteger('duration');
-            $table->boolean('active');
+            $table->text('description');
             $table->timestamps();
         });
     }

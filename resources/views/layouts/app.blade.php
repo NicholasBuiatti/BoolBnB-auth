@@ -25,17 +25,18 @@
 </head>
 
 <body>
-	<div id="app">
+	<div id="app" class="vh-100" style="background: linear-gradient(130deg, #fff6e7, #a8c2cb);>
 
 
-		<nav class=" width-100 px-5 d-flex justify-content-between align-items-center">
-			<a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-				<div class="logo_laravel">
-					<img height="70px" src="{{ asset('logo.png') }}" alt="">
-				</div>
-			</a>
+		<nav class="
+		width-100 px-5 d-flex justify-content-between align-items-center">
+		<a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+			<div class="logo_laravel">
+				<img height="70px" src="{{ asset('logo.png') }}" alt="">
+			</div>
+		</a>
 
-			{{-- <div class="d-flex gap-3" id="navbarSupportedContent">
+		{{-- <div class="d-flex gap-3" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
