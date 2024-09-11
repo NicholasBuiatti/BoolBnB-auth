@@ -16,11 +16,8 @@
 					<div class="col-7">
 						<h2 class="card-title">{{ $apartment->title }}</h2>
 						<p><i class="fa-solid fa-house"></i> Indirizzo: {{ $apartment->address_full }}</p>
-						@if ($apartment->sponsorships->isNotEmpty())
-							@foreach ($apartment->sponsorships as $sponsorship)
-								<p>Inizio Sponsorizzazione:{{ $sponsorship->pivot->ending_date }}</p>
-								<p>Fine Sponsorizzazione:{{ $sponsorship->pivot->ending_date }}</p>
-							@endforeach
+						@if ($lastSponsorship)
+							<p>Fine Sponsorizzazione:{{ $lastSponsorship->pivot->ending_date }}</p>
 						@else
 							<p>Non Sponsorizzato</p>
 						@endif

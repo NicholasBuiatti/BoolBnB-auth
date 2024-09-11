@@ -6,6 +6,7 @@ use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Services\BraintreeService;
+use Carbon\Carbon;
 
 class SponsorshipController extends Controller
 {
@@ -26,11 +27,25 @@ class SponsorshipController extends Controller
         $result = $this->braintree->processPayment($nonce, $amount);
 
         if ($result->success) {
-            // Calcola le date di inizio e fine per la sponsorizzazione
-            $startDate = now();
+            // Trova l'ultima sponsorizzazione attiva, se esiste
+            $currentSponsorship = $apartment->sponsorships()
+                ->where('ending_date', '>', now()) // Sponsorizzazioni ancora attive
+                ->orderBy('ending_date', 'desc')   // Prendi la più recente
+                ->first();
+
+            // Determina la data di inizio e fine per la nuova sponsorizzazione
+            if ($currentSponsorship) {
+                // Sponsorizzazione già attiva: somma la nuova durata a quella rimanente
+                $startDate = Carbon::parse($currentSponsorship->pivot->ending_date); // La nuova inizia alla fine di quella attuale
+            } else {
+                // Nessuna sponsorizzazione attiva: inizia da ora
+                $startDate = now();
+            }
+
+            // Calcola la data di fine sommando la durata della nuova sponsorizzazione
             $endDate = $startDate->copy()->addHours($sponsorship->duration);
 
-            // Collega l'appartamento con la sponsorizzazione e registra le date
+            // Collega l'appartamento con la nuova sponsorizzazione e registra le date
             $apartment->sponsorships()->attach($sponsorship->id, [
                 'starting_date' => $startDate,
                 'ending_date' => $endDate,
@@ -39,6 +54,7 @@ class SponsorshipController extends Controller
             // Pagamento riuscito
             return redirect()->route('apartments.show', $apartment);
         } else {
+            // Pagamento fallito
             return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $result->message);
         }
     }

@@ -132,6 +132,7 @@ class ApartmentController extends Controller
         $data = [
             'apartment' => $apartment,
             'sponsorships' => Sponsorship::all(),
+            'lastSponsorship' => $apartment->sponsorships()->orderBy('pivot_ending_date', 'desc')->first(),
             'clientToken' => $this->braintree->clientToken()
         ];
 
