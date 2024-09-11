@@ -55,7 +55,7 @@
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
 													 {{ $sponsorship->name == 'Elite'
 													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													'
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							'
 													    : '' }}">
 													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
 													<div class="card-body">
@@ -79,11 +79,11 @@
 							</div>
 						</div>
 					</td>
-					<td class="d-none d-sm-table-cell">
+					<td class="d-block d-sm-table-cell col-12 col-md-6">
 						@if ($apartment->is_visible == 1)
-							<i class="fa-solid fa-check fs-3 text-success"></i>
+							<i class="fa-solid fa-eye fs-3"></i>
 						@else
-							<i class="fa-solid fa-xmark fs-3 text-danger"></i>
+							<i class="fa-solid fa-eye-slash fs-3"></i>
 						@endif
 					</td>
 					<td class="d-block d-sm-table-cell col-12 col-md-6">
