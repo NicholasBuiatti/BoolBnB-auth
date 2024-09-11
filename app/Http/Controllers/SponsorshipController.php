@@ -52,7 +52,7 @@ class SponsorshipController extends Controller
             ]);
 
             // Pagamento riuscito
-            return redirect()->route('apartments.show', $apartment);
+            return redirect()->route('apartments.index', $apartment);
         } else {
             // Pagamento fallito
             return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $result->message);

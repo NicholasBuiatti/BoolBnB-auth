@@ -72,7 +72,7 @@
 								</div>
 							</div>
 
-							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+							{{-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
 								aria-controls="offcanvasRight">Sponsorizza</button>
 
 							<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -103,7 +103,7 @@
 										<button type="submit">Paga ora</button>
 									</form>
 								</div>
-							</div>
+							</div> --}}
 
 						</div>
 					</div>
@@ -113,7 +113,7 @@
 	</div>
 
 
-	<script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
+	{{-- <script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
 	<script>
 		var form = document.querySelector('#payment-form');
 		var clientToken = "{{ $clientToken }}";
@@ -142,5 +142,5 @@
 				});
 			});
 		});
-	</script>
+	</script> --}}
 @endsection

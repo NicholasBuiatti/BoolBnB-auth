@@ -45,12 +45,30 @@ class ApartmentController extends Controller
         }
     }
 
-    public function index()
+    protected $braintree;
+
+    public function __construct(BraintreeService $braintree)
+    {
+        $this->braintree = $braintree;
+    }
+
+    public function index(Apartment $apartment)
     {
         $user_id = Auth::id();
+        $apartment = Apartment::where('user_id', $user_id)->with(['services', 'sponsorships'])->paginate(8);
+        // Aggiungi l'ultima sponsorizzazione per ogni appartamento
+        $apartment->getCollection()->transform(function ($apartment) {
+            $apartment->lastSponsorship = $apartment->sponsorships->sortByDesc('pivot.ending_date')->first();
+            return $apartment;
+        });
+
         $data =
             [
-                'catalogue' => Apartment::where('user_id', $user_id)->with(['services', 'sponsorships'])->paginate(8),
+                'catalogue' => $apartment,
+                'sponsorships' => Sponsorship::all(),
+                // 'apartment' => $apartment, non so se serve
+                // 'lastSponsorship' => $apartment->sponsorships()->orderBy('pivot_ending_date', 'desc')->first(),
+                'clientToken' => $this->braintree->clientToken()
 
             ];
 
@@ -111,12 +129,7 @@ class ApartmentController extends Controller
     }
 
 
-    protected $braintree;
 
-    public function __construct(BraintreeService $braintree)
-    {
-        $this->braintree = $braintree;
-    }
 
     public function show(Request $request, Apartment $apartment)
     {
@@ -133,7 +146,6 @@ class ApartmentController extends Controller
             'apartment' => $apartment,
             'sponsorships' => Sponsorship::all(),
             'lastSponsorship' => $apartment->sponsorships()->orderBy('pivot_ending_date', 'desc')->first(),
-            'clientToken' => $this->braintree->clientToken()
         ];
 
         return view('admin.apartment.show', $data);
