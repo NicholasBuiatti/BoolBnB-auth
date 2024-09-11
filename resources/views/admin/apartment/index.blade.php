@@ -22,22 +22,23 @@
 						@if ($apartment->lastSponsorship)
 							<p>{{ $apartment->lastSponsorship->pivot->ending_date }}</p>
 						@endif
-						<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-							aria-controls="offcanvasRight">Sponsorizza</button>
+						<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+							data-bs-target="#offcanvasRight-{{ $apartment->id }}" aria-controls="offcanvasRight">
+							Sponsorizza
+						</button>
 
-						<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+						<div class="offcanvas w-100 offcanvas-end" tabindex="-1" id="offcanvasRight-{{ $apartment->id }}"
+							aria-labelledby="offcanvasRightLabel-{{ $apartment->id }}">
 							<div class="offcanvas-header">
-								<h5 id="offcanvasRightLabel">Seleziona ed effettua il pagamento</h5>
+								<h5 id="offcanvasRightLabel-{{ $apartment->id }}">Seleziona ed effettua il pagamento</h5>
 								<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 							</div>
 							<div class="offcanvas-body">
 								<h1>Seleziona una Sponsorizzazione</h1>
 
-								<form id="payment-form" method="POST"
+								<form id="payment-form-{{ $apartment->id }}" method="POST"
 									action="{{ route('sponsorships.payment', ['apartment' => $apartment->id]) }}">
-									<!-- Solo apartment->id -->
 									@csrf
-
 									<label for="sponsorship">Scegli la tua sponsorizzazione:</label>
 									<select name="sponsorship_id" id="sponsorship">
 										@foreach ($sponsorships as $sponsorship)
@@ -47,8 +48,7 @@
 										@endforeach
 									</select>
 
-
-									<div id="dropin-container"></div>
+									<div id="dropin-container-{{ $apartment->id }}"></div>
 
 									<button type="submit">Paga ora</button>
 								</form>
@@ -64,10 +64,12 @@
 						@endif
 					</td>
 					<td>
-						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}"><i
-								class="fa-solid fa-eye"></i></a>
-						<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}"><i
-								class="fa-solid fa-pen"></i></a>
+						<a class="btn btn-primary my-2" href="{{ route('apartments.show', $apartment->id) }}">
+							<i class="fa-solid fa-eye"></i>
+						</a>
+						<a class="btn btn-secondary" href="{{ route('apartments.edit', $apartment->id) }}">
+							<i class="fa-solid fa-pen"></i>
+						</a>
 					</td>
 				</tr>
 			@endforeach
@@ -77,30 +79,44 @@
 
 	<script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
 	<script>
-		var form = document.querySelector('#payment-form');
-		var clientToken = "{{ $clientToken }}";
+		document.querySelectorAll('button[data-bs-toggle="offcanvas"]').forEach(function(button) {
+			button.addEventListener('click', function() {
+				// Recupera l'id dell'appartamento dal data-bs-target
+				var apartmentId = this.getAttribute('data-bs-target').split('-').pop();
 
-		braintree.dropin.create({
-			authorization: clientToken,
-			container: '#dropin-container'
-		}, function(createErr, instance) {
-			form.addEventListener('submit', function(event) {
-				event.preventDefault();
+				// Seleziona il form e il dropin-container per l'appartamento specifico
+				var form = document.querySelector('#payment-form-' + apartmentId);
+				var dropinContainer = document.querySelector('#dropin-container-' + apartmentId);
 
-				instance.requestPaymentMethod(function(err, payload) {
-					if (err) {
-						console.error(err);
+				// Inizializza Braintree Drop-in per questo specifico appartamento
+				braintree.dropin.create({
+					authorization: "{{ $clientToken }}",
+					container: dropinContainer
+				}, function(createErr, instance) {
+					if (createErr) {
+						console.error(createErr);
 						return;
 					}
 
-					// Aggiungi il nonce nel form e invia
-					var nonceInput = document.createElement('input');
-					nonceInput.setAttribute('type', 'hidden');
-					nonceInput.setAttribute('name', 'payment_method_nonce');
-					nonceInput.setAttribute('value', payload.nonce);
-					form.appendChild(nonceInput);
+					form.addEventListener('submit', function(event) {
+						event.preventDefault();
 
-					form.submit();
+						instance.requestPaymentMethod(function(err, payload) {
+							if (err) {
+								console.error(err);
+								return;
+							}
+
+							// Aggiungi il nonce nel form e invia
+							var nonceInput = document.createElement('input');
+							nonceInput.setAttribute('type', 'hidden');
+							nonceInput.setAttribute('name', 'payment_method_nonce');
+							nonceInput.setAttribute('value', payload.nonce);
+							form.appendChild(nonceInput);
+
+							form.submit();
+						});
+					});
 				});
 			});
 		});

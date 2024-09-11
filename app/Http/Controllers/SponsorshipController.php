@@ -32,7 +32,6 @@ class SponsorshipController extends Controller
                 ->where('ending_date', '>', now()) // Sponsorizzazioni ancora attive
                 ->orderBy('ending_date', 'desc')   // Prendi la più recente
                 ->first();
-
             // Determina la data di inizio e fine per la nuova sponsorizzazione
             if ($currentSponsorship) {
                 // Sponsorizzazione già attiva: somma la nuova durata a quella rimanente
@@ -52,10 +51,20 @@ class SponsorshipController extends Controller
             ]);
 
             // Pagamento riuscito
-            return redirect()->route('apartments.index', $apartment);
+            return redirect()->route('success', ['id' => $apartment->id]);
         } else {
             // Pagamento fallito
             return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $result->message);
         }
+    }
+
+    public function success($id)
+    {
+        $apartment = Apartment::findOrFail($id);
+
+        $data = [
+            'apartment' => $apartment,
+        ];
+        return view('Admin.Sponsorship.success', $data);
     }
 }

@@ -47,8 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
     Route::get('/message/{message}', [MessageController::class, 'show'])->name('message.show');
 
-    Route::get('/apartments/{apartment}/sponsorships', [ApartmentController::class, 'showSponsorships'])->name('sponsorships.index');
+    Route::get('/success/{id}', [SponsorshipController::class, 'success'])->name('success');
 
+
+    Route::get('/apartments/{apartment}/sponsorships', [ApartmentController::class, 'showSponsorships'])->name('sponsorships.index');
     Route::post('/apartments/{apartment}/sponsorships/payment', [SponsorshipController::class, 'processPayment'])->name('sponsorships.payment');
 });
 
