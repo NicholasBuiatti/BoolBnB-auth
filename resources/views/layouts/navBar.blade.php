@@ -42,7 +42,7 @@
 						</button>
 						<div class="collapse navbar-collapse" id="navbarNav">
 							<ul class="nav nav-pills flex-column justify-content-between mb-auto" style="height: 50vh">
-								<li class="nav-item">
+								<li class="nav-item d-inline">
 									<a href="{{ route('dashboard') }}"
 										class="nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'd-none' : '' }}" aria-current="page">
 										Home
