@@ -56,6 +56,7 @@
                                                     <div class="card border-info mb-3 col-10 col-lg-3 shadow p-3 mb-5 bg-body rounded"
                                                         style="{{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
+<<<<<<< HEAD
 													 {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);' : '' }}">
                                                         <div class="card-header text-uppercase fs-3 fw-bold">
                                                             {{ $sponsorship->name }}</div>
@@ -71,6 +72,23 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+=======
+													 {{ $sponsorship->name == 'Elite'
+													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															'
+													    : '' }}">
+													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
+													<div class="card-body">
+														<p>{{ $sponsorship->description }}</p>
+														<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
+															value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
+														<label for="sponsorship_{{ $sponsorship->id }}">
+															{{ $sponsorship->name }} - €{{ $sponsorship->price }}
+														</label>
+													</div>
+												</div>
+											@endforeach
+>>>>>>> boh
 
                                             </div>
                                             <div id="dropin-container-{{ $apartment->id }}"

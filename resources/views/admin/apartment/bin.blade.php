@@ -1,72 +1,63 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<table class="table table-hover">
-
-		<thead class="">
-			<tr class="table-dark text-center">
+	<table class="table table-striped table-responsive shadow-lg rounded"
+		style="background-color: #f5f7fa; border-collapse: separate; border-spacing: 0 1rem; max-width: 1400px;">
+		<thead class="text-center" style="background-color: #34495e; color: #ecf0f1; border-radius: 8px;">
+			<tr class="d-none d-md-table-row">
 				<th scope="col"></th>
 				<th scope="col">Nome</th>
 				<th scope="col">Data di cancellazione</th>
-				<th scope="col">ripristina</th>
-				<th>elimina definitivamente</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($bin as $apartment)
-				<tr class="align-middle text-center">
-					<th scope="row">
-						<img class="object-fit" src="{{ $apartment->image }}" alt="" style="height: 10rem; width:12rem">
+				<tr class="text-center align-middle" style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+					<th scope="row" class="d-block d-sm-table-cell col-12 col-md-2">
+						<img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
+							style="height: 8rem; width:15rem; object-fit: cover;">
 					</th>
-					<td class="fs-2 fw-bolder">{{ $apartment->title }}</td>
-					<td>
-						{{ $apartment->deleted_at }}
+					<td class="d-block d-sm-table-cell col-12 col-md-3">
+						<h3 class="fs-4 title-shadow">{{ $apartment->title }}</h3>
 					</td>
-					<td>
-						<a class="btn btn-secondary" href="{{ route('apartments.restore', $apartment->id) }}">Ripristina</a>
+					<td class="d-block d-sm-table-cell col-12 col-md-3">
+						<h3 class="fs-4 title-shadow">{{ $apartment->deleted_at }}</h3>
 					</td>
-					<td>
 
-						{{-- BOTTONE CHE ATTIVA IL MODALE --}}
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ $apartment->id }}">
-							Cancella
-						</button>
-						{{-- MODALE DI BOOTSTRAP --}}
-						<div class="modal fade text-danger" id="modal-{{ $apartment->id }}" tabindex="-1" data-bs-backdrop="static"
-							data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitle-{{ $apartment->id }}" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="modalTitle-{{ $apartment->id }}">
-											Cancellazione
-										</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
 
-									<div class="modal-body">
-										Stai cancellando l'appartamento: {{ $apartment->title }}
-										<br>Sicuro di proseguire??
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-											Close
-										</button>
-
-										<form action="{{ route('apartments.destroy', $apartment) }}" method="POST">
-											@csrf
-											@method('DELETE')
-											<button class="btn btn-danger" type="submit">Elimina
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</td>
 				</tr>
 			@endforeach
-
 		</tbody>
 	</table>
 	{{-- {{ $bin->links('pagination::bootstrap-5') }} --}}
+
+	<style>
+		.title-shadow {
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			/* Direzione e ombra */
+		}
+
+		/* CSS PER PULSANTE CUSTOM */
+
+		.btn-custom {
+			background: linear-gradient(130deg, #f7c6c7, #f9e1d1);
+			border: none;
+			color: #333;
+			font-weight: bold;
+			border-radius: 30px;
+			padding: 10px 20px;
+			transition: background 0.3s, transform 0.3s;
+		}
+
+		.btn-custom:hover {
+			background: linear-gradient(130deg, #f4a4a5, #f7d0c5);
+			transform: scale(1.05);
+		}
+
+		.btn-custom:focus,
+		.btn-custom:active {
+			box-shadow: none;
+		}
+	</style>
 @endsection
