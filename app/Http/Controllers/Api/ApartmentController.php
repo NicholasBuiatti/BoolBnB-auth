@@ -24,6 +24,7 @@ class ApartmentController extends Controller
                 $query->where('starting_date', '<=', now())
                     ->where('ending_date', '>=', now());
             })
+            ->where('is_visible', '=', 1)
             ->orderBy('created_at', 'asc')
             ->paginate(8);
         return response()->json([
@@ -114,6 +115,7 @@ class ApartmentController extends Controller
             ->having("distance", "<=", $radiusKm) //prende tutti gli appartamenti e crea distance con il metodo ST_Distance_Sphere
             ->where('beds', '>=', $beds)
             ->where('rooms', '>=', $rooms)
+            ->where('is_visible', '=', 1)
             // ->orderby('è sponsorizzato',)
             ->orderByRaw('IF((SELECT COUNT(*)
              FROM apartment_sponsorship
