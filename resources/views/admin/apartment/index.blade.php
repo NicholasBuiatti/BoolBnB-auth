@@ -2,7 +2,7 @@
 
 @section('content')
 	<table class="table table-striped table-responsive shadow-lg rounded"
-		style="background-color: #f5f7fa; border-collapse: separate; border-spacing: 0 1rem; max-width: 1000px;">
+		style="background-color: #f5f7fa; border-collapse: separate; border-spacing: 0 1rem; max-width: 1400px;">
 		<thead class="text-center" style="background-color: #34495e; color: #ecf0f1; border-radius: 8px;">
 			<tr class="d-none d-md-table-row">
 				<th scope="col"></th>
@@ -20,7 +20,7 @@
 						<img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
 							style="height: 8rem; width:15rem; object-fit: cover;">
 					</th>
-					<td class="d-block d-sm-table-cell col-12 col-md-6">
+					<td class="d-block d-sm-table-cell col-12 col-md-3">
 						<h3 class="fs-4 title-shadow">{{ $apartment->title }}</h3>
 					</td>
 
@@ -55,7 +55,7 @@
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
 													 {{ $sponsorship->name == 'Elite'
 													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				'
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					'
 													    : '' }}">
 													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
 													<div class="card-body">
@@ -79,14 +79,14 @@
 							</div>
 						</div>
 					</td>
-					<td class="d-block d-sm-table-cell col-12 col-md-6">
+					<td class="d-block d-sm-table-cell col-12 col-md-3">
 						@if ($apartment->is_visible == 1)
 							<i class="fa-solid fa-eye fs-3 "></i>
 						@else
 							<i class="fa-solid fa-eye-slash fs-3"></i>
 						@endif
 					</td>
-					<td class="d-block d-sm-table-cell col-12 col-md-6">
+					<td class="d-block d-sm-table-cell col-12 col-md-3">
 						<a class="btn btn-light border my-1" href="{{ route('apartments.show', $apartment->id) }}"
 							style="background-color: #ecf0f1;">
 							<i class="fa-solid fa-eye"></i> Visualizza

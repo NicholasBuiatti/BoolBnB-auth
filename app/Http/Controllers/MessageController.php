@@ -22,7 +22,7 @@ class MessageController extends Controller
                         $query->where('user_id', $user_id);
                     }
                 )->with('apartment')->orderBy('created_at', 'desc')
-                    ->get(),
+                    ->paginate(10),
             ];
 
         return view('admin.apartment.message.index', $data);
