@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="row justify-content-between align-items-start">
+        <div class="row justify-content-between align-items-start contenuto">
             <!-- Colonna immagine -->
             <div class="row col-12 mb-4">
                 <div class="col-6">
@@ -125,4 +125,18 @@
             }
         });
     </script>
+
+    <style>
+        @media screen and (max-width: 990px) {
+            .contenuto {
+                margin-top: 5.5rem;
+            }
+        }
+
+        @media screen and (max-width: 455px) {
+            .contenuto {
+                margin-top: 4rem;
+            }
+        }
+    </style>
 @endsection

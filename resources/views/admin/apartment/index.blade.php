@@ -14,7 +14,7 @@
             </thead>
             <tbody class="">
                 @foreach ($catalogue as $apartment)
-                    <tr class="text-center align-middle" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <tr class="text-center align-middle bordato" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
                         <th scope="row" class="d-block d-md-table-cell col-12 col-lg-2">
                             <img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
@@ -86,6 +86,7 @@
                             </div>
                         </td>
                         <td class="d-block d-md-table-cell col-12 col-lg-3">
+                            <span class="sparisci fs-3">Visibilità: </span>
                             @if ($apartment->is_visible == 1)
                                 <i class="fa-solid fa-eye fs-3 eye"></i>
                             @else
@@ -167,6 +168,10 @@
             height: 3.2rem;
         }
 
+        .sparisci {
+            display: none
+        }
+
         @media screen and (min-width:768px) {
             .w-md-100 {
                 width: 100% !important;
@@ -182,6 +187,22 @@
         @media screen and (max-width:768px) {
             .w-md-100 {
                 margin-top: 6rem !important;
+            }
+
+            .bordato {
+                border: 3px solid rgb(101, 167, 217);
+            }
+
+            th {
+                border: none !important;
+            }
+
+            td {
+                border: none !important;
+            }
+
+            .sparisci {
+                display: unset;
             }
         }
     </style>

@@ -1,7 +1,7 @@
 @extends('layouts.navBar')
 
 @section('content')
-    <div class="d-flex align-items-start w-100" style="max-width: 1000px">
+    <div class="d-flex align-items-start w-100 contenuto" style="max-width: 1000px">
         <form id="apartmentForm" method="POST" action="{{ route('apartments.store') }}" class="w-100 p-3 row"
             enctype="multipart/form-data">
             @csrf
@@ -192,6 +192,18 @@
             /* Firefox */
             appearance: textfield;
             /* Altri browser */
+        }
+
+        @media screen and (max-width: 990px) {
+            .contenuto {
+                margin-top: 5.5rem;
+            }
+        }
+
+        @media screen and (max-width: 455px) {
+            .contenuto {
+                margin-top: 4rem;
+            }
         }
     </style>
 @endsection
