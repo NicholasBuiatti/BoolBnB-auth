@@ -54,8 +54,8 @@ Route::middleware('auth')->group(function () {
 
 });
 Route::get('/mailable',function(){
-    //$message=['name'=>'Matteo','email'=>'matteo@matteo.it','text'=>'lorem ipsum ','apartment_id'=>1];
-    $message=Message::first();
+    $message=['name'=>'Matteo','email'=>'matteo@matteo.it','text'=>'lorem ipsum ','apartment_id'=>1];
+    //$message=Message::first();
     return new App\Mail\NewContact($message);
 
     

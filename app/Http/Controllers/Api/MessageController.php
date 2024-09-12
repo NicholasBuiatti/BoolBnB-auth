@@ -41,8 +41,8 @@ class MessageController extends Controller
         $data = $request->all();
 
         $validator=FacadesValidator::make($data,[
-                        'name' => "string",
-             'email' => [
+                'name' => "string",
+                 'email' => [
                  'required',
                  'string',
                  'lowercase',
@@ -68,9 +68,9 @@ class MessageController extends Controller
         }
 
         
-        //$newMsg = new Message();
-        //$newMsg->fill($data);
-        //$newMsg->save();
+        $newMsg = new Message();
+        $newMsg->fill($data);
+        $newMsg->save();
         //Mail::to('info@boolbnb.com')->send(new NewContact($newMsg));
         // Mail::send('emails.new-email', $data, function ($message) {
         //     $message->to('info@boolbnb.com ');
