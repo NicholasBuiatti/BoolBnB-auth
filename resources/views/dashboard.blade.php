@@ -1,7 +1,7 @@
 @extends('layouts.navBar')
 
 @section('content')
-    <div class="d-flex gap-5">
+    <div class=" contenuto d-flex gap-5">
 
         <div class="col">
             <div class="row justify-content-center px-3">
@@ -113,6 +113,12 @@
 
                     .text-primary {
                         color: #333;
+                    }
+
+                    @media screen and (max-width: 990px) {
+                        .contenuto {
+                            margin-top: 3rem;
+                        }
                     }
                 </style>
             @endsection
