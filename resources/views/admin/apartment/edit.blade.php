@@ -140,77 +140,60 @@
 			</form>
 		</div>
 	</div>
-	{{-- <script>
-			document.getElementById('image').addEventListener('change', function() {
-				let file = this.files[0];
-				if (file.size > 5 * 1024 * 1024) {
-					document.getElementById('fileSizeError').style.display = 'block';
-					// disabilito l'invio del form se il file è troppo grande
-					document.getElementById('apartmentForm').onsubmit = function(event) {
-						event.preventDefault();
-					}
-				} else {
-					document.getElementById('fileSizeError').style.display = 'none';
-					// permetto l'invio del form se il file rispetta le dimensioni
-					document.getElementById('apartmentForm').onsubmit = function(event) {
-						return true;
-					};
-				}
+	<style>
+		main {
+			position: relative;
+			background-color: #e9e9e9;
+			background-image: url('/back.png');
+			background-repeat: no-repeat;
+			background-size: 80%;
+			background-position: bottom right;
+			background-size: 40vw;
+			z-index: 1;
+		}
 
-					<style>
-									main {
-													position: relative;
-													background-color: #e9e9e9;
-													background-image: url('/back.png');
-													background-repeat: no-repeat;
-													background-size: 80%;
-													background-position: bottom right;
-													background-size: 40vw;
-													z-index: 1;
-									}
+		main::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: -1;
+		}
 
-									main::before {
-													content: '';
-													position: absolute;
-													top: 0;
-													left: 0;
-													right: 0;
-													bottom: 0;
-													z-index: -1;
-									}
+		#opzioni {
+			width: 100%;
+			background-color: rgb(216, 216, 216);
+			border-radius: 10px;
+			max-height: 4.5rem;
+			overflow: auto;
+			padding-left: 0;
+		}
 
-									#opzioni {
-													width: 100%;
-													background-color: rgb(216, 216, 216);
-													border-radius: 10px;
-													max-height: 4.5rem;
-													overflow: auto;
-													padding-left: 0;
-									}
+		#opzioni li {
+			list-style: none;
+			cursor: pointer;
+			width: 100%;
+			padding-left: 1rem;
+		}
 
-									#opzioni li {
-													list-style: none;
-													cursor: pointer;
-													width: 100%;
-													padding-left: 1rem;
-									}
+		#opzioni li:hover {
+			background-color: rgba(0, 145, 255, 0.278);
+			transition: .5s;
+		}
 
-									#opzioni li:hover {
-													background-color: rgba(0, 145, 255, 0.278);
-													transition: .5s;
-									}
+		input[type="number"]::-webkit-inner-spin-button,
+		input[type="number"]::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
 
-									input[type="number"]::-webkit-inner-spin-button,
-									input[type="number"]::-webkit-outer-spin-button {
-													-webkit-appearance: none;
-													margin: 0;
-									}
-
-									input[type="number"] {
-													-moz-appearance: textfield;
-													/* Firefox */
-													appearance: textfield;
-													/* Altri browser */
-									}
-					</style>
-	@endsection
+		input[type="number"] {
+			-moz-appearance: textfield;
+			/* Firefox */
+			appearance: textfield;
+			/* Altri browser */
+		}
+	</style>
+@endsection
