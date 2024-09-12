@@ -7,6 +7,8 @@ use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Apartment;
 use App\Models\Message;
+use App\Models\Statistic;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -25,20 +27,53 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/', function () {
 //     return view('dashboard');
 // });
-
 Route::get('/', function () {
     $user_id = Auth::id();
+
+    // Recupera il catalogo degli appartamenti dell'utente
     $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
+
+    // Recupera i messaggi associati agli appartamenti dell'utente
     $messages = Message::whereHas('apartment', function ($query) use ($user_id) {
         $query->where('user_id', $user_id);
     })->with('apartment')->paginate(10);
-    $data =
-        [
-            'catalogue' => $catalogue,
-            'messages' => $messages,
-        ];
+
+    // Ottieni la data di inizio e fine del mese corrente
+    $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
+    $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
+
+    // Recupera gli ID degli appartamenti dell'utente
+    $userApartmentsIds = Apartment::where('user_id', $user_id)->pluck('id');
+
+    // Conta le visite agli appartamenti dell'utente nel mese corrente
+    $visitCount = Statistic::whereIn('apartment_id', $userApartmentsIds)
+        ->whereBetween('date_visit', [$startOfMonth, $endOfMonth])
+        ->distinct('ip_address') // Assicurati di contare solo le visite uniche
+        ->count('ip_address');
+
+    // Passa tutti i dati alla vista
+    $data = [
+        'catalogue' => $catalogue,
+        'messages' => $messages,
+        'visitCount' => $visitCount,
+    ];
+
     return view('dashboard', $data);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/', function () {
+//     $user_id = Auth::id();
+//     $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
+//     $messages = Message::whereHas('apartment', function ($query) use ($user_id) {
+//         $query->where('user_id', $user_id);
+//     })->with('apartment')->paginate(10);
+//     $data =
+//         [
+//             'catalogue' => $catalogue,
+//             'messages' => $messages,
+//         ];
+//     return view('dashboard', $data);
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

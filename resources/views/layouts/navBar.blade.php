@@ -27,11 +27,10 @@
 
 <body>
     <div id="app">
-        <div class="container-fluid "
-            style="background: linear-gradient(to bottom right, #d8cfc4, #f9f9f9 50%, #a0d8ef);">
+        <div style="background-color: rgb(233, 233, 233)" class="container-fluid ">
             <div class="row h-100 d-md-flex">
-                <nav class="position-fixed d-md-none navbar navbar-expand-lg"
-                    style="background: linear-gradient(to bottom right, #d8cfc4, #f9f9f9 50%, #a0d8ef);">
+                {{-- ------------------------- navbar mobile -------------------- --}}
+                <nav class="navbar-mobile position-fixed d-md-none navbar navbar-expand-lg">
                     <div class="container-fluid">
                         <a class="col-3 navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                             <div class="logo_laravel">
@@ -44,51 +43,48 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="nav nav-pills flex-column justify-content-between mb-auto" style="height: 50vh">
-                                <li class="nav-item d-inline">
+                            {{-- lista link --}}
+                            <ul class="nav nav-pills flex-column justify-content-between mb-auto">
+                                <li class="nav-item link-navbar">
                                     <a href="{{ route('dashboard') }}"
-                                        class="nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'd-none' : '' }}"
+                                        class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'fw-bold text-decoration-underline' : '' }}"
                                         aria-current="page">
                                         Home
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('apartments.index') }}"
-                                        class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'd-none' : '' }}"
+                                        class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'fw-bold text-decoration-underline' : '' }}"
                                         aria-current="page">
                                         I miei appartamenti
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('apartments.create') }}"
-                                        class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.create' ? 'd-none' : '' }}"
+                                        class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.create' ? 'fw-bold text-decoration-underline' : '' }}"
                                         aria-current="page">
                                         Aggiungi un appartamento
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('apartments.bin') }}"
-                                        class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.bin' ? 'd-none' : '' }}"
+                                        class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.bin' ? 'fw-bold text-decoration-underline' : '' }}"
                                         aria-current="page">
                                         Appartamenti eliminati
                                     </a>
                                 </li>
 
-                                {{-- <li>
-									<a href="#" class="nav-link text-white">
-										Statistiche
-									</a>
-								</li> --}}
+
                                 <li>
                                     <a href="{{ route('message.index') }}"
-                                        class="nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'd-none' : '' }}"
+                                        class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'fw-bold text-decoration-underline' : '' }}"
                                         aria-current="page">
                                         Messaggi
                                     </a>
                                 </li>
                                 <hr>
                                 <li class="dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#"
                                         role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" v-pre>
                                         {{ Auth::user()->email }}
@@ -117,44 +113,42 @@
                         </div>
                     </div>
                 </nav>
-
-
-
+                {{-- ------------------------- navbar desktop -------------------- --}}
                 <nav
-                    class="position-fixed text-center d-none col-md-3 col-lg-2 d-md-flex flex-column vh-100 flex-shrink-0 p-3 text-white navbar-dark sidebar h-100 border border-2 border-end">
-                    <a class="d-none d-md-block navbar-brand
-					d-flex align-items-center"
-                        href="{{ url('/') }}">
+                    class="navbar-desktop position-fixed text-center d-none col-md-3 col-lg-2 d-md-flex flex-column vh-100 flex-shrink-0 p-3 text-white navbar-dark sidebar h-100">
+                    {{-- logo --}}
+                    <a class="d-none d-md-block navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                         <div class="logo_laravel">
                             <img src="{{ asset('logo.png') }}" class="img-fluid" alt="">
                         </div>
                     </a>
                     <hr class="d-none d-md-block">
+                    {{-- lista link --}}
                     <ul class="nav nav-pills flex-md-column justify-content-between mb-auto">
-                        <li class="nav-item">
+                        <li class="nav-item link-navbar">
                             <a href="{{ route('dashboard') }}"
-                                class="nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'fw-bold text-decoration-underline' : '' }}"
+                                class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'fw-bold text-decoration-underline' : '' }}"
                                 aria-current="page">
                                 Home
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('apartments.index') }}"
-                                class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'fw-bold text-decoration-underline' : '' }}"
+                                class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'fw-bold text-decoration-underline' : '' }}"
                                 aria-current="page">
                                 I miei appartamenti
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('apartments.create') }}"
-                                class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.create' ? 'fw-bold text-decoration-underline' : '' }}"
+                                class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.create' ? 'fw-bold text-decoration-underline' : '' }}"
                                 aria-current="page">
                                 Aggiungi un appartamento
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('apartments.bin') }}"
-                                class="nav-link text-dark {{ Route::currentRouteName() == 'apartments.bin' ? 'fw-bold text-decoration-underline' : '' }}"
+                                class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.bin' ? 'fw-bold text-decoration-underline' : '' }}"
                                 aria-current="page">
                                 Appartamenti eliminati
                             </a>
@@ -163,13 +157,14 @@
 
                         <li>
                             <a href="{{ route('message.index') }}"
-                                class="nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'fw-bold text-decoration-underline' : '' }}"
+                                class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'fw-bold text-decoration-underline' : '' }}"
                                 aria-current="page">
                                 Messaggi
                             </a>
                         </li>
                     </ul>
                     <hr>
+                    {{-- opzioni utente --}}
                     <div class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#"
                             role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -194,6 +189,7 @@
                         </ul>
                     </div>
                 </nav>
+                {{-- ------------------------- main app -------------------- --}}
                 <main class="mt-5 mt-md-0  col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto  p-3"
                     style="height:100vh;">
                     @yield('content')
@@ -202,5 +198,44 @@
         </div>
     </div>
 </body>
+<style scoped>
+    .navbar-desktop {
+        background: linear-gradient(130deg, #c1b49d68, #a3ccdb64);
+        border-right: 2px solid #a09d9fc2;
+        box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.367);
+        /* padding: 0 !important; */
+    }
+
+    .navbar-mobile {
+        background: linear-gradient(130deg, #c1b49d, #a3ccdb);
+        border-bottom: 2px solid #a09d9fc2;
+        box-shadow: 2px 5px 20px 2px black;
+        z-index: 999;
+        /* padding: 0 !important; */
+    }
+
+    .nav-link-desktop {
+        border: none;
+        color: #504d50c2 !important;
+        background-color: transparent !important;
+        transition: background-color .3s ease, color .3s ease;
+    }
+
+    .nav-link-desktop:hover {
+        /* background: linear-gradient(130deg, #c3b49ba4, #94a7ae98); */
+        /* background-color: rgba(183, 139, 103, 0.506); */
+        color: black !important;
+        text-decoration: none;
+
+    }
+
+    .nav-link-desktop.fw-bold {
+        border: 2px solid rgba(183, 139, 103, 0.506);
+        color: black !important;
+        text-decoration: none !important;
+        background-color: transparent !important;
+        /* border: 1px solid #a09d9fc2; */
+    }
+</style>
 
 </html>
