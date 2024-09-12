@@ -27,7 +27,7 @@
 
 <body>
 	<div id="app">
-		<div class="container-fluid vh-100" style="background: linear-gradient(130deg, #fff6e7, #a8c2cb);">
+		<div class="container-fluid " style="background: linear-gradient(130deg, #fff6e7, #a8c2cb);">
 			<div class="row h-100 d-md-flex">
 				<nav class="d-md-none navbar navbar-expand-lg">
 					<div class="container-fluid">
@@ -112,7 +112,7 @@
 
 
 				<nav
-					class="text-center d-none col-md-3 col-lg-2 d-md-flex flex-column flex-shrink-0 p-3 text-white navbar-dark sidebar h-100 border border-2 border-end">
+					class="text-center d-none col-md-3 col-lg-2 d-md-flex flex-column vh-100 flex-shrink-0 p-3 text-white navbar-dark sidebar h-100 border border-2 border-end">
 					<a class="d-none d-md-block navbar-brand
 					d-flex align-items-center" href="{{ url('/') }}">
 						<div class="logo_laravel">
@@ -150,11 +150,7 @@
 							</a>
 						</li>
 
-						<li>
-							<a href="#" class="nav-link text-dark">
-								Statistiche
-							</a>
-						</li>
+					
 						<li>
 							<a href="{{ route('message.index') }}"
 								class="nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'fw-bold text-decoration-underline' : '' }}"
@@ -186,7 +182,7 @@
 						</ul>
 					</div>
 				</nav>
-				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100 p-3">
+				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100  p-3" style="height:120vh;">
 					@yield('content')
 				</main>
 			</div>

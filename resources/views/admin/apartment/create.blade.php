@@ -15,7 +15,7 @@
 			<div class="mb-3">
 				<label class="form-label">Indirizzo </label>
 				<input id="input_indirizzo" type="text" class="form-control" name="address_full" required
-					value="{{ old('address_full') }}" list="opzioni">
+					value="{{ old('address_full') }}" list="opzioni" autocomplete="off">
 				<ul id="opzioni">
 				</ul>
 				@error('address_full')
@@ -41,7 +41,7 @@
 								<i class="bi bi-door-closed"></i> <!-- Icona per rappresentare le camere -->
 							</span>
 							<input type="number" id="rooms" min="1" class="form-control @error('rooms') is-invalid @enderror"
-								name="rooms" placeholder="1" value="{{ old('rooms') }}" required>
+								name="rooms"  value="{{ old('rooms') }}" required>
 						</div>
 						@error('rooms')
 							<div class="invalid-feedback">{{ $message }}</div>
@@ -52,10 +52,10 @@
 						<label for="beds" class="form-label fw-bold">Letti</label>
 						<div class="input-group">
 							<span class="input-group-text bg-primary text-white">
-								<i class="bi bi-bed"></i> <!-- Icona per rappresentare i letti -->
+								<i class="fa-solid fa-bed"></i></i> <!-- Icona per rappresentare i letti -->
 							</span>
 							<input type="number" id="beds" min="1" class="form-control @error('beds') is-invalid @enderror"
-								name="beds" placeholder="1" value="{{ old('beds') }}" required>
+								name="beds"  value="{{ old('beds') }}" required>
 						</div>
 						@error('beds')
 							<div class="invalid-feedback">{{ $message }}</div>
@@ -69,7 +69,7 @@
 								<i class="bi bi-droplet"></i> <!-- Icona per rappresentare i bagni -->
 							</span>
 							<input type="number" id="bathrooms" min="1" class="form-control @error('bathrooms') is-invalid @enderror"
-								name="bathrooms" placeholder="1" value="{{ old('bathrooms') }}" required>
+								name="bathrooms"  value="{{ old('bathrooms') }}" required>
 						</div>
 						@error('bathrooms')
 							<div class="invalid-feedback">{{ $message }}</div>
