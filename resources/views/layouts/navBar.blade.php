@@ -150,11 +150,7 @@
 							</a>
 						</li>
 
-						<li>
-							<a href="#" class="nav-link text-dark">
-								Statistiche
-							</a>
-						</li>
+					
 						<li>
 							<a href="{{ route('message.index') }}"
 								class="nav-link text-dark {{ Route::currentRouteName() == 'message.index' ? 'fw-bold text-decoration-underline' : '' }}"

@@ -6,12 +6,15 @@ namespace App\Http\Controllers;
 use App\Models\Apartment;
 use App\Models\Message;
 use App\Models\Service;
+use App\Models\Statistic;
 use App\Models\Sponsorship;
 use App\Services\BraintreeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -140,9 +143,42 @@ class ApartmentController extends Controller
             // Se l'utente non è autorizzato, mostra la pagina 404
             abort(403);
         }
+        $startingDate = Carbon::now()->subMonths(12)->startOfMonth();
+        $endingDate = Carbon::now()->endOfMonth();
 
         // Se l'utente è autorizzato, passa i dati alla vista
+        $statistics = Statistic::select(
+            DB::raw('COUNT(*) as visits'),
+            DB::raw('MONTH(date_visit) as month'),
+            DB::raw('YEAR(date_visit) as year')
+        )
+        ->where('apartment_id', $apartment->id)
+        ->whereBetween('date_visit', [$startingDate, $endingDate]) // Filtra per l'ultimo anno
+        ->groupBy(DB::raw('YEAR(date_visit)'), DB::raw('MONTH(date_visit)'))
+        ->orderBy(DB::raw('YEAR(date_visit)'), 'asc')
+        ->orderBy(DB::raw('MONTH(date_visit)'), 'asc')
+        ->get();
+
+        $monthlyData=array_fill(0,12,0);
+        $months=[];
+        for ($i = 0; $i < 13; $i++) {
+            $months[] = Carbon::now()->subMonths(12 - $i)->format('F Y'); // Esempio: 'Ottobre 2023'
+        }
+
+        // Popola l'array con i dati dai risultati
+        foreach ($statistics as $stat) {
+            // Calcola l'indice corrispondente nell'array (in base all'anno e al mese)
+            $dateKey = Carbon::create($stat->year, $stat->month)->format('F Y');
+            $index = array_search($dateKey, $months);
+            if ($index !== false) {
+                $monthlyData[$index] = $stat->visits;
+            }
+        }
+
+
         $data = [
+            'monthlyData'=>$monthlyData,
+            'months'=>$months,
             'apartment' => $apartment,
             'sponsorships' => Sponsorship::all(),
             'lastSponsorship' => $apartment->sponsorships()->orderBy('pivot_ending_date', 'desc')->first(),
