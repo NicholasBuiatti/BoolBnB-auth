@@ -112,28 +112,31 @@
 						@enderror
 					</div>
 				</div>
-				<div class="mb-3 col-12 col-sm-8">
-					<label class="form-label">Inserisci Immagine</label>
-					<input id="image" type="file" accept="image/*" class="form-control" name="image"
-						value={{ old('image') ?? $apartment->image }}>
-					@error('image')
-						<div class="text-danger">{{ $message }}</div>
-					@enderror
-					<p id="fileSizeError" style="color:red; display:none;">Il file supera le dimensioni massime di 5 mb.</p>
+				<div class="">
+					<div class="col-12 d-flex flex-column flex-lg-row col-12">
+						<div class="col-4">
+							<img src="{{ $apartment->image }}" class="object-fit-cover" style="width: 15rem; height: 15rem;" alt="">
+						</div>
+						<div class="mb-3 col-12 col-sm-8 d-flex flex-column justify-content-between">
+							<label class="form-label">Inserisci Immagine</label>
+							<input id="image" type="file" accept="image/*" class="form-control" name="image"
+								value={{ old('image') ?? $apartment->image }}>
+							@error('image')
+								<div class="text-danger">{{ $message }}</div>
+							@enderror
+							<p id="fileSizeError" style="color:red; display:none;">Il file supera le dimensioni massime di 5 mb.</p>
+							<div class="mb-3">
+								<label class="form-label me-2">Visibilità Appartamento </label>
+								<input type="checkbox" class="" name="is_visible"
+									{{ $apartment['is_visible'] ? 'checked' : 'unchecked' }}>
+								@error('is_visible')
+									<div class="text-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<button type="submit" class="btn btn-primary col-5 col-md-4">Modifica appartamento </button>
+						</div>
+					</div>
 				</div>
-
-				<div class="mb-3">
-					<label class="form-label me-2">Visibilità Appartamento </label>
-					<input type="checkbox" class="" name="is_visible"
-						{{ $apartment['is_visible'] ? 'checked' : 'unchecked' }}>
-					@error('is_visible')
-						<div class="text-danger">{{ $message }}</div>
-					@enderror
-				</div>
-
-
-				<button type="submit" class="btn btn-primary col-5 col-md-3">Modifica appartamento </button>
-
 			</form>
 		</div>
 	</div>
