@@ -88,37 +88,36 @@
 		<div>
 			<canvas id="myChart"></canvas>
 		</div>
-		  
-		  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-		  
-		  <script>
-			const monthlyData=@json(array_values($monthlyData));
-			const months=@json($months);
-			
-			const ctx = document.getElementById('myChart');
-		  
-			new Chart(ctx, {
-			  type: 'line',
-			  data: {
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<script>
+		const monthlyData = @json(array_values($monthlyData));
+		const months = @json($months);
+
+		const ctx = document.getElementById('myChart');
+
+		new Chart(ctx, {
+			type: 'line',
+			data: {
 				labels: months,
 				datasets: [{
-				  label: '# of Votes',
-				  data: monthlyData,
-				  borderWidth: 1
+					label: '# of Votes',
+					data: monthlyData,
+					borderWidth: 1
 				}]
-			  },
-			  options: {
+			},
+			options: {
 				scales: {
-				  y: {
-					beginAtZero: true,
-					ticks:{
-						stepSize: 1,
+					y: {
+						beginAtZero: true,
+						ticks: {
+							stepSize: 1,
+						}
 					}
-				  }
 				}
-			  }
-			});
-		  </script>
-		  
-	</div>
+			}
+		});
+	</script>
 @endsection

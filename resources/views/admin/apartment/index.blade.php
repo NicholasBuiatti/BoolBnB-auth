@@ -1,10 +1,10 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<div class="rounded overflow-hidden">
-		<table class="table table-responsive shadow-lg">
+	<div class="rounded">
+		<table class="table table-responsive shadow-lg w-75 m-auto w-md-100">
 			<thead class="text-center">
-				<tr class="d-none d-md-table-row">
+				<tr class="d-none d-lg-table-row">
 					<th scope="col"></th>
 					<th scope="col" class="text-uppercase">Nome</th>
 					<th scope="col" class="text-uppercase">Sponsorizzazione</th>
@@ -12,20 +12,20 @@
 					<th scope="col" class="text-uppercase">Azioni</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="">
 				@foreach ($catalogue as $apartment)
 					<tr class="text-center align-middle" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-						<th scope="row" class="d-block d-sm-table-cell col-12 col-md-2">
+						<th scope="row" class="d-block d-md-table-cell col-12 col-lg-2">
 							<img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
 								style="height: 8rem; width:15rem; object-fit: cover;">
 						</th>
-						<td class="d-block d-sm-table-cell col-12 col-md-3">
+						<td class="d-block d-md-table-cell col-12 col-md-3">
 							<h3 style="color: #6f5a4a" class="fs-4">{{ $apartment->title }}</h3>
 						</td>
 
 
-						<td class="d-block d-sm-table-cell col-12 col-md-3">
+						<td class="d-block d-md-table-cell col-12 col-lg-3">
 							@if ($apartment->lastSponsorship)
 								<p class="fw-light">Fine della Sponsorizzazione: <br>
 									{{ $apartment->lastSponsorship->pivot->ending_date }}</p>
@@ -57,7 +57,7 @@
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
 													 {{ $sponsorship->name == 'Elite'
 													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												'
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											'
 													    : '' }}">
 														<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
 														<div class="card-body">
@@ -82,14 +82,14 @@
 								</div>
 							</div>
 						</td>
-						<td class="d-block d-sm-table-cell col-12 col-md-3">
+						<td class="d-block d-md-table-cell col-12 col-lg-3">
 							@if ($apartment->is_visible == 1)
 								<i class="fa-solid fa-eye fs-3 "></i>
 							@else
 								<i class="fa-solid fa-eye-slash fs-3"></i>
 							@endif
 						</td>
-						<td class="d-block d-sm-table-cell col-12 col-md-3">
+						<td class="d-block d-md-table-cell col-12 col-lg-3">
 							<a class="btn btn-light border my-1" href="{{ route('apartments.show', $apartment->id) }}"
 								style="background-color: #ecf0f1;">
 								<i class="fa-solid fa-eye"></i> Visualizza
@@ -130,6 +130,12 @@
 		.btn-custom:focus,
 		.btn-custom:active {
 			box-shadow: none;
+		}
+
+		@media screen and (min-width:768px) {
+			.w-md-100 {
+				width: 100% !important
+			}
 		}
 	</style>
 

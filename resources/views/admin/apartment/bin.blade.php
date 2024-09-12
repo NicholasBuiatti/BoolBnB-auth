@@ -1,35 +1,28 @@
 @extends('layouts.navBar')
 
 @section('content')
-	<table class="table table-striped table-responsive shadow-lg rounded"
-		style="background-color: #f5f7fa; border-collapse: separate; border-spacing: 0 1rem; max-width: 1400px;">
-		<thead class="text-center" style="background-color: #34495e; color: #ecf0f1; border-radius: 8px;">
-			<tr class="d-none d-md-table-row">
-				<th scope="col"></th>
-				<th scope="col">Nome</th>
-				<th scope="col">Data di cancellazione</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach ($bin as $apartment)
-				<tr class="text-center align-middle" style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+	@foreach ($bin as $apartment)
+		<div class="card text-center">
+			<div class="card-header">
+				Featured
+			</div>
+			<div class="card-body row">
+				<div class="col-3">
+					<img src="{{ $apartment->image }}" alt="" style="height: 8rem; width:15rem; object-fit: cover;">
+				</div>
+				<div class="col-9">
+					<h5 class="card-title">Special title treatment</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				</div>
 
-					<th scope="row" class="d-block d-sm-table-cell col-12 col-md-2">
-						<img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
-							style="height: 8rem; width:15rem; object-fit: cover;">
-					</th>
-					<td class="d-block d-sm-table-cell col-12 col-md-3">
-						<h3 class="fs-4 title-shadow">{{ $apartment->title }}</h3>
-					</td>
-					<td class="d-block d-sm-table-cell col-12 col-md-3">
-						<h3 class="fs-4 title-shadow">{{ $apartment->deleted_at }}</h3>
-					</td>
+			</div>
+			<div class="card-footer text-muted">
+				Data di canellazione: {{ $apartment->deleted_at }}
+			</div>
+		</div>
+	@endforeach
 
-
-				</tr>
-			@endforeach
-		</tbody>
-	</table>
 	{{-- {{ $bin->links('pagination::bootstrap-5') }} --}}
 
 	<style>
