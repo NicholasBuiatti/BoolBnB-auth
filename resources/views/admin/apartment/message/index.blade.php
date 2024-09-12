@@ -1,10 +1,11 @@
 @extends('layouts.navBar')
 
 @section('content')
-    <div class="rounded overflow-hidden">
+    <div class="rounded overflow-hidden contenitore">
         <table class="table table-responsive shadow-lg w-75 m-auto w-md-100">
             <thead class="text-center">
-                <tr class="d-none d-lg-table-row">
+                <tr class="d-none d-lg-table-row"
+                    style=" background: linear-gradient(130deg, #ebb7568a, #5fa2baa0) !important;">
                     <th></th>
                     <th scope="col" class="text-uppercase">DATA RICEZIONE</th>
                     <th scope="col" class="text-uppercase">DA</th>
@@ -15,9 +16,10 @@
             </thead>
             <tbody>
                 @foreach ($messages as $message)
-                    <tr class="text-center align-middle bordato">
+                    <tr class="text-center align-middle bordato"
+                        style=" background: linear-gradient(130deg, #d7b5768a, #5ca1baa0) !important;">
 
-                        <th scope="row" class="d-block d-md-table-cell col-12 col-lg-2">
+                        <th scope="row" class="d-block d-md-table-cell col-12 col-lg-3">
                             <img class="rounded shadow-sm" src="{{ $message->apartment->image }}"
                                 alt="Immagine appartamento" style="height: 8rem; width:15rem; object-fit: cover;">
                         </th>
@@ -47,25 +49,8 @@
     </div>
 
     <style>
-        main {
-            position: relative;
-            background-color: #e9e9e9;
-            background-image: url('/back.png');
-            background-repeat: no-repeat;
-            background-size: 80%;
-            background-position: bottom right;
-            background-size: 40vw;
-            z-index: 1;
-        }
-
-        main::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
+        .contenitore {
+            box-shadow: 3px 3px 10px 1px;
         }
 
         td,
