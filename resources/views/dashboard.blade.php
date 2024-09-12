@@ -44,13 +44,16 @@
 									Messaggi
 								</div>
 								<div class="card-body">
-									{{-- <h5 class="card-title">Posseduti: {{ $catalogue->total() }} ecco i primi {{ count($catalogue) }}</h5>
+									<h5 class="card-title">Posseduti: {{ $catalogue->total() }} ecco i primi {{ count($catalogue) }}</h5>
 									<ul>
-										@foreach ($catalogue as $apartment)
-											<li>{{ $apartment->title }}</li>
+										@foreach ($messages as $message)
+										<a href="{{ route('message.show', $message->id) }} " class="btn ">
+											<li>{{$message['email']}} relativo all'appartmento in {{$message['apartment']->title}}</li>
+											{{-- <p>relativo all'appartmento in {{$message['apartment']->title}}</p> --}}
+										</a>
+										
 										@endforeach
-									</ul> --}}
-									<a href="#" class="btn btn-primary">Go somewhere</a>
+									</ul>
 								</div>
 							</div>
 						</div>

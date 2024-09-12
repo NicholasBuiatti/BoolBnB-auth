@@ -31,7 +31,7 @@ Route::get('/', function () {
     $catalogue = Apartment::where('user_id', $user_id)->with(['services'])->paginate(8);
     $messages = Message::whereHas('apartment', function ($query) use ($user_id) {
         $query->where('user_id', $user_id);
-    })->paginate(10);
+    })->with('apartment')->paginate(10);
     $data =
         [
             'catalogue' => $catalogue,

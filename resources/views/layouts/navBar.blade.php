@@ -27,9 +27,9 @@
 
 <body>
 	<div id="app">
-		<div class="container-fluid " style="background: linear-gradient(130deg, #fff6e7, #a8c2cb);">
+		<div class="container-fluid " style="background: linear-gradient(to bottom right, #d8cfc4, #f9f9f9 50%, #a0d8ef);">
 			<div class="row h-100 d-md-flex">
-				<nav class="d-md-none navbar navbar-expand-lg">
+				<nav class="position-fixed d-md-none navbar navbar-expand-lg" style="background: linear-gradient(to bottom right, #d8cfc4, #f9f9f9 50%, #a0d8ef);">
 					<div class="container-fluid">
 						<a class="col-3 navbar-brand d-flex align-items-center" href="{{ url('/') }}">
 							<div class="logo_laravel">
@@ -112,7 +112,7 @@
 
 
 				<nav
-					class="text-center d-none col-md-3 col-lg-2 d-md-flex flex-column vh-100 flex-shrink-0 p-3 text-white navbar-dark sidebar h-100 border border-2 border-end">
+					class="position-fixed text-center d-none col-md-3 col-lg-2 d-md-flex flex-column vh-100 flex-shrink-0 p-3 text-white navbar-dark sidebar h-100 border border-2 border-end">
 					<a class="d-none d-md-block navbar-brand
 					d-flex align-items-center" href="{{ url('/') }}">
 						<div class="logo_laravel">
@@ -182,7 +182,7 @@
 						</ul>
 					</div>
 				</nav>
-				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100  p-3" style="height:120vh;">
+				<main class="mt-5 mt-md-0  col-md-9 ms-sm-auto col-lg-10 px-md-4 overflow-auto h-100  p-3" style="height:120vh;">
 					@yield('content')
 				</main>
 			</div>
