@@ -13,33 +13,27 @@ class StatisticController extends Controller
 {
     public function store(Request $request)
 
-    {
-
-        // $data = $request->validate([
-        //     'name' => "string|nullable",
-        //     'email' => [
-        //         'required',
-        //         'string',
-        //         'lowercase',
-        //         'email',
-        //         'max:255',
-        //         'unique:' . User::class,
-        //         function ($attribute, $value, $fail) {
-        //             // Definisci la regex per .com o .it
-        //             if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es
-        //          )$/', $value)) {
-        //                 $fail('Il campo email deve terminare con un domninio riconosciuto(ad esempio .com o .it)');
-        //             }
-        //         },
-        //     ],
-        //     'text' => "required|string",
-        //     'apartment_id' => "required"
-        // ]);
-
+    {   
+        $today=Carbon::today()->toDateString();
         $data = $request->all();
-        $statistic = new Statistic();
-        $statistic->fill($data);
-        $statistic->date_visit=Carbon::today()->toDateString();
-        $statistic->save();
+
+        $ifStat=Statistic::where('ip_address',$data['ip'])
+        ->where('apartment_id',$data['apartmentId'])
+        ->where('date_visit',$today)
+        ->first();
+        
+        if($ifStat){
+            return response()->json([
+                'message'=>'indirizzo ip già presente nella giornata'
+            ],200);
+
+        }
+            $statistic = new Statistic();
+            $statistic->apartment_id= $data['apartmentId'];
+            $statistic->ip_address= $data['ip'];
+            $statistic->date_visit=Carbon::today()->toDateString();
+            $statistic->save();
+
+         
     }
 }

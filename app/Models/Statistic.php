@@ -16,6 +16,11 @@ class Statistic extends Model
         'date_visit',
     ];
 
+    protected $hidden=[
+        'created_at',
+        'updated_at',
+    ];
+
 
     public function apartment(){
         return $this->belongsTo(Apartment::class);

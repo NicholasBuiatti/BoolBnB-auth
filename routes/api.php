@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentController as ApiApartmentController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
-use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\Api\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +29,5 @@ Route::get('apartments/{apartment}', [ApiApartmentController::class, 'show']);
 Route::get('search', [ApiApartmentController::class, 'search']);
 Route::get('services', [ServiceController::class, 'index']);
 Route::post('messages',[MessageController::class,'store']); 
-Route::post('statistic',[StatisticController::class,'store']); 
+Route::post('statistics',[StatisticController::class,'store']); 
 
