@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Message;
+use App\Models\Statistic;
 
 class Apartment extends Model
 {
@@ -50,4 +51,9 @@ class Apartment extends Model
             ->withPivot('starting_date', 'ending_date')
             ->withTimestamps();
     }
+
+    public function statistics(){
+        return $this->belongsToMany(Statistic::class);
+    }
+
 }
