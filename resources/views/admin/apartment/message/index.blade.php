@@ -7,9 +7,9 @@
 			<tr class="d-none d-md-table-row">
 				<th></th>
 				<th scope="col" class="text-uppercase">RICEVUTO</th>
-				<th scope="col" class="text-uppercase">DA</th>
 				<th scope="col" class="text-uppercase">EMAIL</th>
-				<th scope="col" class="text-uppercase">RELATIVO ALL'APPARTAMENTO:</th>
+				<th scope="col" class="text-uppercase">APPARTAMENTO</th>
+				<th scope="col" class="text-uppercase">DETTAGLI</th>
 				<th scope="col" class="text-uppercase"></th>
 			</tr>
 		</thead>
