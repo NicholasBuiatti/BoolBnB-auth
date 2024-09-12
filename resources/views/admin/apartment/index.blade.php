@@ -16,7 +16,7 @@
 			@foreach ($catalogue as $apartment)
 				<tr class="text-center align-middle" style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-					<th scope="row" class="d-block d-sm-table-cell col-12 col-md-5">
+					<th scope="row" class="d-block d-sm-table-cell col-12 col-md-2">
 						<img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
 							style="height: 8rem; width:15rem; object-fit: cover;">
 					</th>
@@ -55,7 +55,7 @@
 													{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
 													 {{ $sponsorship->name == 'Elite'
 													    ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					'
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																		'
 													    : '' }}">
 													<div class="card-header text-uppercase fs-3 fw-bold">{{ $sponsorship->name }}</div>
 													<div class="card-body">
