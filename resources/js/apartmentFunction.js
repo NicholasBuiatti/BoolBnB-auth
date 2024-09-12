@@ -28,7 +28,7 @@ indirizzo.addEventListener('input', function() {
     if (indirizzo.value.length > 5) {
         let addressInput = indirizzo.value;
         const url_tomtom =
-            `https://api.tomtom.com/search/2/search/${encodeURIComponent(addressInput)}.json?key=${apiKey}&typeahead=true&limit=${limit}&countrySet={IT}`;
+            `https://api.tomtom.com/search/2/search/${encodeURIComponent(addressInput)}.json?key=${apiKey}&typeahead=true&limit=${limit}&countrySet=IT`;
         axios.get(url_tomtom)
             .then(function(response) {
 
