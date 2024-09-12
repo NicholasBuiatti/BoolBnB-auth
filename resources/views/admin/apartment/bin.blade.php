@@ -2,18 +2,35 @@
 
 @section('content')
 	@foreach ($bin as $apartment)
-		<div class="card text-center">
-			<div class="card-header">
-				Featured
-			</div>
-			<div class="card-body row">
-				<div class="col-3">
-					<img src="{{ $apartment->image }}" alt="" style="height: 8rem; width:15rem; object-fit: cover;">
+		<div class="card text-center mt-2">
+			<div class="card-body d-flex flex-column flex-md-row align-items-center">
+				<div class="d-flex flex-column flex-sm-row col-12 col-md-7 align-items-center justify-content-between">
+					<div>
+						<img src="{{ $apartment->image }}" class="rounded" alt=""
+							style="height: 8rem; width:15rem; object-fit: cover;">
+					</div>
+					<div class="col-5">
+						<h5 class="card-title fs-3" style="color: #6f5a4a">{{ $apartment->title }}</h5>
+						<p class="card-text">{{ $apartment->address_full }}</p>
+					</div>
 				</div>
-				<div class="col-9">
-					<h5 class="card-title">Special title treatment</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+				<div class="row col-12 col-md-5 align-items-center mt-3 mt-md-0">
+					<div class="d-flex flex-column col-6 align-items-center">
+						<p class="mb-2"><span class="fw-bold">Camere: </span>{{ $apartment->rooms }}</p>
+						<p class="mb-2"><span class="fw-bold">Bagni: </span>{{ $apartment->bathrooms }}</p>
+						<p class="mb-2"><span class="fw-bold">Letti: </span>{{ $apartment->beds }}</p>
+						<p class="mb-2"><span class="fw-bold">Dimensioni: </span>{{ $apartment->dimension_mq }} mq</p>
+					</div>
+					<div class="col-6 overflow-auto" style="height: 8rem">
+						<ul class="mb-0 list-unstyled">
+							@foreach ($apartment->services as $service)
+								<li>
+									- {{ $service->name }}
+								</li>
+							@endforeach
+
+						</ul>
+					</div>
 				</div>
 
 			</div>

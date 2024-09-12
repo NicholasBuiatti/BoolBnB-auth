@@ -152,15 +152,15 @@ class ApartmentController extends Controller
             DB::raw('MONTH(date_visit) as month'),
             DB::raw('YEAR(date_visit) as year')
         )
-        ->where('apartment_id', $apartment->id)
-        ->whereBetween('date_visit', [$startingDate, $endingDate]) // Filtra per l'ultimo anno
-        ->groupBy(DB::raw('YEAR(date_visit)'), DB::raw('MONTH(date_visit)'))
-        ->orderBy(DB::raw('YEAR(date_visit)'), 'asc')
-        ->orderBy(DB::raw('MONTH(date_visit)'), 'asc')
-        ->get();
+            ->where('apartment_id', $apartment->id)
+            ->whereBetween('date_visit', [$startingDate, $endingDate]) // Filtra per l'ultimo anno
+            ->groupBy(DB::raw('YEAR(date_visit)'), DB::raw('MONTH(date_visit)'))
+            ->orderBy(DB::raw('YEAR(date_visit)'), 'asc')
+            ->orderBy(DB::raw('MONTH(date_visit)'), 'asc')
+            ->get();
 
-        $monthlyData=array_fill(0,12,0);
-        $months=[];
+        $monthlyData = array_fill(0, 12, 0);
+        $months = [];
         for ($i = 0; $i < 13; $i++) {
             $months[] = Carbon::now()->subMonths(12 - $i)->format('F Y'); // Esempio: 'Ottobre 2023'
         }
@@ -177,8 +177,8 @@ class ApartmentController extends Controller
 
 
         $data = [
-            'monthlyData'=>$monthlyData,
-            'months'=>$months,
+            'monthlyData' => $monthlyData,
+            'months' => $months,
             'apartment' => $apartment,
             'sponsorships' => Sponsorship::all(),
             'lastSponsorship' => $apartment->sponsorships()->orderBy('pivot_ending_date', 'desc')->first(),
@@ -289,7 +289,7 @@ class ApartmentController extends Controller
         $user_id = Auth::id();
 
         // Ottieni solo gli appartamenti soft deleted
-        $bin = Apartment::onlyTrashed()->where('user_id', $user_id)->get();
+        $bin = Apartment::onlyTrashed()->with(['services'])->where('user_id', $user_id)->get();
 
         $data = [
             'bin' => $bin,
