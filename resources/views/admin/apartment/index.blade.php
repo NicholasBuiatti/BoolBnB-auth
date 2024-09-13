@@ -55,9 +55,10 @@
 											<div class="row justify-content-around">
 												@foreach ($sponsorships as $sponsorship)
 													<label for="sponsorship_{{ $sponsorship->id }}" class="col-10 col-lg-4 sponsorship-label">
-														<div class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card"
+														<div
+															class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card {{ $sponsorship->name == 'Premium' ? 'highlight' : '' }}"
 															style="{{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}
-           															{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
+           															{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0); .highlight;' : '' }}
           															{{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);' : '' }}">
 															<div class="card-header text-uppercase fs-3 fw-bold">
 																{{ $sponsorship->name }}
@@ -68,7 +69,8 @@
 															</div>
 														</div>
 														<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
-															value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}" class="d-none">
+															value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}" class="d-none"
+															{{ $sponsorship->name == 'Premium' ? 'checked' : '' }}>
 													</label>
 												@endforeach
 
@@ -107,7 +109,7 @@
 	{{ $catalogue->links('pagination::bootstrap-5') }}
 	<style>
 		.highlight {
-			border: 3px solid #ababab;
+			border: 3px solid #6f76fd;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 			transition: all 0.3s ease-in-out;
 		}
