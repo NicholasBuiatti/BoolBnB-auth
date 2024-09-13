@@ -80,7 +80,7 @@
                                                 class="col-10 col-lg-4 mx-auto shadow p-3 mb-5 rounded">
                                             </div>
 
-                                            <button type="submit" class="btn btn-custom">Paga ora</button>
+                                            <button type="submit" class="btn btn-primary" id="btnPagaOra">Paga ora</button>
                                         </form>
 
                                     </div>

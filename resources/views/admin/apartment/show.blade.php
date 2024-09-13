@@ -108,7 +108,7 @@
             data: {
                 labels: months,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Numero di visite',
                     data: monthlyData,
                     borderWidth: 1
                 }]
