@@ -38,21 +38,23 @@
 							<a class="visualizza btn btn-light border" href="{{ route('message.show', $message->id) }}"><span
 									class="sparisci me-2">Dettagli</span><i class="fa-solid fa-magnifying-glass"></i></a>
 							<!-- Bottone di cancellazione con modale -->
-							<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ $message->id }}">
-								<i class="fa-solid fa-trash"></i>
+							<button type="button" class="visualizzaRed btn btn-danger border" data-bs-toggle="modal"
+								data-bs-target="#modal-{{ $message->id }}">
+								<i class="fa-solid fa-trash text-black"></i>
 							</button>
 
 							<!-- Modale per la cancellazione -->
-							<div class="modal fade text-danger" id="modal-{{ $message->id }}" tabindex="-1" data-bs-backdrop="static"
+							<div class="modal fade text-danger " id="modal-{{ $message->id }}" tabindex="-1" data-bs-backdrop="static"
 								data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitle-{{ $message->id }}" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+								<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl " role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="modalTitle-{{ $message->id }}">Cancellazione</h5>
+											<h5 class="modal-title fs-2 fw-bold" id="modalTitle-{{ $message->id }}">ATTENZIONE!!!!</h5>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<div class="modal-body">
-											Stai cancellando l'appartamento: {{ $message->title }}<br>Sicuro di proseguire?
+										<div class="modal-body fs-3">
+											Stai cancellando il messaggio di: <span class="fw-bold">{{ $message->email }}</span> che fa riferimento a
+											<span class="fw-bold">{{ $message->apartment->title }}</span><br>Sicuro di proseguire?
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -89,21 +91,23 @@
 			/* Grigio scuro */
 		}
 
-		/* .contenitore {
-							box-shadow: 3px 3px 10px 1px;
-							} */
-
 		td,
 		th {
 			background-color: rgba(235, 245, 246, 0.74) !important;
 		}
 
+		.visualizzaRed,
 		.visualizza {
 			background-color: #cbe5eb;
 		}
 
 		.visualizza:hover {
 			background-color: #8cdbed;
+		}
+
+
+		.visualizzaRed:hover {
+			background-color: #d62839;
 		}
 
 		.modifica {
@@ -155,110 +159,4 @@
 			}
 		}
 	</style>
-
-
-
-
-	{{-- <div class="rounded overflow-hidden contenitore">
-        <table class="table table-responsive shadow-lg w-75 m-auto w-md-100">
-            <thead class="text-center">
-                <tr class="d-none d-lg-table-row"
-                    style=" background: linear-gradient(130deg, #ebb7568a, #5fa2baa0) !important;">
-                    <th></th>
-                    <th scope="col" class="text-uppercase">DATA RICEZIONE</th>
-                    <th scope="col" class="text-uppercase">DA</th>
-                    <th scope="col" class="text-uppercase">APPARTAMENTO</th>
-                    <th scope="col" class="text-uppercase">DETTAGLI</th>
-                    <th scope="col" class="text-uppercase"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($messages as $message)
-                    <tr class="text-center align-middle bordato"
-                        style=" background: linear-gradient(130deg, #d7b5768a, #5ca1baa0) !important;">
-
-                        <th scope="row" class="d-block d-md-table-cell col-12 col-lg-3">
-                            <img class="rounded shadow-sm" src="{{ $message->apartment->image }}"
-                                alt="Immagine appartamento" style="height: 8rem; width:15rem; object-fit: cover;">
-                        </th>
-                        <td class="d-block d-md-table-cell col-12 col-md-3">
-                            <h3 class="fs-4 title-shadow"><span class="sparisci">Ricevuto:</span> {{ $message->created_at }}
-                            </h3>
-                        </td>
-
-                        <td class="d-block d-md-table-cell col-12 col-md-3">
-                            <h3 class="fs-4 title-shadow"><span class="sparisci">Da:</span> {{ $message->email }}</h3>
-                        </td>
-
-                        <td class="d-block d-md-table-cell col-12 col-md-3">
-                            <h3 class="fs-4 title-shadow"><span class="sparisci">Appartamento:</span>
-                                {{ $message->apartment->title }}</h3>
-                        </td>
-
-                        <td class="d-block d-md-table-cell col-12 col-md-3">
-                            <a class="btn btn-primary my-2" href="{{ route('message.show', $message->id) }}"><span
-                                    class="sparisci">Dettagli</span></a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            {{ $messages->links('pagination::bootstrap-5') }}
-        </table>
-    </div>
-
-    <style>
-        .contenitore {
-            box-shadow: 3px 3px 10px 1px;
-        }
-
-        td,
-        th {
-            background-color: rgba(235, 245, 246, 0.74) !important;
-        }
-
-        .eye {
-            color: #473a32;
-            border: 2px solid #6f5a4a;
-            padding: 1rem;
-            border-radius: 20px
-        }
-
-        .sparisci {
-            display: none;
-        }
-
-        @media screen and (min-width:768px) {
-            .w-md-100 {
-                width: 100% !important;
-            }
-        }
-
-        @media screen and (max-width:990px) {
-            .w-md-100 {
-                margin-top: 7rem !important;
-            }
-        }
-
-        @media screen and (max-width:768px) {
-            .w-md-100 {
-                margin-top: 6rem !important;
-            }
-
-            .bordato {
-                border: 3px solid rgb(101, 167, 217) !important;
-            }
-
-            th {
-                border: none !important;
-            }
-
-            td {
-                border: none !important;
-            }
-
-            .sparisci {
-                display: unset;
-            }
-        }
-    </style> --}}
 @endsection
