@@ -24,7 +24,7 @@
 								style="height: 8rem; width:15rem; object-fit: cover;">
 						</th> --}}
 						<td class=" d-block d-md-table-cell col-12 col-md-3">
-							<h3 class="fs-4 myFont"><span class="sparisci">Appartamento:</span>{{ $message->apartment->title }}</h3>
+							<h3 class="fs-5 myFont"><span class="sparisci">Appartamento:</span>{{ $message->apartment->title }}</h3>
 						</td>
 						<td class="d-block d-md-table-cell col-12 col-md-3">
 							<h3 class="fs-6 myFont"><span class="sparisci">Ricevuto:</span>
