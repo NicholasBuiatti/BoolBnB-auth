@@ -39,7 +39,7 @@
 									class="sparisci me-2">Dettagli</span><i class="fa-solid fa-magnifying-glass"></i></a>
 							<!-- Bottone di cancellazione con modale -->
 							<button type="button" class="visualizzaRed btn btn-danger border" data-bs-toggle="modal"
-								data-bs-target="#modal-{{ $message->id }}">
+								data-bs-target="#modal-{{ $message->id }}"><span class="sparisci me-2 text-black">Cancella</span>
 								<i class="fa-solid fa-trash text-black"></i>
 							</button>
 
