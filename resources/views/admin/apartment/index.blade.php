@@ -54,28 +54,29 @@
 											@csrf
 											<div class="row justify-content-around">
 												@foreach ($sponsorships as $sponsorship)
-													<div class="card border-info mb-3 col-10 col-lg-3 shadow p-3 mb-5 bg-body rounded"
-														style="{{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}
-													    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
-													    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);' : '' }}">
-														<div class="card-header text-uppercase fs-3 fw-bold">
-															{{ $sponsorship->name }}</div>
-														<div class="card-body">
-															<p>{{ $sponsorship->description }}</p>
-															<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
-																value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}">
-															<label for="sponsorship_{{ $sponsorship->id }}">
-																{{ $sponsorship->name }} - €{{ $sponsorship->price }}
-															</label>
+													<label for="sponsorship_{{ $sponsorship->id }}" class="col-10 col-lg-4 sponsorship-label">
+														<div class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card"
+															style="{{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}
+           															{{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}
+          															{{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);' : '' }}">
+															<div class="card-header text-uppercase fs-3 fw-bold">
+																{{ $sponsorship->name }}
+															</div>
+															<div class="card-body">
+																<p>{{ $sponsorship->description }}</p>
+																<p class="fw-bold fs-3">€ {{ $sponsorship->price }}</p>
+															</div>
 														</div>
-													</div>
+														<input type="radio" name="sponsorship_id" id="sponsorship_{{ $sponsorship->id }}"
+															value="{{ $sponsorship->id }}" data-amount="{{ $sponsorship->price }}" class="d-none">
+													</label>
 												@endforeach
 
 											</div>
 											<div id="dropin-container-{{ $apartment->id }}" class="col-10 col-lg-4 mx-auto shadow p-3 mb-5 rounded">
 											</div>
 
-											<button type="submit" class="btn btn-primary" id="btnPagaOra">Paga ora</button>
+											<button type="submit" class="btn btn-primary" id="btnPagaOra">Conferma</button>
 										</form>
 
 									</div>
@@ -105,6 +106,12 @@
 	</div class="altezza">
 	{{ $catalogue->links('pagination::bootstrap-5') }}
 	<style>
+		.highlight {
+			border: 3px solid #ababab;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			transition: all 0.3s ease-in-out;
+		}
+
 		.contenitore {
 			box-shadow: 3px 3px 10px 1px;
 		}
@@ -187,6 +194,16 @@
 
 	<script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
 	<script>
+		document.querySelectorAll('.sponsorship-card').forEach(card => {
+			card.addEventListener('click', function() {
+				// Rimuovi la classe highlight da tutte le carte
+				document.querySelectorAll('.sponsorship-card').forEach(c => c.classList.remove('highlight'));
+
+				// Aggiungi la classe highlight alla carta cliccata
+				this.classList.add('highlight');
+			});
+		});
+
 		document.querySelectorAll('button[data-bs-toggle="offcanvas"]').forEach(function(button) {
 			button.addEventListener('click', function() {
 				// Recupera l'id dell'appartamento dal data-bs-target
