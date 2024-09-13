@@ -14,7 +14,7 @@
                                 <div class="d-flex justify-content-center align-items-center mt-3">
                                     <i class="fa-solid fa-chart-line fa-2x custom-icon me-3"></i>
                                     <h3 class="mb-0 fw-bold">
-                                        visite dei miei appartamenti nel mese corrente: {{ $visitCount }}
+                                        visite dei miei appartamenti nel mese corrente: {{ $visitCount ?? 0 }}
                                     </h3>
                                 </div>
                             </div>

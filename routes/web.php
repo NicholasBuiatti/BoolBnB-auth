@@ -50,7 +50,7 @@ Route::get('/', function () {
         ->whereBetween('date_visit', [$startOfMonth, $endOfMonth])
         ->distinct('ip_address') // Assicurati di contare solo le visite uniche
         ->count('ip_address');
-
+    $visitCount = $visitCount ?? 0;
     // Passa tutti i dati alla vista
     $data = [
         'catalogue' => $catalogue,
