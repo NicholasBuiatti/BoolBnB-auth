@@ -17,6 +17,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
+Carbon::setLocale('it');
 class ApartmentController extends Controller
 {
     // creo la funzione per trasformare l'indirizzo in coordinate tramite chiamata api
@@ -162,7 +163,7 @@ class ApartmentController extends Controller
         $monthlyData = array_fill(0, 12, 0);
         $months = [];
         for ($i = 0; $i < 13; $i++) {
-            $months[] = Carbon::now()->subMonths(12 - $i)->format('F Y'); // Esempio: 'Ottobre 2023'
+            $months[] = Carbon::now()->subMonths(12 - $i)->isoFormat('MMM YY'); // Esempio: 'Ottobre 2023'
         }
 
         // Popola l'array con i dati dai risultati
@@ -246,13 +247,6 @@ class ApartmentController extends Controller
         return redirect()->route('apartments.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-
-
-
-
 
 
     //--------------------destroy function 
@@ -267,34 +261,34 @@ class ApartmentController extends Controller
 
         return to_route('apartments.index')->with('message', 'Appartamento eliminato.');
     }
-    public function restore($id)
-    {
-        $apartment = Apartment::withTrashed()->find($id);
-        $apartment->restore();
-        return to_route('apartments.index')->with('success', 'Appartamento ripristinato!.');
-    }
-    public function forceDelete($id)
-    {
-        $apartment = Apartment::onlyTrashed()->find($id);
+    // public function restore($id)
+    // {
+    //     $apartment = Apartment::withTrashed()->find($id);
+    //     $apartment->restore();
+    //     return to_route('apartments.index')->with('success', 'Appartamento ripristinato!.');
+    // }
+    // public function forceDelete($id)
+    // {
+    //     $apartment = Apartment::onlyTrashed()->find($id);
 
-        if ($apartment) {
-            $apartment->forceDelete();
-            return redirect()->route('apartments.bin')->with('success', 'apartment permanently deleted');
-        }
+    //     if ($apartment) {
+    //         $apartment->forceDelete();
+    //         return redirect()->route('apartments.bin')->with('success', 'apartment permanently deleted');
+    //     }
 
-        return redirect()->route('apartments.index')->with('error', 'Post not found');
-    }
-    public function bin()
-    {
-        $user_id = Auth::id();
+    //     return redirect()->route('apartments.index')->with('error', 'Post not found');
+    // }
+    // public function bin()
+    // {
+    //     $user_id = Auth::id();
 
-        // Ottieni solo gli appartamenti soft deleted
-        $bin = Apartment::onlyTrashed()->with(['services'])->where('user_id', $user_id)->get();
+    //     // Ottieni solo gli appartamenti soft deleted
+    //     $bin = Apartment::onlyTrashed()->with(['services'])->where('user_id', $user_id)->get();
 
-        $data = [
-            'bin' => $bin,
-        ];
+    //     $data = [
+    //         'bin' => $bin,
+    //     ];
 
-        return view('admin.apartment.bin', $data);
-    }
+    //     return view('admin.apartment.bin', $data);
+    // }
 }

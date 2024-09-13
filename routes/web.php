@@ -81,17 +81,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/apartments/force-delete/{id}', [ApartmentController::class, 'forceDelete'])->name('apartments.forceDelete');
 
-    // ROTTE APARTAMENTI E SOFT DELETE
-
-    Route::get('/apartments/bin', [ApartmentController::class, 'bin'])->name('apartments.bin');
     Route::resource('/apartments', ApartmentController::class);
-    Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
+    // ROTTE SOFT DELETE
+    // Route::get('/apartments/bin', [ApartmentController::class, 'bin'])->name('apartments.bin');
+    // Route::get('/apartments/restore/{id}', [ApartmentController::class, 'restore'])->name('apartments.restore');
 
     // ROTTE PER I MESSAGGI
 
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
     Route::get('/message/{message}', [MessageController::class, 'show'])->name('message.show');
     Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
+    Route::delete('/message/{message}', [MessageController::class, 'destroy'])->name('message.destroy');
 
     // ROTTE PER LA SPONSORSHIP
 

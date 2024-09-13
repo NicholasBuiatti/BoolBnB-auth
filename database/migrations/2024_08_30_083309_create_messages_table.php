@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('text');
             $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

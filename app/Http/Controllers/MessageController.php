@@ -45,4 +45,11 @@ class MessageController extends Controller
 
         return view('admin.apartment.message.show', $data);
     }
+
+    public function destroy(Message $message)
+    {
+        $message->delete();
+
+        return to_route('message.index')->with('message', 'Appartamento eliminato.');
+    }
 }
