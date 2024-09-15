@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('is_visible');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('slug')->unique();
         });
     }
 

@@ -116,7 +116,9 @@ class ApartmentController extends Controller
             $img_path = Storage::put('uploads', $request->image);
             $data['image'] = $img_path;
         };
-
+        if (empty($apartment->slug)) {
+            $newApartment->slug = Str::slug($newApartment->title);
+        };
         // salvo i dati delle coordinate nel database FUNZIONAAAAAAAA!
         $newApartment->longitude = $responseAddress['longitude'];
         $newApartment->latitude = $responseAddress['latitude'];

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Apartment;
-
+use Illuminate\Support\Str;
 
 
 class ApartmentSeeder extends Seeder
@@ -105,42 +105,6 @@ class ApartmentSeeder extends Seeder
             "Strada Nuova"
         ];
 
-
-        // //ciclo appartamenti Milano
-        // for ($i = 0; $i < 30; $i++) {
-        //     $newApartment = new Apartment();
-        //     $newApartment->user_id = rand(1, 3);
-        //     $newApartment->title = "Villa " . $milanStreets[$i];
-        //     $newApartment->rooms = rand(1, 5);
-        //     $newApartment->beds = rand(1, 4);
-        //     $newApartment->bathrooms = rand(1, 2);
-        //     $newApartment->dimension_mq = rand(40, 120);
-        //     $newApartment->image = "http://www.case-in-legno-progettolegno.it/wp-content/uploads/2015/12/Casa-in-legno-a-Fano-0003.jpg";
-
-        //     list($newApartment->latitude, $newApartment->longitude) = generateRandomCoordinates($milanBaseLatitude, $milanBaseLongitude, 40);
-
-        //     $newApartment->address_full = $milanStreets[$i] . ", " . rand(1, 100) . ", 20100, Milano";
-        //     $newApartment->is_visible = true;
-        //     $newApartment->save();
-        // }
-        // //ciclo appartamenti Parma
-        // for ($i = 0; $i < 15; $i++) {
-        //     $newApartment = new Apartment();
-        //     $newApartment->user_id = rand(1, 3);
-        //     $newApartment->title = "Villa " . $parmaStreets[$i];
-        //     $newApartment->rooms = rand(1, 5);
-        //     $newApartment->beds = rand(1, 4);
-        //     $newApartment->bathrooms = rand(1, 2);
-        //     $newApartment->dimension_mq = rand(40, 120);
-        //     $newApartment->image = "http://www.case-in-legno-progettolegno.it/wp-content/uploads/2015/12/Casa-in-legno-a-Fano-0003.jpg";
-
-        //     list($newApartment->latitude, $newApartment->longitude) = generateRandomCoordinates($parmaBaseLatitude, $parmaBaseLongitude, 40);
-
-        //     $newApartment->address_full = $parmaStreets[$i] . ", " . rand(1, 100) . ", 43125, Parma";
-        //     $newApartment->is_visible = true;
-        //     $newApartment->save();
-        // }
-
         // Aggiungi un array di immagini casuali
         $imageUrls = [
             "https://plus.unsplash.com/premium_photo-1684175656320-5c3f701c082c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -173,6 +137,7 @@ class ApartmentSeeder extends Seeder
             $newApartment = new Apartment();
             $newApartment->user_id = rand(1, 3);
             $newApartment->title = "Villa " . $milanStreets[$i];
+            $newApartment->slug = Str::slug($newApartment->title, '-');
             $newApartment->rooms = rand(1, 5);
             $newApartment->beds = rand(1, 4);
             $newApartment->bathrooms = rand(1, 2);
@@ -192,6 +157,7 @@ class ApartmentSeeder extends Seeder
             $newApartment = new Apartment();
             $newApartment->user_id = rand(1, 3);
             $newApartment->title = "Villa " . $parmaStreets[$i];
+            $newApartment->slug = Str::slug($newApartment->title, '-');
             $newApartment->rooms = rand(1, 5);
             $newApartment->beds = rand(1, 4);
             $newApartment->bathrooms = rand(1, 2);

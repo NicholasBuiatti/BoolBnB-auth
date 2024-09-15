@@ -51,16 +51,16 @@ class SponsorshipController extends Controller
             ]);
 
             // Pagamento riuscito
-            return redirect()->route('success', ['id' => $apartment->id]);
+            return redirect()->route('success', ['slug' => $apartment->slug]);
         } else {
             // Pagamento fallito
             return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $result->message);
         }
     }
 
-    public function success($id)
+    public function success($slug)
     {
-        $apartment = Apartment::findOrFail($id);
+        $apartment = Apartment::where('slug', $slug)->firstOrFail();
 
         $data = [
             'apartment' => $apartment,

@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function () {
 
     // ROTTE PER LA SPONSORSHIP
 
-    Route::get('/success/{id}', [SponsorshipController::class, 'success'])->name('success');
+    Route::get('/success/{slug}', [SponsorshipController::class, 'success'])->name('success');
     Route::get('/apartments/{apartment}/sponsorships', [ApartmentController::class, 'showSponsorships'])->name('sponsorships.index');
     Route::post('/apartments/{apartment}/sponsorships/payment', [SponsorshipController::class, 'processPayment'])->name('sponsorships.payment');
 });
