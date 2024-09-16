@@ -90,9 +90,9 @@
                                                             class="col-10 col-lg-4 sponsorship-label">
                                                             <div class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card {{ $sponsorship->name == 'Premium' ? 'highlight' : '' }}"
                                                                 style="
-                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #CD7F32, #A0522D);' : '' }}  /* Bronzo */
-                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #C0C0C0, #B0B0B0);' : '' }}  /* Argento */
-                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #FFD700, #FFEC8B);' : '' }}  /* Oro */">
+                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}  /* Bronzo */
+                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}  /* Argento */
+                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);' : '' }}  /* Oro */">
 
                                                                 <div class="card-header text-uppercase fs-3 fw-bold">
                                                                     {{ $sponsorship->name }}
@@ -233,9 +233,9 @@
                                                             class="col-10 col-lg-4 sponsorship-label">
                                                             <div class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card {{ $sponsorship->name == 'Premium' ? 'highlight' : '' }}"
                                                                 style="
-                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #CD7F32, #A0522D);' : '' }}  /* Bronzo */
-                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #C0C0C0, #B0B0B0);' : '' }}  /* Argento */
-                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #FFD700, #FFEC8B);' : '' }}  /* Oro */">
+                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #f8ebd1, #b89a6e);' : '' }}  /* Bronzo */
+                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #f0f4f8, #c0c0c0);' : '' }}  /* Argento */
+                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #fff5e4, #f2c27f);' : '' }}  /* Oro */">
 
                                                                 <div class="card-header text-uppercase fs-3 fw-bold">
                                                                     {{ $sponsorship->name }}
@@ -246,7 +246,6 @@
                                                                     </p>
                                                                 </div>
                                                             </div>
-
 
                                                             <input type="radio" name="sponsorship_id"
                                                                 id="sponsorship_{{ $sponsorship->id }}"
