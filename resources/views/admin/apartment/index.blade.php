@@ -55,7 +55,7 @@
                             </td>
 
 
-                            <td class="d-none d-md-table-cell col-12">
+                            <td class="d-none d-md-table-cell col-3">
                                 <div class="d-flex flex-column justify-content-center align-items-center">
 
                                     @if ($apartment->lastSponsorship)
@@ -132,7 +132,7 @@
                                     <i class="fa-solid fa-xmark fs-2 text-danger"></i>
                                 @endif
                             </td>
-                            <td class="d-none d-md-table-cell col">
+                            <td class="d-none d-md-table-cell col-12">
                                 <div class="d-flex pippo gap-1">
                                     <a class="col-4 visualizza p-0 btn btn-light my-1 rounded-3"
                                         href="{{ route('apartments.show', $apartment->id) }}">
