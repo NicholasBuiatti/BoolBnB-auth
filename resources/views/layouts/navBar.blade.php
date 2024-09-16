@@ -131,32 +131,28 @@
                         </a>
                         <hr class="d-none d-md-block">
                         {{-- lista link --}}
-                        <ul class="nav nav-pills flex-md-column justify-content-between mb-auto">
+                        <ul class="nav nav-pills flex-md-column mb-auto">
                             <li class="nav-item link-navbar">
                                 <a href="{{ route('dashboard') }}"
-                                    class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'fw-bold text-decoration-underline' : '' }}"
+                                    class="d-flex gap-2  align-items-center  nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'dashboard' ? 'fw-bold text-decoration-underline' : '' }}"
                                     aria-current="page">
-                                    Home
+                                    <i class="fa-solid fa-table-columns fs-4"></i>
+                                    Dashboard
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('apartments.index') }}"
-                                    class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'fw-bold text-decoration-underline' : '' }}"
+                                    class="d-flex gap-2 align-items-center  nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.index' ? 'fw-bold text-decoration-underline' : '' }}"
                                     aria-current="page">
+                                    <i class="fa-solid fa-house-chimney"></i>
                                     I miei appartamenti
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('apartments.create') }}"
-                                    class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'apartments.create' ? 'fw-bold text-decoration-underline' : '' }}"
-                                    aria-current="page">
-                                    Aggiungi un appartamento
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{ route('message.index') }}"
-                                    class="nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'message.index' || Route::currentRouteName() == 'message.show' ? 'fw-bold text-decoration-underline' : '' }}"
+                                    class="d-flex gap-2  align-items-center  nav-link-desktop nav-link text-dark {{ Route::currentRouteName() == 'message.index' || Route::currentRouteName() == 'message.show' ? 'fw-bold text-decoration-underline' : '' }}"
                                     aria-current="page">
+                                    <i class="fa-solid fa-envelope-open-text"></i>
                                     Messaggi
                                 </a>
                             </li>
@@ -200,7 +196,7 @@
 </body>
 <style scoped>
     .navbar-desktop {
-        background: rgba(255, 255, 255, 0.817);
+        background: rgba(255, 255, 255, 0.887);
         /* border-right: 2px solid #a09d9fc2; */
         border-radius: 0 20px 20px 0;
         z-index: 1;
@@ -214,7 +210,7 @@
     }
 
     .navbar-mobile {
-        background: linear-gradient(130deg, #c1b49d, #a3ccdb);
+        background: linear-gradient(130deg, #ffd489, #8cd7f2);
         border-bottom: 2px solid #a09d9fc2;
         box-shadow: 2px 5px 20px 2px black;
         z-index: 999;
@@ -236,10 +232,10 @@
     }
 
     .nav-link-desktop.fw-bold {
-        /* border: 4px solid rgb(255, 255, 255); */
+        border: 2px solid rgba(0, 0, 0, 0.316);
         color: black !important;
         text-decoration: none !important;
-        background: linear-gradient(1300deg, #ffd489a4, #8cd7f298) !important;
+        /* background: rgb(197, 251, 255) !important; */
         /* border: 1px solid #a09d9fc2; */
     }
 </style>
