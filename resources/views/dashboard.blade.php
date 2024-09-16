@@ -30,16 +30,19 @@
                             @foreach ($messages as $message)
                                 <li
                                     class="list-group-item custom-list-group-item d-flex justify-content-between align-items-start">
-                                    <div class="ms-2 me-auto">
+                                    <div class="col-6 ms-2 me-auto">
                                         <div class="fw-bold">{{ $message['apartment']->title }}</div>
-                                        <span class="text-muted">{{ $message['email'] }}</span>
+                                        <span class="text-muted text-truncate w-100"
+                                            style="max-width: 100%; display: inline-block;">{{ $message['email'] }}</span>
                                     </div>
-                                    <small class="text-muted">{{ $message['created_at']->format('d M Y, H:i') }}</small>
-                                    <div class="background rounded-3  ms-3">
-                                        <a href="{{ route('message.show', $message->id) }}"
-                                            class="background-white rounded-3 btn btn-sm custom-btn">
-                                            <i class="fa-solid fa-reply"></i>
-                                        </a>
+                                    <div class=" col-5 d-flex justify-content-end align-items-center">
+                                        <small class="text-muted">{{ $message['created_at']->format('d M Y, H:i') }}</small>
+                                        <div class=" background rounded-3  ms-3">
+                                            <a href="{{ route('message.show', $message->id) }}"
+                                                class="background-white rounded-3 btn btn-sm custom-btn">
+                                                <i class="fa-solid fa-reply"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </li>
                             @endforeach
