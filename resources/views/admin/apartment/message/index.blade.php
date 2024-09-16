@@ -28,7 +28,7 @@
                             </td>
                             <td class="d-block d-md-table-cell col-12 col-md-3">
                                 <h3 class="fs-6 myFont"><span class="sparisci">Ricevuto:</span>
-                                    {{ $message->created_at }}</h3>
+                                    {{ $message->created_at->format('d M Y, H:i') }}</h3>
                             </td>
                             <td class="d-block d-md-table-cell col-12 col-md-3">
                                 <h3 class="fs-6 myFont"><span class="sparisci">Da:</span>
