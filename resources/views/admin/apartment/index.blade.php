@@ -85,19 +85,19 @@
                                                             class="col-10 col-lg-4 sponsorship-label">
                                                             <div class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card {{ $sponsorship->name == 'Premium' ? 'highlight' : '' }}"
                                                                 style="
-                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #FFEB3B, #8BC34A);' : '' }}
-                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #C0C0C0, #64B5F6); .highlight;' : '' }}
-                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #FFC107, #673AB7);' : '' }}">
+                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #CD7F32, #A0522D);' : '' }}  /* Bronzo */
+                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #C0C0C0, #B0B0B0);' : '' }}  /* Argento */
+                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #FFD700, #FFEC8B);' : '' }}  /* Oro */">
 
                                                                 <div class="card-header text-uppercase fs-3 fw-bold">
                                                                     {{ $sponsorship->name }}
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <p>{{ $sponsorship->description }}</p>
-                                                                    <p class="fw-bold fs-3">€ {{ $sponsorship->price }}
-                                                                    </p>
+                                                                    <p class="fw-bold fs-3">€ {{ $sponsorship->price }}</p>
                                                                 </div>
                                                             </div>
+
                                                             <input type="radio" name="sponsorship_id"
                                                                 id="sponsorship_{{ $sponsorship->id }}"
                                                                 value="{{ $sponsorship->id }}"
@@ -228,9 +228,9 @@
                                                             class="col-10 col-lg-4 sponsorship-label">
                                                             <div class="card mb-3 shadow p-3 mb-5 bg-body rounded sponsorship-card {{ $sponsorship->name == 'Premium' ? 'highlight' : '' }}"
                                                                 style="
-                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #FFEB3B, #8BC34A);' : '' }}
-                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #C0C0C0, #64B5F6); .highlight;' : '' }}
-                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #FFC107, #673AB7);' : '' }}">
+                                                                    {{ $sponsorship->name == 'Basic' ? 'background: linear-gradient(130deg, #CD7F32, #A0522D);' : '' }}  /* Bronzo */
+                                                                    {{ $sponsorship->name == 'Premium' ? 'background: linear-gradient(130deg, #C0C0C0, #B0B0B0);' : '' }}  /* Argento */
+                                                                    {{ $sponsorship->name == 'Elite' ? 'background: linear-gradient(130deg, #FFD700, #FFEC8B);' : '' }}  /* Oro */">
 
                                                                 <div class="card-header text-uppercase fs-3 fw-bold">
                                                                     {{ $sponsorship->name }}
@@ -241,6 +241,7 @@
                                                                     </p>
                                                                 </div>
                                                             </div>
+
 
                                                             <input type="radio" name="sponsorship_id"
                                                                 id="sponsorship_{{ $sponsorship->id }}"
