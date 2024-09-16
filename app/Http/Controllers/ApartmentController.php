@@ -59,7 +59,9 @@ class ApartmentController extends Controller
     public function index(Apartment $apartment)
     {
         $user_id = Auth::id();
-        $apartment = Apartment::where('user_id', $user_id)->with(['services', 'sponsorships'])->paginate(8);
+        $apartment = Apartment::where('user_id', $user_id)->with(['services', 'sponsorships'])
+        ->orderBy('id','desc')
+        ->paginate(8);
         // Aggiungi l'ultima sponsorizzazione per ogni appartamento
         $apartment->getCollection()->transform(function ($apartment) {
             $apartment->lastSponsorship = $apartment->sponsorships->sortByDesc('pivot.ending_date')->first();
