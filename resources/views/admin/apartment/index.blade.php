@@ -185,13 +185,6 @@
 								<img style="max-height: 300px; width: 100%;" class="img-fluid rounded object-fit-cover"
 									src="{{ asset('storage/' . $apartment->image) }}" alt="{{ $apartment->title }}">
 							@endif
-							{{-- @if (Str::startsWith($apartment->image, 'http'))
-								<img class="rounded shadow-sm my-2" src="{{ $apartment->image }}" alt="{{ $apartment->title }}"
-									style="height: 6rem; width:12rem; object-fit: cover;">
-							@else
-								<img class="rounded shadow-sm my-2" src="{{ asset('storage/' . $apartment->image) }}"
-									style="height: 6rem; width:12rem; object-fit: cover;" alt="{{ $apartment->title }}">
-							@endif --}}
 						</div>
 						<!-- Contenuto della card -->
 						<div class="col-md-8">

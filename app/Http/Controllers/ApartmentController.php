@@ -60,8 +60,8 @@ class ApartmentController extends Controller
     {
         $user_id = Auth::id();
         $apartment = Apartment::where('user_id', $user_id)->with(['services', 'sponsorships'])
-        ->orderBy('id','desc')
-        ->paginate(8);
+            ->orderBy('id', 'desc')
+            ->paginate(8);
         // Aggiungi l'ultima sponsorizzazione per ogni appartamento
         $apartment->getCollection()->transform(function ($apartment) {
             $apartment->lastSponsorship = $apartment->sponsorships->sortByDesc('pivot.ending_date')->first();
@@ -118,15 +118,14 @@ class ApartmentController extends Controller
             $img_path = Storage::put('uploads', $request->image);
             $data['image'] = $img_path;
         };
-        if (empty($apartment->slug)) {
-            $newApartment->slug = Str::slug($newApartment->title);
-        };
+
         // salvo i dati delle coordinate nel database FUNZIONAAAAAAAA!
         $newApartment->longitude = $responseAddress['longitude'];
         $newApartment->latitude = $responseAddress['latitude'];
         $data['is_visible'] = $request->has('is_visible') ? 1 : 0;
 
         $newApartment->fill($data);
+        $newApartment->slug = Str::slug($newApartment->title);
         $newApartment->save();
 
         if (isset($data['services'])) {
