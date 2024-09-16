@@ -6,7 +6,8 @@
         <div class="rounded  overflow-hidden shadow ">
             <table class="table table-responsive m-0">
                 <thead class="text-center">
-                    <tr class="d-none d-lg-table-row" style="background: linear-gradient(130deg, #ffd489, #8cd7f2);">
+                    <tr class="d-none d-lg-table-row"
+                        style="background: linear-gradient(130deg, #ffd489a4, #8cd7f298) !important;">
                         {{-- <th scope="col"></th> --}}
                         <th scope="col" class="text-uppercase">Nome Appartamento</th>
                         <th scope="col" class="text-uppercase">DATA</th>
