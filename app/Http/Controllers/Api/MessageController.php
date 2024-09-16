@@ -20,8 +20,8 @@ class MessageController extends Controller
                 'string',
                 'lowercase',
                 'email',
-                'max:255',
-                'unique:' . User::class,
+                
+            
                 function ($attribute, $value, $fail) {
                     // Definisci la regex per .com o .it
                     if (!preg_match('/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|co|io|us|uk|de|jp|fr|it|ru|br|ca|cn|au|in|es
