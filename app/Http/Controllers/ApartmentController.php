@@ -165,13 +165,13 @@ class ApartmentController extends Controller
         $monthlyData = array_fill(0, 12, 0);
         $months = [];
         for ($i = 0; $i < 13; $i++) {
-            $months[] = Carbon::now()->subMonths(12 - $i)->isoFormat('MMM YY'); // Esempio: 'Ottobre 2023'
+            $months[] = Carbon::now()->subMonths(12 - $i)->isoFormat('MMM YY'); // Esempio: 'Ott 23'
         }
 
         // Popola l'array con i dati dai risultati
         foreach ($statistics as $stat) {
             // Calcola l'indice corrispondente nell'array (in base all'anno e al mese)
-            $dateKey = Carbon::create($stat->year, $stat->month)->format('F Y');
+            $dateKey = Carbon::create($stat->year, $stat->month)->isoFormat('MMM YY');
             $index = array_search($dateKey, $months);
             if ($index !== false) {
                 $monthlyData[$index] = $stat->visits;
