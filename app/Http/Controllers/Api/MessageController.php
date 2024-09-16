@@ -18,7 +18,6 @@ class MessageController extends Controller
             'email' => [
                 'required',
                 'string',
-                'lowercase',
                 'email',
                 
             
