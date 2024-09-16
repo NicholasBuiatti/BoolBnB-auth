@@ -42,15 +42,20 @@
                         <tr class="text-center align-middle" style="height: 1rem">
 
                             <td scope="row" class="d-none d-md-table-cell col">
-                                <img class="rounded shadow-sm" src="{{ $apartment->image }}" alt="Immagine appartamento"
-                                    style="height: 6rem; width:12rem; object-fit: cover;">
+                                @if (Str::startsWith($apartment->image, 'http'))
+                                    <img class="rounded shadow-sm my-2" src="{{ $apartment->image }}"
+                                        alt="{{ $apartment->title }}" style="height: 6rem; width:12rem; object-fit: cover;">
+                                @else
+                                    <img class="rounded shadow-sm my-2" src="{{ asset('storage/' . $apartment->image) }}"
+                                        style="height: 6rem; width:12rem; object-fit: cover;" alt="{{ $apartment->title }}">
+                                @endif
                             </td>
-                            <td class="d-none d-md-table-cell col-8">
+                            <td class="d-none d-md-table-cell col-7">
                                 <h4 style="color: #6f5a4a" class="fs-4">{{ $apartment->title }}</h4>
                             </td>
 
 
-                            <td class="d-none d-md-table-cell col">
+                            <td class="d-none d-md-table-cell col-12">
                                 <div class="d-flex flex-column justify-content-center align-items-center">
 
                                     @if ($apartment->lastSponsorship)
