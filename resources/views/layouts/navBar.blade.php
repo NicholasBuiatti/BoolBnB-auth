@@ -46,7 +46,7 @@
                 {{-- ------------------------- navbar mobile -------------------- --}}
                 <nav class="navbar-mobile position-fixed d-lg-none navbar navbar-expand-lg">
                     <div class="container-fluid">
-                        <a class="col-3 navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                        <a class="col-3 navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5173') }}">
                             <div class="logo_laravel">
                                 <img src="{{ asset('logo.png') }}" class="img-fluid" alt="">
                             </div>
@@ -124,7 +124,7 @@
 
                     <nav class="navbar-desktop vh-100 d-flex flex-column p-3">
                         {{-- logo --}}
-                        <a class="d-none d-md-block navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                        <a class="d-none d-md-block navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5173') }}">
                             <div class="logo_laravel">
                                 <img src="{{ asset('logo.png') }}" class="img-fluid" alt="">
                             </div>
