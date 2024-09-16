@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="margin-top" style="max-width: 1000px; margin: 0 auto;">
-        <h2>Modifica appartamento</h2>
+        <h2>Aggiungi appartamento</h2>
         <div class="d-flex align-items-start w-100  rounded shadow" style="max-width: 1000px">
             <form id="apartmentForm" method="POST" action="{{ route('apartments.store') }}" class="w-100 p-3 row"
                 enctype="multipart/form-data">

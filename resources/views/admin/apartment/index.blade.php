@@ -23,7 +23,7 @@
                                 <i class=" bold fa-solid fa-camera"></i>
                             </th>
                             <th scope="col" class="text-uppercase">
-                                <i class="fa-solid fa-house-flag"></i> <span>Titolo</span>
+                                <i class="fa-solid fa-house-flag"></i> <span>Nome</span>
                             </th>
                             <th scope="col" class="text-uppercase">
                                 <i class="fa-solid fa-bullhorn"></i> <span>Sponsorizzazione</span>
